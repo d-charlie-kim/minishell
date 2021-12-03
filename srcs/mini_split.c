@@ -6,14 +6,25 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/03 22:43:57 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:18:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/mijeong.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+int	ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 int	pipe_check(char *str)
 {
@@ -40,11 +51,28 @@ int	pipe_check(char *str)
 	return (count);
 }
 
+int	size_check(char *str, )
+{
+	
+}
+
 void	ft_split(char *str)
 {
-	int	pipe_count;
+	int		i;
+	int		j;
+	int		pipe_count;
+	int		count;
+	char	**bundle;
 
+	i = 0;
+	j = 0;
 	pipe_count = pipe_check(str);
+	bundle = (char **)malloc(sizeof(char *) * pipe_count + 2);
+	while (i < pipe_count + 1)
+	{
+		while (str[j] != '|')
+		i++;
+	}
 	printf("how many pipe : %d\n", pipe_count);
 }
 
