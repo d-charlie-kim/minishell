@@ -6,27 +6,91 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/03 23:18:54 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/04 05:07:17 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/mini_split.h"
 #include "../includes/mijeong.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int	ft_strlen(char *str)
+int	token_size_check(char *ptr)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	int count;
 }
 
-int	pipe_check(char *str)
+int	redir_count(char *ptr, int size)
+{
+	int i;
+	int count;
+	int	flag;
+
+	i = 0;
+	count = 1;
+	flag = 0;
+	while (i < size)
+	{
+		if (ptr[i] == '"' || ptr[i] == '\'')
+		{
+			if (flag == 0)
+				flag = 1;
+			else
+				flag = 0;
+		}
+		if (flag == 0 && (ptr[i] == '>' || ptr[i] == '<'))
+		{
+			count++;
+			while (ptr[i] == '>' || ptr[i] == '<')
+				i++;
+		}
+		else if (flag == 0 && ptr[i] == ' ')
+		{
+			count++;
+			while (ptr[i] == ' ')
+				i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+void	second_split(t_process *bundle, char *ptr, int size)
+{
+	int	token_count;
+
+	token_count = redir_count(ptr, size);
+}
+
+int	pipe_size_check(char *ptr)
+{
+	int size;
+	int	flag;
+
+	size = 0;
+	flag = 0;
+	while (*ptr)
+	{
+		if (*ptr && (*ptr == '"' || *ptr == '\''))
+		{
+			if (flag == 0)
+				flag = 1;
+			else
+				flag = 0;
+		}
+		if (flag == 0 && *ptr == '|')
+		{
+			ptr++;
+			return (size);
+		}
+		ptr++;
+		size++;
+	}
+	return (size);
+}
+
+int	pipe_count(char *str)
 {
 	int i;
 	int count;
@@ -51,37 +115,36 @@ int	pipe_check(char *str)
 	return (count);
 }
 
-int	size_check(char *str, )
+t_process	*first_split(char *str, t_info *info)
 {
-	
-}
+	t_process	*processes;
+	char		*ptr;
+	char		*temp;
+	int			size;
+	int			count;
 
-void	ft_split(char *str)
-{
-	int		i;
-	int		j;
-	int		pipe_count;
-	int		count;
-	char	**bundle;
-
-	i = 0;
-	j = 0;
-	pipe_count = pipe_check(str);
-	bundle = (char **)malloc(sizeof(char *) * pipe_count + 2);
-	while (i < pipe_count + 1)
+	count = 0;
+	info->process_count = pipe_count(str) + 1;
+	ptr = str;
+	processes = (t_process *)malloc(sizeof(t_process) * info->process_count);
+	while (count < info->process_count)
 	{
-		while (str[j] != '|')
-		i++;
+		temp = ptr;
+		size = pipe_size_check(&ptr);
+		second_split(&processes[count], temp, size);
+		count++;
 	}
-	printf("how many pipe : %d\n", pipe_count);
+	return (processes);
 }
 
 int main(void)
 {
-	char *output;
+	char		*output;
+	t_info		info;
+	t_process	*processes;
 	
 	output = readline("test : ");
-	ft_split(output);
+	processes = first_split(output, &info);
 	free(output);
 	return (0);
 }
