@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/05 16:30:05 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/05 17:03:32 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,4 @@ t_process	*first_split(char *str, t_info *info)
 		count++;
 	}
 	return (processes);
-}
-
-int main(void)
-{
-	char		*output;
-	t_info		info;
-	t_process	*processes;
-	
-	output = readline("test : ");
-	processes = first_split(output, &info);
-	processing_instruction(processes, info.process_count);
-	free(output);
-	return (0);
 }
