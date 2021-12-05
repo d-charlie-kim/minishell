@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/04 05:07:17 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/05 16:30:05 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	pipe_size_check(char *ptr)
 	flag = 0;
 	while (*ptr)
 	{
-		if (*ptr && (*ptr == '"' || *ptr == '\''))
+		if (*ptr && (*ptr == '"' || *ptr == '\'')) // "'|'" -> 파이프로 인식해버림
 		{
 			if (flag == 0)
 				flag = 1;
@@ -145,6 +145,7 @@ int main(void)
 	
 	output = readline("test : ");
 	processes = first_split(output, &info);
+	processing_instruction(processes, info.process_count);
 	free(output);
 	return (0);
 }
