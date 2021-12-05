@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/05 17:23:15 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/05 17:24:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 
 void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
-			int child_index, bool can_enter)
+			int child_index, bool *can_enter)
 {
 	int		status;
 	int		pipefd[2];
@@ -27,7 +27,7 @@ void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		waitpid(pid, &status, 0);
-		can_enter = false;
+		*can_enter = false;
 	}
 	else
 	{
@@ -51,7 +51,7 @@ void	processing_instruction(t_process *processes, int process_count)
 	while (child_index >= 0)
 	{
 		if (can_enter)
-			make_pipe_and_fork(processes, cur_process, child_index, can_enter);
+			make_pipe_and_fork(processes, cur_process, child_index, &can_enter);
 		child_index--;
 	}
 	if (cur_process)
