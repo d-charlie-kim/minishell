@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/05 17:21:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/05 17:23:15 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	processing_instruction(t_process *processes, int process_count)
 	while (child_index >= 0)
 	{
 		if (can_enter)
-			make_pipe_and_fork(processes, cur_process, child_index);
+			make_pipe_and_fork(processes, cur_process, child_index, can_enter);
 		child_index--;
 	}
 	if (cur_process)
