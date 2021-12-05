@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_child_process.c                               :+:      :+:    :+:   */
+/*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/05 16:46:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/05 17:11:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	processing_instruction(t_process *processes, int process_count)
 	child_index = process_count - 1;
 	cur_process = NULL;
 	while (child_index >= 0)
+	{
 		make_pipe_and_fork(processes, cur_process, child_index);
+		child_index--;
+	}
 	if (cur_process)
 	{
 		exit_status = any_program(cur_process);
