@@ -6,15 +6,13 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/05 17:03:32 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/05 17:32:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/mini_split.h"
-#include "../includes/mijeong.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "mini_split.h"
+#include "mijeong.h"
+
 
 int	token_size_check(char *ptr)
 {
