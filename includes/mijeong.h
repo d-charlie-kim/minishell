@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/04 05:01:41 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/05 16:50:24 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MIJEONG_H
 # define MIJEONG_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_info
 {
