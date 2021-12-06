@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 03:31:16 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/06 12:59:10 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_process
 {
 	int		token_count;
 	char	*instruction;
-	char	*option;
+	char	*option; // option이 여러 개인 경우가 있음. char * 에서 char ** 로?
 	char	**bundle;
 }	t_process;
 
