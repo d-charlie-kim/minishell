@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: charlie <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
 /*   Updated: 2021/12/06 16:01:47 by jaejeong         ###   ########.fr       */
@@ -13,20 +13,20 @@
 #include "mijeong.h"
 #include "mini_split.h"
 
-int	check_quotes(char c, int flag) // something wrong.....
+int	check_quotes(char c, int flag)
 {
-	if (c == '"' && flag < 2)
-		flag += 2;
-	else if (c == '"')
-		flag -= 2;
-	else if (c == '\'' && flag != 1 && flag != 3)
-		flag += 1;
-	else if (c == '\'')
-		flag -= 1;
+	if (flag == 0 && c == '"')
+		flag = 1;
+	else if (flag == 0 && c == '\'')
+		flag = 2;
+	else if (flag == 1 && c == '"')
+		flag = 0;
+	else if (flag == 2 && c == '\'')
+		flag = 0;
 	return (flag);
 }
 
-int	token_size_check(char *ptr) // char -> const char
+int	token_size_check(char *ptr)
 {
 	int i;
 	int	flag;
@@ -36,7 +36,7 @@ int	token_size_check(char *ptr) // char -> const char
 	while();
 }
 
-int	token_count(const char *ptr, int size) // char -> const char
+int	token_count(const char *ptr, int size)
 {
 	int i;
 	int count;
@@ -118,8 +118,7 @@ int	pipe_size_check(char **ptr)
 	return (size);
 }
 
-int	pipe_count(const char *str)	// char -> const char
-							// Option1. 플래그 하나로 처리하기
+int	pipe_count(const char *str)
 {
 	int i;
 	int count;
@@ -131,14 +130,14 @@ int	pipe_count(const char *str)	// char -> const char
 	while (str[i])
 	{
 		flag = check_quotes(str[i], flag);
-		if (str[i] == '|' && flag == 0)
+		if (flag == 0 && str[i] == '|')
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-t_process	*first_split(const char *str, t_info *info) // char -> const char
+t_process	*first_split(const char *str, t_info *info)
 {
 	t_process	*processes;
 	char		*ptr;
@@ -148,11 +147,11 @@ t_process	*first_split(const char *str, t_info *info) // char -> const char
 
 	count = 0;
 	info->process_count = pipe_count(str) + 1;
-	ptr = str;  // 있는 이유
+	ptr = str;
 	processes = (t_process *)malloc(sizeof(t_process) * info->process_count);
 	while (count < info->process_count)
 	{
-		temp = ptr; // 있는 이유. temp의 값 변경 아직 안한 것인가?
+		temp = ptr;
 		size = pipe_size_check(&ptr);
 		second_split(&processes[count], temp, size);
 		count++;

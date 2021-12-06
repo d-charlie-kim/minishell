@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/06 14:44:28 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:14:50 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	start_program(t_process *cur_process)
 {
-	
+	if (!ft_strncmp)
 }
 
 void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
