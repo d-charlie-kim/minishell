@@ -6,19 +6,35 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/06 18:14:50 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/06 21:39:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
+#include "parsing.h"
 
-int	start_program(t_process *cur_process)
+int	start_program(t_info *info, t_process *cur_process)
 {
-	if (!ft_strncmp)
+	if (!ft_strncmp("cd", cur_process->instruction, 3))
+		mini_cd(info, cur_process); // ft + 명령어.. 함수 이름 마음에 안듬. 나중에 수정...
+	else if (!ft_strncmp("exit", cur_process->instruction, 5))
+		mini_exit(info, cur_process);
+	else if (!ft_strncmp("env", cur_process->instruction, 4))
+		mini_env(info, cur_process);
+	else if (!ft_strncmp("export", cur_process->instruction, 7))
+		mini_export(info, cur_process);
+	else if (!ft_strncmp("unset", cur_process->instruction, 6))
+		mini_unset(info, cur_process);
+	else if (!ft_strncmp("pwd", cur_process->instruction, 4))
+		mini_pwd(info, cur_process);
+	else if (!ft_strncmp("echo", cur_process->instruction, 5))
+		mini_echo(info, cur_process);
+	else
+		find_inst_in_path();
 }
 
-void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
-			int child_index, bool *can_enter)
+bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
+			int child_index, int *exit_status)
 {
 	int		status;
 	int		pipefd[2];
@@ -32,7 +48,7 @@ void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		waitpid(pid, &status, 0);
-		*can_enter = false;
+		return (false);
 	}
 	else
 	{
@@ -40,29 +56,28 @@ void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		cur_process = &processes[child_index];
+		return (true);
 	}
 }
 
-void	processing_instruction(t_process *processes, int process_count)
+void	processing_instruction(t_info *info, t_process *processes)
 {
 	int			child_index;
 	int			exit_status;
-	bool		can_enter;
+	bool		can_fork;
 	t_process	*cur_process;
 
-	child_index = process_count - 1;
+	child_index = info->process_count - 1;
 	cur_process = NULL;
-	can_enter = true;
+	can_fork = true;
 	while (child_index >= 0)
 	{
-		if (!can_enter)
+		if (!can_fork)
 			break ;
-		make_pipe_and_fork(processes, cur_process, child_index, &can_enter);
+		can_fork = make_pipe_and_fork(processes, cur_process, child_index, &exit_status);
 		child_index--;
 	}
 	if (cur_process)
-	{
-		exit_status = start_program(cur_process);
-		exit(exit_status);
-	}
+		start_program(info, cur_process);
+	info->last_exit_status = exit_status;
 }

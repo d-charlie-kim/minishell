@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 14:43:03 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/06 21:35:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
+#include "mini_split.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -18,11 +19,12 @@ int	main(int argc, char **argv, char **envp)
 	t_info		info;
 	t_process	*processes;
 
+	// 구조체 init
 	getcwd(info.cur_dir, 256);
 	while (output = readline(info.cur_dir))
 	{
 		processes = first_split(output, &info);
-		processing_instruction(processes, info.process_count);
+		processing_instruction(&info, processes);
 		getcwd(info.cur_dir, 256);
 		free(output);
 	}

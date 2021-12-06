@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mijeong.h                                          :+:      :+:    :+:   */
+/*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 19:58:30 by dokkim           ###   ########.fr       */
+/*   Created: 2021/12/06 19:06:37 by dokkim            #+#    #+#             */
+/*   Updated: 2021/12/06 21:40:45 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MIJEONG_H
-# define MIJEONG_H
+#include "mijeong.h"
+#include "mini_split.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-typedef struct s_info
+int	mini_cd(t_info *info, t_process *process)
 {
-	int		process_count;
-	int		last_exit_status;
-	char	cur_dir[256];
-}				t_info;
+	int	ret;
 
-# endif
+	ret = 0;
+	if (process->arguments[0])
+		ret = chdir(process->arguments[0]);
+	else
+		ret = chdir("~");
+	if (ret == -1)
+		print_error_and_exit();
+}
