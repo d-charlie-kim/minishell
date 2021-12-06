@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 19:06:37 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 21:40:45 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/07 00:39:17 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
-#include "mini_split.h"
+#include "parsing.h"
 
 int	mini_cd(t_info *info, t_process *process)
 {

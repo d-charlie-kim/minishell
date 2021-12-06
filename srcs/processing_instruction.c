@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/06 21:39:16 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:04:54 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-int	start_program(t_info *info, t_process *cur_process)
+static int	start_program(t_info *info, t_process *cur_process)
 {
 	if (!ft_strncmp("cd", cur_process->instruction, 3))
-		mini_cd(info, cur_process); // ft + 명령어.. 함수 이름 마음에 안듬. 나중에 수정...
+		mini_cd(info, cur_process);
 	else if (!ft_strncmp("exit", cur_process->instruction, 5))
 		mini_exit(info, cur_process);
 	else if (!ft_strncmp("env", cur_process->instruction, 4))
@@ -33,7 +33,7 @@ int	start_program(t_info *info, t_process *cur_process)
 		find_inst_in_path();
 }
 
-bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
+static bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 			int child_index, int *exit_status)
 {
 	int		status;

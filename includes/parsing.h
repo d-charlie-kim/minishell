@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 21:33:37 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:08:59 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_SPLIT_H
-# define MINI_SPLIT_H
+#ifndef PARSING_H
+# define PARSING_H
 
 # define SINGLE_IN 1
 # define DOUBLE_IN 2
@@ -29,10 +29,9 @@ typedef struct s_process
 {
 	char		**bundle;
 	char		*instruction;
-	char		**options; // option이 여러 개인 경우가 있음. char * 에서 char ** 로?
+	char		**options;
 	char		**arguments;
-	t_redirect	*input;
-	t_redirect	*output;
+	t_redirect	*redirect; // input, output을 나누지 않고 하나로 모아서 나중에 처리
 }				t_process;
 
 #endif
