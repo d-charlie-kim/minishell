@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:40:55 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 12:58:36 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:01:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ int	token_size_check(char *ptr) // char -> const char
 
 	i = 0;
 	flag = 0;
-	while()
-		;
+	while();
 }
 
-int	token_count(char *ptr, int size) // char -> const char
+int	token_count(const char *ptr, int size) // char -> const char
 {
 	int i;
 	int count;
@@ -98,7 +97,7 @@ void	second_split(t_process *process, char *ptr, int size)
 	}
 }
 
-int	pipe_size_check(char *ptr)
+int	pipe_size_check(char **ptr)
 {
 	int size;
 	int	flag;
@@ -107,14 +106,6 @@ int	pipe_size_check(char *ptr)
 	flag = 0;
 	while (*ptr)
 	{
-		// if (*ptr == '"' && flag < 2)
-		// 	flag += 2;
-		// else if (*ptr == '"')
-		// 	flag -= 2;
-		// else if (*ptr == '\'' && flag != 1 && flag != 3)
-		// 	flag += 1;
-		// else if (*ptr == '\'')
-		// 	flag -= 1;
 		flag = check_quotes(*ptr, flag);
 		if (*ptr == '|' && flag == 0)
 		{
@@ -127,35 +118,7 @@ int	pipe_size_check(char *ptr)
 	return (size);
 }
 
-// int	pipe_count(char *str)   // Option2. 플래그 두개로 처리하기
-// {
-// 	int i;
-// 	int count;
-// 	int	flag1;
-// 	int	flag2;
-
-// 	i = 0;
-// 	count = 0;
-// 	flag1 = 0;
-// 	flag2 = 0;
-// 	while (str[i])
-// 	{
-// 		if (*str == '"' && flag1 == 0)
-// 			flag1 = 1;
-// 		else if (*str == '"' && flag1 == 1)
-// 			flag1 = 0;
-// 		else if (*str =='\'' && flag2 == 0)
-// 			flag2 = 1;
-// 		else if (*str =='\'' && flag2 == 1)
-// 			flag2 = 0;
-// 		else if (flag1 == 0 && flag2 == 0 && str[i] == '|')
-// 			count++;
-// 		i++;
-// 	}
-// 	return (count);
-// }
-
-int	pipe_count(char *str)	// char -> const char
+int	pipe_count(const char *str)	// char -> const char
 							// Option1. 플래그 하나로 처리하기
 {
 	int i;
@@ -167,14 +130,6 @@ int	pipe_count(char *str)	// char -> const char
 	flag = 0;
 	while (str[i])
 	{
-		// if (str[i] == '"' && flag < 2)
-		// 	flag += 2;
-		// else if (str[i] == '"')
-		// 	flag -= 2;
-		// else if (str[i] == '\'' && flag != 1 && flag != 3)
-		// 	flag += 1;
-		// else if (str[i] == '\'')
-		// 	flag -= 1;
 		flag = check_quotes(str[i], flag);
 		if (str[i] == '|' && flag == 0)
 			count++;
@@ -183,7 +138,7 @@ int	pipe_count(char *str)	// char -> const char
 	return (count);
 }
 
-t_process	*first_split(char *str, t_info *info) // char -> const char
+t_process	*first_split(const char *str, t_info *info) // char -> const char
 {
 	t_process	*processes;
 	char		*ptr;
@@ -198,7 +153,7 @@ t_process	*first_split(char *str, t_info *info) // char -> const char
 	while (count < info->process_count)
 	{
 		temp = ptr; // 있는 이유. temp의 값 변경 아직 안한 것인가?
-		size = pipe_size_check(&ptr); // &ptr -> ptr?
+		size = pipe_size_check(&ptr);
 		second_split(&processes[count], temp, size);
 		count++;
 	}

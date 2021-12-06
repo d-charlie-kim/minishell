@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   mini_split.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/04 04:35:39 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/06 16:31:33 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_SPLIT_H
 # define MINI_SPLIT_H
 
-#include <stdlib.h>
-
+typedef struct s_dkanrjsk
+{
+	char	*redirection;
+	char	*file_name;
+}				t_dkanrjsk;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 12:59:10 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:03:59 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 typedef struct s_info
 {
-	int	process_count;
+	int		process_count;
+	char	cur_dir[256];
 }	t_info;
 
 typedef struct s_process
@@ -35,3 +36,18 @@ typedef struct s_process
 }	t_process;
 
 # endif
+
+a | < | b
+
+a<b
+a    <    b = 3
+a<    b     = 2
+a    <b     = 2
+a    <<b    = 2
+a<<b        = 2
+a<<    b    = 2
+a    <<    b = 
+
+
+a<"bb"c
+a<bbc

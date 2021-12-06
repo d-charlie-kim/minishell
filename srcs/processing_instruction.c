@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/05 17:26:13 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/06 14:44:28 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
+
+int	start_program(t_process *cur_process)
+{
+	
+}
 
 void	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 			int child_index, bool *can_enter)
@@ -57,7 +62,7 @@ void	processing_instruction(t_process *processes, int process_count)
 	}
 	if (cur_process)
 	{
-		exit_status = any_program(cur_process);
+		exit_status = start_program(cur_process);
 		exit(exit_status);
 	}
 }
