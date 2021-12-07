@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_classify.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 21:26:17 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 21:38:44 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/07 14:55:41 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mijeong.h"
 #include "parsing.h"
 
 void	instruction_check(t_process *process, char **bundle, int size)

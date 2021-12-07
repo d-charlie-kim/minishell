@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/07 01:04:54 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:18:07 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	start_program(t_info *info, t_process *cur_process)
 	else if (!ft_strncmp("echo", cur_process->instruction, 5))
 		mini_echo(info, cur_process);
 	else
-		find_inst_in_path();
+		find_inst_in_path(); // path, 상대경로, 절대경로에서 찾아서 사용
+	print_errer_and_exit(); // 명령어를 찾지 못했다는 메세지와 종료
 }
 
 static bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,

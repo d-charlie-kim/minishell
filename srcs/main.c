@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/07 01:15:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:09:33 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	main(int argc, char **argv, char **envp)
 	t_info		info;
 	t_process	*processes;
 
+	// signal 처리
 	// 구조체 init
-	getcwd(info.cur_dir, 256);
-	while (output = readline(info.cur_dir))
+	parse_env(&info, envp);
+	while (output = readline("mijeong$ "))
 	{
 		processes = first_split(output, &info);
 		processing_instruction(&info, processes);
-		getcwd(info.cur_dir, 256);
 		free(output);
 	}
 	return (0);
