@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processing_instruction.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/07 15:18:07 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/08 00:58:21 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 	}
 }
 
-void	processing_instruction(t_info *info, t_process *processes)
+void	execute_instruction(t_info *info, t_process *processes)
 {
 	int			child_index;
 	int			exit_status;

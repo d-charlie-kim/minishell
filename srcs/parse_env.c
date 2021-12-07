@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_envp.c                                       :+:      :+:    :+:   */
+/*   parse_or_get_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/07 16:58:32 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/08 01:01:04 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-t_env	*find_next_node(t_env *env)
+static t_env	*find_next_node(t_env *env)
 {
 	while (env) // main에서 env가 NULL로 초기화 되었다고 가정함
 		env = env->next;
 	return (env);
 }
 
-void	save_key_and_value(t_env *env, char *data) // data 말고 괜찮은 변수 이름 있나..
+static void	save_key_and_value(t_env *env, char *data) // data 말고 괜찮은 변수 이름 있나..
 {
 	int		begin;
 	int		size;

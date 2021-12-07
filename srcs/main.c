@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/07 17:09:33 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/08 01:01:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main(int argc, char **argv, char **envp)
 	parse_env(&info, envp);
 	while (output = readline("mijeong$ "))
 	{
+		add_history(output);
 		processes = first_split(output, &info);
-		processing_instruction(&info, processes);
+		execute_instruction(&info, processes);
 		free(output);
 	}
 	return (0);
