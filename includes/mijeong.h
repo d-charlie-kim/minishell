@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/06 19:58:30 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/07 16:34:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "libft.h"
 
 typedef struct s_info
 {
 	int		process_count;
 	int		last_exit_status;
 	char	cur_dir[256];
+	t_env	*env;
 }				t_info;
 
 # endif

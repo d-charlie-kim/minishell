@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/07 01:08:59 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:12:12 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,12 @@ typedef struct s_process
 	char		**arguments;
 	t_redirect	*redirect; // input, output을 나누지 않고 하나로 모아서 나중에 처리
 }				t_process;
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}				t_env;
 
 #endif
