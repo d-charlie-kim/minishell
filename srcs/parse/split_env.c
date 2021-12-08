@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   split_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/08 04:47:19 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:46:28 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-char *find_env(char *str, t_env *env)
+char	*find_env(char *str, t_env *env) // utils에 get_env_value도 있어용
 {
 	t_env *temp;
 
@@ -40,10 +40,11 @@ int	env_size_check(char *ptr, int size, t_env *env)
 	env_size = 0;
 	while (i < size)
 	{
-		if (ptr[i] == '$' && ptr[i + 1] != ' ')
+		if (ptr[i] == '$' && ptr[i + 1] != ' ')			// $다음 따옴표도 아니어야 함. 
+						//$를 만났을 때 환경변수인지 체크하고 맞다면 치환해주는 함수 있으면 좋을듯
 		{
 			i++;
-			while (ptr[i] != ' ')
+			while (ptr[i] != ' ') // 따옴표에서 끝날 경우도 있음
 			{
 				i++;
 				count++;
