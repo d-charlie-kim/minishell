@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_first.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/08 05:01:51 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:28:59 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,19 @@
 
 int	pipe_size_check(char *ptr)
 {
-	int i;
-	int size;
+	int size; // size와 i의 기능이 완전히 똑같아서 i 없에버림
 	int	flag;
 
-	i = 0;
 	size = 0;
 	flag = 0;
-	while (ptr[i])
+	while (ptr[size])
 	{
-		flag = check_quotes(ptr[i], flag);
-		if (ptr[i] == '|' && flag == 0)
+		flag = check_quotes(ptr[size], flag);
+		if (ptr[size] == '|' && flag == 0)
 		{
-			i++;
+			size++; // 여기서 ++을 하고 리턴?
 			return (size);
 		}
-		i++;
 		size++;
 	}
 	return (size);
@@ -78,9 +75,11 @@ t_process	*first_split(const char *str, t_info *info)
 // 여기서 포인터를 저장 안하고
 // 밑에서 temp에 넣어줄때 ptr++ 해주고 싶은데 너무 꼬여버림
 
-		size += env_size_check(ptr, size, info->env); // 한 프로세스 내의 환경변수 사이즈
+		size += env_size_check(ptr, size, info->env); // 한 프로세스 내의 환경변수 사이즈 (작은 따옴표는 체크하지 않기!)
+													// 환경변수 $key의 사이즈는 빼고 value의 사이즈만 늘려야 하지 않는가?
 		temp = (char *)malloc(sizeof(char) * (size + 1)); // 환경변수 치환한 총 길이로 할당
 		temp[size] = '\0';                                // 끝 표시
+													// 위 세 줄이 put process with env 함수에 들어가면 어떨지
 		put_process_with_env(&temp, ptr, size, info->env); // 할당한 temp에 넣어주기 (여기서 환경변수 치환 작업도 들어가 있음)
 		second_split(&processes[count], temp);            // 전부 채워진 temp를 token으로 나누기 위해 보냄
 		free (temp);  // 다 사용한 temp 프리해줌

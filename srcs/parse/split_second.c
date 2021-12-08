@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_second.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/08 05:18:55 by dokkim           ###   ########.fr       */
+/*   Updated: 2021/12/08 14:29:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,12 @@ void	second_split(t_process *process, char *str)
 	sum = 0;
 	token_size = 0;
 	count = token_count(str);
-	process->bundle = (char *)malloc(sizeof(char *) * (count));
+	process->bundle = (char *)malloc(sizeof(char *) * (count)); // char * -> char **
 	if (!process->bundle)
 		return (-1);
 	ptr = str;
-	while (i + 1 < count)
-	{ 
+	while (i + 1 < count) // 토큰 갯수만큼이 아닌 한번 덜 도는 이유?
+	{
 		token_size = token_size_check(&ptr);
 		sum += token_size;
 		process->bundle[i] = (char *)malloc(sizeof(char) * (token_size + 1));
