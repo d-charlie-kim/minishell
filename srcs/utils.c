@@ -6,19 +6,19 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/08 01:01:10 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:17:42 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-char	*get_env_value(t_env *env, char *value)
+char	*get_env_value(t_env *env, char *key)
 {
 	while (env)
 	{
-		if (!(ft_strncmp(env->value, value, ft_strlen(value) + 1)))
-			return (env->key);
+		if (!(ft_strncmp(env->key, key, ft_strlen(key) + 1)))
+			return (env->value);
 		env = env->next;
 	}
 	return (NULL);
