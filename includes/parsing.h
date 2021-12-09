@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/07 17:12:12 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 00:23:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+# define NOT 0
+# define SINGLE 1
+# define DOUBLE 2
 
 # define SINGLE_IN 1
 # define DOUBLE_IN 2
