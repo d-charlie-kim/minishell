@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 01:20:41 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:55:11 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*add_character_to_str(char *str, char character)
 
 	str_size = ft_strlen(str);
 	new_str = (char *)malloc(sizeof(char) * (str_size + 2));
+	if (!new_str)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_strlcpy(new_str, str, str_size + 1);
 	new_str[str_size] = character;
 	new_str[str_size + 1] = '\0';
