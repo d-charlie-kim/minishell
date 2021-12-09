@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_second.c                                     :+:      :+:    :+:   */
+/*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/08 14:29:47 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:00:07 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ int	token_count(const char *str)
 {
 	int i;
 	int count;
-	int	flag;
+	int	in_quotes;
 
 	i = 0;
 	count = 0;
-	flag = 0;
+	in_quotes = 0;
 	while (str[i])
 	{
-		flag = check_quotes(str[i], flag);
-		if (flag == 0 && (str[i] == '>' || str[i] == '<'))
+		in_quotes = check_quotes(str[i], in_quotes);
+		if ((str[i] == '>' || str[i] == '<') && !in_quotes == 0)
 		{
 			i++;
 			count++;
@@ -67,7 +67,7 @@ int	token_count(const char *str)
 				i++;
 			continue ;
 		}
-		else if (flag == 0 && (str[i] != ' '))
+		else if ((str[i] != ' ') && !in_quotes)
 		{
 			count++;
 			while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != ' ')
@@ -101,13 +101,16 @@ void	classfy_init(t_process *process, char **bundle, int size)
 	arguments_check(process, bundle, size);
 }
 
-void	second_split(t_process *process, char *str)
+void	split_process(t_process *process, t_info *info, const char *str, int size)
 {
 	int		i;
 	int		token_size;
 	int		sum;
 	int		count;
 	char	*ptr;
+	char	*new_str;
+
+	new_str = replace_env_value(info, str, size);
 
 	i = 0;
 	sum = 0;

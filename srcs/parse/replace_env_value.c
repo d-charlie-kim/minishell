@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_env.c                                        :+:      :+:    :+:   */
+/*   replace_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/08 14:46:28 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:01:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,43 @@ void	put_process_with_env(char **dest, char *ptr, int size, t_env *env)
 			i++;
 			*dest++;
 		}
+	}
+}
+char	*find_key_in_str(const char *str)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z')
+			|| '0' <= str[i] && str[i] <= '9' || str[i] == '_')
+		i++;
+	ret = (char *)malloc(sizeof(char) * (i + 1));
+	strlcpy(ret, str, i + 1);
+	return (ret);
+}
+
+char	*replace_env_value(t_info *info, const char *str, int size)
+{
+	int		i;
+	int		in_quotes;
+	char	*ret;
+	char	*key;
+	char	*value;
+
+	i = 0;
+	in_quotes = 0;
+	ret = NULL;
+	while (i < size)
+	{
+		in_quotes = check_quotes(in_quotes);
+		if (str[i] != '$' || in_quotes == NOT)
+		{
+			ret = add_character_to_str(ret, str[i]);
+			continue ;
+		}
+		key = find_key_in_str(&str[i]);
+		value = get_env_value(info->env, key);
+		i++;
 	}
 }
