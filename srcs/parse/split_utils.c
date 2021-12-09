@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 00:48:28 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:20:41 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_quotes(char c, int in_quotes)
 	return (in_quotes);
 }
 
-void	add_character_to_str(char *str, char character)
+char	*add_character_to_str(char *str, char character)
 {
 	int		str_size;
 	char	*new_str;

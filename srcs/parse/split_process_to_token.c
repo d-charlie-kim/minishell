@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 01:00:07 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:06:03 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	classfy_init(t_process *process, char **bundle, int size)
 	arguments_check(process, bundle, size);
 }
 
-void	split_process(t_process *process, t_info *info, const char *str, int size)
+void	split_process(t_process *process, t_info *info, const char *str, int len)
 {
 	int		i;
 	int		token_size;
@@ -110,7 +110,7 @@ void	split_process(t_process *process, t_info *info, const char *str, int size)
 	char	*ptr;
 	char	*new_str;
 
-	new_str = replace_env_value(info, str, size);
+	new_str = replace_env_value(info, str, len);
 
 	i = 0;
 	sum = 0;

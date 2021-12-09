@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 00:25:14 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:05:29 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	get_pipe_count(const char *str)
 t_process	*split_line(const char *str, t_info *info)
 {
 	int			i;
-	int			size;
+	int			len;
 	t_process	*processes;
 
 	info->process_count = get_pipe_count(str) + 1;
@@ -62,8 +62,8 @@ t_process	*split_line(const char *str, t_info *info)
 	i = 0;
 	while (i < info->process_count)
 	{
-		size = num_of_character_in_pipe(str);
-		split_process(&processes[i], str, size);
+		len = num_of_character_in_pipe(str);
+		split_process(&processes[i], str, len);
 		i++;
 	}
 	return (processes);
