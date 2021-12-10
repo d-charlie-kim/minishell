@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 02:04:23 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 13:01:43 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-void	*add_exit_status_code(char *str, int last_exit_status)
+static void	add_last_exit_status(char *str, int last_exit_status)
 {
 	int		i;
 	char	*num_arr;
@@ -31,7 +31,7 @@ void	*add_exit_status_code(char *str, int last_exit_status)
 	return ;
 }
 
-char	*find_key_in_str(const char *str)
+static char	*find_key_in_str(const char *str)
 {
 	int		i;
 	char	*ret;
@@ -54,7 +54,7 @@ char	*find_key_in_str(const char *str)
 	return (ret);
 }
 
-void	add_env_value(t_info *info, const char *key, char *str)
+static void	add_env_value(t_info *info, const char *key, char *str)
 {
 	char	*value;
 	char	*num_arr;
@@ -66,7 +66,7 @@ void	add_env_value(t_info *info, const char *key, char *str)
 	}
 	else if (*key == '?')
 	{
-		str = add_last_exit_status(str, info->last_exit_status);
+		add_last_exit_status(str, info->last_exit_status);
 		return ;
 	}
 	value = get_env_value(info->env, key);

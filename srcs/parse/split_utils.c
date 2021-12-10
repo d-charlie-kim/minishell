@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 01:55:11 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 13:55:03 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,21 @@ char	*add_character_to_str(char *str, char character)
 	new_str[str_size + 1] = '\0';
 	free(str);
 	return (new_str);
+}
+
+char	*remove_quotes_in_str(char *str)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	ret = NULL;
+	while (str[i])
+	{
+		if (str[i] != '\'' && str[i] != '"')
+			ret = add_character_to_str(ret, str[i]);
+		i++;
+	}
+	free(str);
+	return (ret);
 }

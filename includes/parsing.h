@@ -6,36 +6,40 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 00:23:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:17:07 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# define NOT 0
+# define NOT 0  // define quotes
 # define SINGLE 1
 # define DOUBLE 2
 
-# define SINGLE_IN 1
+# define SINGLE_IN 1 // define redirection
 # define DOUBLE_IN 2
 # define SINGLE_OUT 3
 # define DOUBLE_OUT 4
-# define ERROR 5
 
-typedef struct s_redirect
+# define INST 1 // define tag
+# define OPTION 2
+# define ARG 3
+# define REDIRECTION 4
+# define FILENAME 5
+
+typedef struct s_redirect_pair
 {
-	int		symbol; // < : SINGLE_IN, << : DOUBLE_IN, > : SINGLE_OUT, >> : DOUBLE_OUT, ERROR : 5
-	char	file_name[256];
-}				t_redirect;
+	int		symbol;
+	char	*file_name;
+}				t_redirect_pair;
 
 typedef struct s_process
 {
-	char		**bundle;
 	char		*instruction;
-	char		**options;
-	char		**arguments;
-	t_redirect	*redirect; // input, output을 나누지 않고 하나로 모아서 나중에 처리
+	t_list		*option;
+	t_list		*arguments;
+	t_list		*redirect;
 }				t_process;
 
 typedef struct s_env

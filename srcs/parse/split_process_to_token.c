@@ -6,128 +6,97 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 01:06:03 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:57:00 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-int	token_size_check(char **ptr)
+char	*get_str_token(const char *str)
 {
-// 이 부분은 못하겠습니다.
-// 전체적인 고민과 토의와 수정이 필요합니다.
-	
-	// int i;
-	// int	flag;
-	// int	size;
-
-	// i = 0;
-	// flag = 0;
-	// size = 0;
-	// while (*ptr == ' ')
-	// 	*ptr++;
-	// while (ptr[i])
-	// {
-	// 	flag = check_quotes(ptr[i], flag);
-	// 	if (flag != 0)
-	// 	{
-	// 		size++;
-	// 		i++;
-	// 		continue ;
-	// 	}
-	// 	else if (ptr[i] == ' ')
-	// 		i++;
-		
-	// }
-	// while (ptr[i])
-	// {
-	// 	if (flag == 0 && ptr[i] == ' ')
-	// 		i++;
-	// }
-}
-
-int	token_count(const char *str)
-{
-	int i;
-	int count;
-	int	in_quotes;
+	int		i;
+	int		in_quotes;
+	char	*ret;
 
 	i = 0;
-	count = 0;
 	in_quotes = 0;
-	while (str[i])
+	while (in_quotes != NOT && (str[i] == ' ' || str[i] == '<' || str[i] == '>'))
 	{
 		in_quotes = check_quotes(str[i], in_quotes);
-		if ((str[i] == '>' || str[i] == '<') && !in_quotes == 0)
-		{
-			i++;
-			count++;
-			while (str[i] && (str[i] == '<' || str[i] == '>'))
-				i++;
-			continue ;
-		}
-		else if ((str[i] != ' ') && !in_quotes)
-		{
-			count++;
-			while (str[i] && str[i] != '<' && str[i] != '>' && str[i] != ' ')
-				i++;
-			continue ;
-		}
 		i++;
 	}
-	return (count);
+	ret = (char *)malloc(sizeof(char) * (i + 1));
+	if (!ret)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	strlcpy(ret, str, i + 1);
+	return (ret);
 }
 
-void	put_token(char *str, char *ptr, int size)
+char	*get_redirection_token(const char *str)
 {
-	int i;
+	int		i;
+	char	*ret;
 
 	i = 0;
-	while (i < size)
-	{
-		str[i] = *ptr;
-		ptr++;
+	while (str[0] == str[i] && i < 2)
 		i++;
-	}
-	str[i] = '\0';
+	ret = (char *)malloc(sizeof(char) * (i + 1));
+	if (!ret)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	strlcpy(ret, str, i + 1);
+	return (ret);
 }
 
-void	classfy_init(t_process *process, char **bundle, int size)
+char	*get_one_token(const char *str)
 {
-	instruction_check(process, bundle, size);
-	options_check(process, bundle, size);
-	redirections_check(process, bundle, size);
-	arguments_check(process, bundle, size);
+	int	i;
+
+	i = 0;
+	if (str[i] == '<' || str[i] == '>')
+		return (get_redirection_token(str));
+	else
+		return (get_str_token(str));
+}
+
+int	classyfy_token(t_process *process, const char *token, int tag)
+{
+	if (token[0] == '<' || token[0] == '>')
+	{
+		if (tag == REDIRECTION)
+			print_error_and_exit("syntax error near unexpected token", 0); // 올바른 에러코드 못찾음..
+		else
+			return (REDIRECTION);
+	}
+	if (tag == REDIRECTION)
+		return (FILENAME);
+	if (!process->instruction)
+		return (INST);
+	if (token[0] == '-' && token[1] != '-' && !process->arguments)
+		return (OPTION);
+	return (ARG);
 }
 
 void	split_process(t_process *process, t_info *info, const char *str, int len)
 {
 	int		i;
-	int		token_size;
-	int		sum;
-	int		count;
-	char	*ptr;
+	int		tag;
+	char	*cur_token;
 	char	*new_str;
 
+	cur_token = NULL;
 	new_str = replace_env_value(info, str, len);
-
+	tag = 0;
 	i = 0;
-	sum = 0;
-	token_size = 0;
-	count = token_count(str);
-	process->bundle = (char *)malloc(sizeof(char *) * (count)); // char * -> char **
-	if (!process->bundle)
-		return (-1);
-	ptr = str;
-	while (i + 1 < count) // 토큰 갯수만큼이 아닌 한번 덜 도는 이유?
+	while (new_str[i])
 	{
-		token_size = token_size_check(&ptr);
-		sum += token_size;
-		process->bundle[i] = (char *)malloc(sizeof(char) * (token_size + 1));
-		put_token(&(process->bundle[i]), ptr, token_size);
-		i++;
+		cur_token = get_one_token(&new_str[i]);
+		tag = classyfy_token(process, cur_token, tag);
+		cur_token = remove_quotes_in_str(cur_token);
+		save_token_in_struct(process, cur_token, tag);
+		i += ft_strlen(cur_token);
+		while (new_str[i] != ' ')
+			i++;
 	}
-	put_token(&(process->bundle[i]), ptr, ft_strlen(str) - sum);
-	classfy_init(process, process->bundle, count);
+	free(new_str);
 }

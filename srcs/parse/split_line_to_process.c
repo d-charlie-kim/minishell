@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 01:05:29 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 14:19:48 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-int	num_of_character_in_pipe(char *ptr)
+static int	num_of_character_in_pipe(char *ptr)
 {
 	int size;
 	int	in_quotes;
@@ -30,7 +30,7 @@ int	num_of_character_in_pipe(char *ptr)
 	return (size);
 }
 
-int	get_pipe_count(const char *str)
+static int	get_pipe_count(const char *str)
 {
 	int i;
 	int pipe_count;
@@ -57,6 +57,7 @@ t_process	*split_line(const char *str, t_info *info)
 
 	info->process_count = get_pipe_count(str) + 1;
 	processes = (t_process *)malloc(sizeof(t_process) * info->process_count);
+	ft_bzero(processes, sizeof(processes));
 	if (!processes)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	i = 0;
