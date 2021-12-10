@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:58:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/10 17:28:46 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:33:38 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-void	save_redirect(t_process *process, const char *str)
+static void	save_redirect(t_process *process, const char *str)
 {
 	t_list			*new_node;
 	t_redirect_pair	*pair;
@@ -37,7 +37,7 @@ void	save_redirect(t_process *process, const char *str)
 	ft_lstadd_back(&(process->redirect), new_node);
 }
 
-void	save_filename(t_process *process, const char *str)
+static void	save_filename(t_process *process, const char *str)
 {
 	t_list			*temp;
 	t_redirect_pair	*pair;
@@ -47,7 +47,7 @@ void	save_filename(t_process *process, const char *str)
 	pair->file_name = str;
 }
 
-void	save_option(t_process *process, const char *token)
+static void	save_option(t_process *process, const char *token)
 {
 	t_list	*new_node;
 		
@@ -59,7 +59,7 @@ void	save_option(t_process *process, const char *token)
 	ft_lstadd_back(&(process->option), new_node);
 }
 
-void	save_argument(t_process *process, const char *token)
+static void	save_argument(t_process *process, const char *token)
 {
 	t_list	*new_node;
 

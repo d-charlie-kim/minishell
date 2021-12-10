@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 16:57:00 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:34:01 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-char	*get_str_token(const char *str)
+static char	*get_str_token(const char *str)
 {
 	int		i;
 	int		in_quotes;
@@ -33,7 +33,7 @@ char	*get_str_token(const char *str)
 	return (ret);
 }
 
-char	*get_redirection_token(const char *str)
+static char	*get_redirection_token(const char *str)
 {
 	int		i;
 	char	*ret;
@@ -48,7 +48,7 @@ char	*get_redirection_token(const char *str)
 	return (ret);
 }
 
-char	*get_one_token(const char *str)
+static char	*get_one_token(const char *str)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ char	*get_one_token(const char *str)
 		return (get_str_token(str));
 }
 
-int	classyfy_token(t_process *process, const char *token, int tag)
+static int	classyfy_token(t_process *process, const char *token, int tag)
 {
 	if (token[0] == '<' || token[0] == '>')
 	{
