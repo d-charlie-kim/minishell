@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 14:30:26 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:28:18 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 	char	*key;
 
 	i = 0;
-	in_quotes = 0;
+	in_quotes = NOT;
 	ret = NULL;
 	while (i < len)
 	{

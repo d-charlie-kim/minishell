@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 17:51:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:17:22 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		return (FILENAME);
 	if (!process->instruction)
 		return (INST);
-	if (token[0] == '-' && token[1] != '-' && !process->arguments)
+	if (token[0] == '-' && token[1] != '-' && !process->arguments) // 수정 필요
 		return (OPTION);
 	return (ARG);
 }
@@ -86,15 +86,14 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 	new_str = replace_env_value(info, str, len);
 	tag = 0;
 	i = 0;
+	while (new_str[i] == ' ')
+		i++;
 	while (new_str[i])
 	{
-		while (new_str[i] == ' ')
-			i++;
 		cur_token = get_one_token(&new_str[i]);
 		tag = classyfy_token(process, cur_token, tag);
 		cur_token = remove_quotes_in_str(cur_token);
-		save_token_in_struct(process, cur_token, tag);
-		i += ft_strlen(cur_token);
+		i += save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')
 			i++;
 	}

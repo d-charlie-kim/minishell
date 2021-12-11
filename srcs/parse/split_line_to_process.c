@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 17:47:05 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:13:22 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 
 	info->process_count = get_pipe_count(str) + 1;
 	processes = (t_process *)malloc(sizeof(t_process) * info->process_count);
-	ft_bzero(processes, sizeof(t_process) * info->process_count);
 	if (!processes)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	ft_bzero(processes, sizeof(t_process) * info->process_count);
 	i = 0;
 	while (i < info->process_count)
 	{

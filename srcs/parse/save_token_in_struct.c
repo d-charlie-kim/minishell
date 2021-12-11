@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:58:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/11 14:32:42 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:20:57 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,22 @@ static void	save_argument(t_process *process, char *token)
 	ft_lstadd_back(&(process->arguments), new_node);
 }
 
-void	save_token_in_struct(t_process *process, char *token, int tag)
+int	save_token_in_struct(t_process *process, char *token, int tag)
 {
+	int	ret;
+
+	ret = ft_strlen(token);
 	if (!token)
-		return ;
+		return (0);
 	if (tag == INST)
 		process->instruction = token;
-	else if (tag == REDIRECTION)
-		save_redirect(process, token);
 	else if (tag == FILENAME)
 		save_filename(process, token);
 	else if (tag == OPTION)
 		save_option(process, token);
 	else if (tag == ARG)
 		save_argument(process, token);
+	else if (tag == REDIRECTION)
+		save_redirect(process, token);
+	return (ret);
 }
