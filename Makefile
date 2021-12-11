@@ -6,14 +6,14 @@
 #    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/11 14:35:31 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/11 15:42:32 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
 CC			= gcc
-CFLAGS		= $(INCFLAGS) $(WFLAGS) #$(GFLAGS)
+CFLAGS		= $(INCFLAGS) $(WFLAGS) $(GFLAGS)
 WFLAGS		= -Wall -Wextra -Werror
 GFLAGS		= -g -fsanitize=address
 INCFLAGS	= -I$(INCDIR)
@@ -37,7 +37,7 @@ SRCS		= main.c\
 			  utils.c\
 			  #execute_instruction.c
 
-OBJS		= $(SRCS:.c=.o)
+OBJS		= $(SRCS:.c=.o) # 오브젝트 파일 build 디렉토리로 들어가도록 수정
 
 LIBNAME		= ft
 LIB			= $(LIBDIR)/libft.a
@@ -45,7 +45,7 @@ LIB			= $(LIBDIR)/libft.a
 all			: $(NAME)
 
 $(NAME)		: $(LIB) $(OBJS)
-	$(CC) -o $@ $(OBJ) $(CFLAGS) $(INCFLAGS) -L$(LIBDIR) -l$(LIBNAME) -lreadline
+	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCFLAGS) -L$(LIBDIR) -l$(LIBNAME) -lreadline
 
 $(LIB)		:
 	make -C $(LIBDIR) bonus
@@ -67,4 +67,3 @@ fclean		: clean
 re			: fclean all
 
 .PHONY		: all clean fclean re
-

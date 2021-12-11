@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/11 14:11:05 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:45:19 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_env	*find_next_node(t_env *env)
 	return (env);
 }
 
-static void	save_key_and_value(t_env *env, char *data) // data 말고 괜찮은 변수 이름 있나..
+static void	save_key_and_value(t_env *env, const char *data) // data 말고 괜찮은 변수 이름 있나..
 {
 	int		begin;
 	int		size;

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 14:21:28 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:25:59 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char	*get_str_token(const char *str)
 
 	i = 0;
 	in_quotes = 0;
-	while (in_quotes != NOT && (str[i] == ' ' || str[i] == '<' || str[i] == '>'))
+	while ((str[i] != ' ' && str[i] != '<' && str[i] != '>' && str[i] != '\0')
+			|| in_quotes != NOT)
 	{
 		in_quotes = check_quotes(str[i], in_quotes);
 		i++;
@@ -50,10 +51,7 @@ static char	*get_redirection_token(const char *str)
 
 static char	*get_one_token(const char *str)
 {
-	int	i;
-
-	i = 0;
-	if (str[i] == '<' || str[i] == '>')
+	if (str[0] == '<' || str[0] == '>')
 		return (get_redirection_token(str));
 	else
 		return (get_str_token(str));
@@ -90,12 +88,14 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 	i = 0;
 	while (new_str[i])
 	{
+		while (new_str[i] == ' ')
+			i++;
 		cur_token = get_one_token(&new_str[i]);
 		tag = classyfy_token(process, cur_token, tag);
 		cur_token = remove_quotes_in_str(cur_token);
 		save_token_in_struct(process, cur_token, tag);
 		i += ft_strlen(cur_token);
-		while (new_str[i] != ' ')
+		while (new_str[i] == ' ')
 			i++;
 	}
 	free(new_str);
