@@ -6,14 +6,14 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 14:19:48 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:18:56 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-static int	num_of_character_in_pipe(char *ptr)
+static int	num_of_character_in_pipe(const char *ptr)
 {
 	int size;
 	int	in_quotes;
@@ -49,7 +49,7 @@ static int	get_pipe_count(const char *str)
 	return (pipe_count);
 }
 
-t_process	*split_line(const char *str, t_info *info)
+t_process	*split_line_to_process(const char *str, t_info *info)
 {
 	int			i;
 	int			len;
@@ -64,7 +64,7 @@ t_process	*split_line(const char *str, t_info *info)
 	while (i < info->process_count)
 	{
 		len = num_of_character_in_pipe(str);
-		split_process(&processes[i], str, len);
+		split_process_to_token(&processes[i], info, str, len);
 		i++;
 	}
 	return (processes);

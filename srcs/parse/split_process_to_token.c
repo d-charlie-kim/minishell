@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 17:34:01 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:21:28 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*get_str_token(const char *str)
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	strlcpy(ret, str, i + 1);
+	ft_strlcpy(ret, str, i + 1);
 	return (ret);
 }
 
@@ -44,7 +44,7 @@ static char	*get_redirection_token(const char *str)
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	strlcpy(ret, str, i + 1);
+	ft_strlcpy(ret, str, i + 1);
 	return (ret);
 }
 
@@ -77,7 +77,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	return (ARG);
 }
 
-void	split_process(t_process *process, t_info *info, const char *str, int len)
+void	split_process_to_token(t_process *process, t_info *info, const char *str, int len)
 {
 	int		i;
 	int		tag;

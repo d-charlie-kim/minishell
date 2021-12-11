@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/10 13:01:43 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:30:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,18 @@ static char	*find_key_in_str(const char *str)
 		return (ret);
 	}
 	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z')
-			|| '0' <= str[i] && str[i] <= '9' || str[i] == '_')
+			|| ('0' <= str[i] && str[i] <= '9') || str[i] == '_')
 		i++;
 	if (i == 0)
 		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (i + 1));
-	strlcpy(ret, str, i + 1);
+	ft_strlcpy(ret, str, i + 1);
 	return (ret);
 }
 
 static void	add_env_value(t_info *info, const char *key, char *str)
 {
 	char	*value;
-	char	*num_arr;
 
 	if (!key)
 	{
@@ -91,7 +90,7 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 	ret = NULL;
 	while (i < len)
 	{
-		in_quotes = check_quotes(in_quotes);
+		in_quotes = check_quotes(str[i], in_quotes);
 		if (str[i] != '$' || in_quotes == SINGLE)
 		{
 			ret = add_character_to_str(ret, str[i]);
@@ -100,7 +99,7 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 		else
 		{
 			key = find_key_in_str(&str[i + 1]);
-			add_env_value(info->env, key, ret);
+			add_env_value(info, key, ret);
 			i += ft_strlen(key) + 1;
 			free(key);
 		}

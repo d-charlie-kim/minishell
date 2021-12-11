@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_or_get_env.c                                 :+:      :+:    :+:   */
+/*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/08 01:01:04 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 14:11:05 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	save_key_and_value(t_env *env, char *data) // data 말고 괜찮은 
 	while (data[size] != '=')
 		size++;
 	key = (char *)malloc(sizeof(char) * (size + 1));
-	ft_strlcpy(key, data[begin], size + 1);
+	ft_strlcpy(key, &data[begin], size + 1);
 	begin = size + 1;
 	size = 0;
 	while (data[begin + size] != '\0')
 		size++;
 	value = (char *)malloc(sizeof(char) * (size + 1));
-	ft_strlcpy(value, data[begin], size + 1);
+	ft_strlcpy(value, &data[begin], size + 1);
 	new_node->key = key;
 	new_node->value = value;
 	new_node->next = NULL;
