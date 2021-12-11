@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 22:17:22 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:42:01 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 	new_str = replace_env_value(info, str, len);
 	tag = 0;
 	i = 0;
-	while (new_str[i] == ' ')
-		i++;
 	while (new_str[i])
 	{
+		while (new_str[i] == ' ')
+			i++;
 		cur_token = get_one_token(&new_str[i]);
 		tag = classyfy_token(process, cur_token, tag);
 		cur_token = remove_quotes_in_str(cur_token);
