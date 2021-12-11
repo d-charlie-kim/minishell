@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 17:46:26 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:51:58 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	if (token[0] == '<' || token[0] == '>')
 	{
 		if (tag == REDIRECTION)
-			print_error_and_exit("syntax error near unexpected token", 0); // 올바른 에러코드 못찾음..
+			print_error_and_exit("syntax error near unexpected token\n", 0); // 올바른 에러코드 못찾음..
 		else
 			return (REDIRECTION);
 	}
