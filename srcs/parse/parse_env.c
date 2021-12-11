@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/11 15:45:19 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:36:23 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static t_env	*find_next_node(t_env *env)
 {
-	while (env) // main에서 env가 NULL로 초기화 되었다고 가정함
+	while (env)
 		env = env->next;
 	return (env);
 }

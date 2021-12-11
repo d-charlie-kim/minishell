@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 17:25:18 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:47:05 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	{
 		len = num_of_character_in_pipe(str);
 		split_process_to_token(&processes[i], info, str, len);
+		str += len + 1;
 		i++;
 	}
 	return (processes);
