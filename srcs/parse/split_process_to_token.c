@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 16:41:20 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:59:03 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static char	*get_one_token(const char *str)
 
 static int	classyfy_token(t_process *process, const char *token, int tag)
 {
+	int	i;
+
 	if (token[0] == '<' || token[0] == '>')
 	{
 		if (tag == REDIRECTION)
@@ -70,8 +72,14 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		return (FILENAME);
 	if (!process->instruction)
 		return (INST);
-	if (token[0] == '-' && token[1] != '-' && !process->arguments) // 수정 필요
-		return (OPTION);
+	if (token[0] == '-')
+	{
+		i = 1;
+		while (token[i] == '"' || token[i] == '\'')
+			i++;
+		if (('a' <= token[i] && token[i] <= 'z') || ('A' <= token[i] && token[i] <= 'Z'))
+			return (OPTION);
+	}
 	return (ARG);
 }
 
