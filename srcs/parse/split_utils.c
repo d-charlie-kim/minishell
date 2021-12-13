@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 22:15:46 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:39:58 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_quotes(char c, int in_quotes)
 	return (in_quotes);
 }
 
-char	*add_character_to_str(char *str, char character)
+char	*add_character_to_str(char *str, char character) // 반환값을 없에고 인자를 더블포인터로
 {
 	int		str_size;
 	char	*new_str;
@@ -45,19 +45,19 @@ char	*add_character_to_str(char *str, char character)
 	return (new_str);
 }
 
-char	*remove_quotes_in_str(char *str)
+void	remove_quotes_in_str(char **str)
 {
 	int		i;
-	char	*ret;
+	char	*new_str;
 
 	i = 0;
-	ret = NULL;
-	while (str[i])
+	new_str = NULL;
+	while ((*str)[i])
 	{
-		if (str[i] != '\'' && str[i] != '"')
-			ret = add_character_to_str(ret, str[i]);
+		if ((*str)[i] != '\'' && (*str)[i] != '"')
+			new_str = add_character_to_str(new_str, (*str)[i]);
 		i++;
 	}
-	free(str);
-	return (ret);
+	free(*str);
+	*str = new_str;
 }

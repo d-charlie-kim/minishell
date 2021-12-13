@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_token_in_struct.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:58:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/11 22:20:57 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:41:48 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,10 @@ static void	save_argument(t_process *process, char *token)
 	ft_lstadd_back(&(process->arguments), new_node);
 }
 
-int	save_token_in_struct(t_process *process, char *token, int tag)
+void	save_token_in_struct(t_process *process, char *token, int tag)
 {
-	int	ret;
-
-	ret = ft_strlen(token);
 	if (!token)
-		return (0);
+		return ;
 	if (tag == INST)
 		process->instruction = token;
 	else if (tag == FILENAME)
@@ -88,5 +85,4 @@ int	save_token_in_struct(t_process *process, char *token, int tag)
 		save_argument(process, token);
 	else if (tag == REDIRECTION)
 		save_redirect(process, token);
-	return (ret);
 }

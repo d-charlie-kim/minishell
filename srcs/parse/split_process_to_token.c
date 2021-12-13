@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 22:42:01 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:41:20 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 {
 	int		i;
 	int		tag;
+	int		remove_len;
 	char	*cur_token;
 	char	*new_str;
 
@@ -86,14 +87,16 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 	new_str = replace_env_value(info, str, len);
 	tag = 0;
 	i = 0;
+	remove_len = 0;
+	while (new_str[i] == ' ')
+		i++;
 	while (new_str[i])
 	{
-		while (new_str[i] == ' ')
-			i++;
 		cur_token = get_one_token(&new_str[i]);
+		i += ft_strlen(cur_token);
 		tag = classyfy_token(process, cur_token, tag);
-		cur_token = remove_quotes_in_str(cur_token);
-		i += save_token_in_struct(process, cur_token, tag);
+		remove_quotes_in_str(&cur_token);
+		save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')
 			i++;
 	}
