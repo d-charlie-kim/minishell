@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 16:39:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:13:58 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ int	check_quotes(char c, int in_quotes)
 	return (in_quotes);
 }
 
-char	*add_character_to_str(char *str, char character) // 반환값을 없에고 인자를 더블포인터로
+void	add_character_to_str(char **str, char character)
 {
 	int		str_size;
 	char	*new_str;
 
-	str_size = ft_strlen(str);
+	str_size = ft_strlen(*str);
 	new_str = (char *)malloc(sizeof(char) * (str_size + 2));
 	if (!new_str)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	if (str_size != 0)
 	{
-		ft_strlcpy(new_str, str, str_size + 1);
-		free(str);
+		ft_strlcpy(new_str, *str, str_size + 1);
+		free(*str);
 	}
 	new_str[str_size] = character;
 	new_str[str_size + 1] = '\0';
-	return (new_str);
+	*str = new_str;
 }
 
 void	remove_quotes_in_str(char **str)
@@ -55,7 +55,7 @@ void	remove_quotes_in_str(char **str)
 	while ((*str)[i])
 	{
 		if ((*str)[i] != '\'' && (*str)[i] != '"')
-			new_str = add_character_to_str(new_str, (*str)[i]);
+			add_character_to_str(&new_str, (*str)[i]);
 		i++;
 	}
 	free(*str);

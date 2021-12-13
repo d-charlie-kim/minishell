@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 22:49:49 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:18:17 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-static char	*add_last_exit_status(char *str, int last_exit_status)
+static void	add_last_exit_status(char **str, int last_exit_status)
 {
 	int		i;
 	char	*num_arr;
@@ -24,11 +24,10 @@ static char	*add_last_exit_status(char *str, int last_exit_status)
 	i = 0;
 	while (num_arr[i])
 	{
-		str = add_character_to_str(str, num_arr[i]);
+		add_character_to_str(str, num_arr[i]);
 		i++;
 	}
 	free(num_arr);
-	return (str);
 }
 
 static char	*find_key_in_str(const char *str)
@@ -60,12 +59,12 @@ static char	*add_env_value(t_info *info, const char *key, char *str)
 
 	if (!key)
 	{
-		str = add_character_to_str(str, '$');
+		add_character_to_str(&str, '$');
 		return (str);
 	}
 	else if (*key == '?')
 	{
-		str = add_last_exit_status(str, info->last_exit_status);
+		add_last_exit_status(&str, info->last_exit_status);
 		return (str);
 	}
 	value = get_env_value(info->env, key);
@@ -73,7 +72,7 @@ static char	*add_env_value(t_info *info, const char *key, char *str)
 		return (str);
 	while (*value)
 	{
-		str = add_character_to_str(str, *value);
+		add_character_to_str(&str, *value);
 		value++;
 	}
 	return (str);
@@ -94,13 +93,13 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 		in_quotes = check_quotes(str[i], in_quotes);
 		if (str[i] != '$' || in_quotes == SINGLE)
 		{
-			ret = add_character_to_str(ret, str[i]);
+			add_character_to_str(&ret, str[i]);
 			i++;
 		}
 		else
 		{
 			key = find_key_in_str(&str[i + 1]);
-			ret = add_env_value(info, key, ret);
+			add_env_value(info, key, ret);
 			i += ft_strlen(key) + 1;
 			free(key);
 		}

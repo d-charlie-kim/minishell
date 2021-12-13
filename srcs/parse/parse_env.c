@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/11 23:22:41 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:10:25 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-//static t_env	*find_last_node(t_env *env)
-//{
-//	if (env)
-//		return (NULL);
-//	while (env->next)
-//		env = env->next;
-//	return (env);
-//}
+static void	add_new_node(t_env **env, t_env *new_node)
+{
+	t_env	*last_node;
 
-static void	save_key_and_value(t_env **env, const char *data) // data 말고 괜찮은 변수 이름 있나..
+	if (!*env)
+	{
+		*env = new_node;
+		return ;
+	}
+	last_node = *env;
+	while (last_node->next)
+		last_node = last_node->next;
+	last_node->next = new_node;
+}
+
+static void	save_key_and_value(t_env **env, const char *data)
 {
 	int		begin;
 	int		size;
 	char	*key;
 	char	*value;
 	t_env	*new_node;
-	t_env	*temp;
 
-	// 보기 불편함. 나중에 함수 쪼개기
 	new_node = (t_env *)malloc(sizeof(t_env));
 	begin = 0;
 	size = 0;
@@ -48,15 +52,7 @@ static void	save_key_and_value(t_env **env, const char *data) // data 말고 괜
 	new_node->key = key;
 	new_node->value = value;
 	new_node->next = NULL;
-	if (!(*env))
-	{
-		*env = new_node;
-		return ;
-	}
-	temp = *env;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new_node;
+	add_new_node(env, new_node);
 }
 
 void	parse_envp(t_info *info, char **envp)
