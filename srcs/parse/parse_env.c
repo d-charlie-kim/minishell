@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/13 17:10:25 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:43:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,12 @@ void	parse_envp(t_info *info, char **envp)
 	{
 		save_key_and_value(&(info->env), envp[i]);
 		i++;
+	}
+	t_env *temp;
+	temp = info->env;
+	while (temp)
+	{
+		printf("%s %s\n", temp->key, temp->value);
+		temp = temp->next;
 	}
 }

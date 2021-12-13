@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 17:18:17 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:54:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,22 @@ static char	*find_key_in_str(const char *str)
 	return (ret);
 }
 
-static char	*add_env_value(t_info *info, const char *key, char *str)
+static void	add_env_value(t_info *info, const char *key, char **str)
 {
 	char	*value;
 
 	if (!key)
-	{
-		add_character_to_str(&str, '$');
-		return (str);
-	}
+		add_character_to_str(str, '$');
 	else if (*key == '?')
-	{
-		add_last_exit_status(&str, info->last_exit_status);
-		return (str);
-	}
+		add_last_exit_status(str, info->last_exit_status);
 	value = get_env_value(info->env, key);
 	if (!value)
-		return (str);
+		return ;
 	while (*value)
 	{
-		add_character_to_str(&str, *value);
+		add_character_to_str(str, *value);
 		value++;
 	}
-	return (str);
 }
 
 char	*replace_env_value(t_info *info, const char *str, int len)
@@ -99,7 +92,8 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 		else
 		{
 			key = find_key_in_str(&str[i + 1]);
-			add_env_value(info, key, ret);
+			printf("%s\n", key);
+			add_env_value(info, key, &ret);
 			i += ft_strlen(key) + 1;
 			free(key);
 		}

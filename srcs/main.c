@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/11 23:23:07 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:44:32 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,14 @@ int	main(int argc, char **argv, char **envp)
 	// signal 처리
 	info.env = NULL;
 	parse_envp(&info, envp);
+
+	t_env *temp;
+	temp = info.env;
+	while (temp)
+	{
+		printf("%s %s\n", temp->key, temp->value);
+		temp = temp->next;
+	}
 	output = readline("mijeong$ ");
 	while (output)
 	{
