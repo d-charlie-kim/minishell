@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 17:54:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:10:52 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 		else
 		{
 			key = find_key_in_str(&str[i + 1]);
-			printf("%s\n", key);
 			add_env_value(info, key, &ret);
 			i += ft_strlen(key) + 1;
 			free(key);

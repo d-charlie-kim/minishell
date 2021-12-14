@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/13 18:03:06 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:08:29 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,4 @@ void	parse_envp(t_info *info, char **envp)
 		save_key_and_value(&(info->env), envp[i]);
 		i++;
 	}
-	t_env *temp;
-	temp = info->env;
 }
