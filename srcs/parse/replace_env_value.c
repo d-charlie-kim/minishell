@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:10:52 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:25:38 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ static void	add_env_value(t_info *info, const char *key, char **str)
 char	*replace_env_value(t_info *info, const char *str, int len)
 {
 	int		i;
-	int		in_quotes;
+	int		is_in_quotes;
 	char	*ret;
 	char	*key;
 
 	i = 0;
-	in_quotes = NOT;
+	is_in_quotes = NOT;
 	ret = NULL;
 	while (i < len)
 	{
-		in_quotes = check_quotes(str[i], in_quotes);
-		if (str[i] != '$' || in_quotes == SINGLE)
+		check_quotes(str[i], &is_in_quotes);
+		if (str[i] != '$' || is_in_quotes == SINGLE)
 		{
 			add_character_to_str(&ret, str[i]);
 			i++;

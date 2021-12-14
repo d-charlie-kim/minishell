@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:08:39 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:24:49 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 static char	*get_str_token(const char *str)
 {
 	int		i;
-	int		in_quotes;
+	int		is_in_quotes;
 	char	*ret;
 
 	i = 0;
-	in_quotes = 0;
+	is_in_quotes = 0;
 	while ((str[i] != ' ' && str[i] != '<' && str[i] != '>' && str[i] != '\0')
-			|| (in_quotes != NOT && str[i] != '\0'))
+			|| (is_in_quotes != NOT && str[i] != '\0'))
 	{
-		in_quotes = check_quotes(str[i], in_quotes);
+		check_quotes(str[i], &is_in_quotes);
 		i++;
 	}
 	ret = (char *)malloc(sizeof(char) * (i + 1));
@@ -101,7 +101,7 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 		cur_token = get_one_token(&new_str[i]);
 		i += ft_strlen(cur_token);
 		tag = classyfy_token(process, cur_token, tag);
-		remove_quotes_in_str(&cur_token);
+		remove_outside_quotes_in_str(&cur_token);
 		save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')
 			i++;

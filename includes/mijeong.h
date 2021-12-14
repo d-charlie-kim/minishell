@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 17:11:08 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:25:32 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void		split_process_to_token(t_process *process, t_info *info, const char *str, 
 void		save_token_in_struct(t_process *process, char *token, int tag);
 char		*replace_env_value(t_info *info, const char *str, int len);
 void		parse_envp(t_info *info, char **envp);
-int			check_quotes(char c, int in_quotes);
+int			check_quotes(char c, int *is_in_quotes);
 void		add_character_to_str(char **str, char character);
-void		remove_quotes_in_str(char **str);
+void		remove_outside_quotes_in_str(char **str);
 
 char		*get_env_value(t_env *env, const char *key);
 void		print_error_and_exit(char *output, int error_num);
