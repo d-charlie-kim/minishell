@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/13 18:03:24 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/14 15:56:35 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

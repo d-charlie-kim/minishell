@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:25:38 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:54:23 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,15 @@ static void	add_env_value(t_info *info, const char *key, char **str)
 	char	*value;
 
 	if (!key)
+	{
 		add_character_to_str(str, '$');
+		return ;
+	}
 	else if (*key == '?')
+	{
 		add_last_exit_status(str, info->last_exit_status);
+		return ;
+	}
 	value = get_env_value(info->env, key);
 	if (!value)
 		return ;
