@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:24:49 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:57:57 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static char	*get_str_token(const char *str)
 	{
 		check_quotes(str[i], &is_in_quotes);
 		i++;
+	}
+	if (is_in_quotes != NOT)
+	{
+		i = 1;
+		while (str[i] != ' ' && str[i] != '\0')
+			i++;
 	}
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
