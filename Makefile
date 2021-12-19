@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/14 15:56:35 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/19 22:14:43 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS		= main.c\
 			  utils.c\
 			  #execute_instruction.c
 
-OBJS		= $(SRCS:.c=.o) # 오브젝트 파일 build 디렉토리로 들어가도록 수정
+OBJS		= $(addprefix build/, $(SRCS:.c=.o)) # 오브젝트 파일 build 디렉토리로 들어가도록 수정
 
 LIBNAME		= ft
 LIB			= $(LIBDIR)/libft.a
@@ -50,7 +50,7 @@ $(NAME)		: $(LIB) $(OBJS)
 $(LIB)		:
 	make -C $(LIBDIR) bonus
 
-%.o:		%.c | $(OBJDIR)
+$(OBJDIR)/%.o	: %.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCFLAGS) -o $@ -c $^
 
 $(OBJDIR)	:
