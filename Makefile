@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
+#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/19 22:25:56 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/19 22:37:12 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,13 @@ LIB			= $(LIBDIR)/libft.a
 all			: $(NAME)
 
 $(NAME)		: $(LIB) $(OBJS)
-	$(CC) -o $@ $(OBJS) $(CFLAGS) $(INCFLAGS) -L$(LIBDIR) -l$(LIBNAME) -lreadline
+	$(CC) -o $@ $(OBJS) $(CFLAGS) -L$(LIBDIR) -l$(LIBNAME) -lreadline
 
 $(LIB)		:
 	make -C $(LIBDIR) bonus
 
 $(OBJDIR)/%.o	: %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCFLAGS) -o $@ -c $^
+	$(CC) $(CFLAGS) -o $@ -c $^
 
 $(OBJDIR)	:
 	mkdir build
