@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/19 22:18:51 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/19 22:20:59 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,11 +57,11 @@ $(OBJDIR)	:
 	mkdir build
 
 clean		:
-	$(RM) $(OBJS)
+	$(RM) -rf $(OBJDIR)
 	make -C $(LIBDIR) clean
 
 fclean		: clean
-	$(RM) $(NAME) $(OBJDIR)
+	$(RM) $(NAME)
 	make -C $(LIBDIR) fclean
 
 re			: fclean all
