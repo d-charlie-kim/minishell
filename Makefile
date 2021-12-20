@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/20 16:08:11 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/20 18:40:22 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS		= main.c\
 			  utils.c\
 			  #execute_instruction_main.c
 
-OBJS		= $(addprefix build/, $(SRCS:.c=.o))
+OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
 LIBNAME		= ft
 LIB			= $(LIBDIR)/libft.a

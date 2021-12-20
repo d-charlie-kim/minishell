@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 17:00:06 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:41:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	num_of_character_in_pipe(const char *ptr)
 		check_quotes(ptr[size], &is_in_quotes);
 		if (ptr[size] == '|' && is_in_quotes == NOT)
 			return (size);
+		// if (ptr[size] == '$' && is_in_quotes == NOT)
+		// 	size += 2;
 		size++;
 	}
 	return (size);

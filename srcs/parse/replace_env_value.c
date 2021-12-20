@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 17:04:11 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:45:38 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*find_key_in_str(const char *str)
 	return (ret);
 }
 
-static void	add_env_value(t_info *info, const char *key, char **str)
+static void	add_env_value(t_info *info, const char *key, char **str, int is_in_quotes)
 {
 	char	*value;
 
@@ -62,7 +62,7 @@ static void	add_env_value(t_info *info, const char *key, char **str)
 		add_character_to_str(str, '$');
 		return ;
 	}
-	else if (*key == '?')
+	if (*key == '?')
 	{
 		add_last_exit_status(str, info->last_exit_status);
 		return ;
@@ -70,11 +70,15 @@ static void	add_env_value(t_info *info, const char *key, char **str)
 	value = get_env_value(info->env, key);
 	if (!value)
 		return ;
+	if (is_in_quotes == NOT)
+		add_character_to_str(str, '\"');
 	while (*value)
 	{
 		add_character_to_str(str, *value);
 		value++;
 	}
+	if (is_in_quotes == NOT)
+		add_character_to_str(str, '\"');
 }
 
 char	*replace_env_value(t_info *info, const char *str, int len)
@@ -103,7 +107,7 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 				continue ;
 			}
 			key = find_key_in_str(&str[i + 1]);
-			add_env_value(info, key, &ret);
+			add_env_value(info, key, &ret, is_in_quotes);
 			i += ft_strlen(key) + 1;
 			free(key);
 		}

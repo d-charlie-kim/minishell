@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/20 18:23:05 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:36:51 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*find_inst_in_env_path(const char *path, t_process *process)
 
 	begin_index = 0;
 	end_index = 0;
-	while (!instruction)
+	while (begin_index < ft_strlen(path))
 	{
 		while (path[end_index] != ':' && path[end_index] != '\0')
 			end_index++;
@@ -41,11 +41,12 @@ char	*find_inst_in_env_path(const char *path, t_process *process)
 			print_error_and_exit("cannot allocate memory\n", ENOMEM);
 		ft_strlcpy(directory, &process[begin_index], end_index - begin_index + 1);
 		instruction = find_inst_in_absolute_path();
-		if (end_index == '\0')
-			return (NULL);
+		if (instruction)
+			return (instruction);
 		end_index++;
 		begin_index = end_index;
 	}
+	return (NULL);
 }
 
 void	find_instruction(t_info *info, t_process *process)
