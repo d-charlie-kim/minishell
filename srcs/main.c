@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/13 18:03:16 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:14:57 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,19 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc; (void)argv;
 	// signal 처리
 	info.env = NULL;
+	
 	parse_envp(&info, envp);
-	output = readline("mijeong$ ");
-	while (output)
+	
+	while (1)
 	{
+		output = readline("mijeong$ ");
+		if (output[0] == '\0')
+			continue ;
 		add_history(output);
 		processes = split_line_to_process(output, &info);
 		print_parsing_data_test(processes, info.process_count);
-		//execute_instruction(&info, processes);
+		//execute_instruction_main(&info, processes);
 		free(output);
-		output = readline("mijeong$ ");
 	}
 	return (0);
 }

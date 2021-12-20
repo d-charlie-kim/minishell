@@ -3,6 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
+/*   Updated: 2021/12/20 17:15:40 by jaejeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
@@ -98,6 +105,8 @@ void	split_process_to_token(t_process *process, t_info *info, const char *str, i
 
 	cur_token = NULL;
 	new_str = replace_env_value(info, str, len);
+	if (!new_str)
+		return ;
 	tag = 0;
 	i = 0;
 	while (new_str[i] == ' ')

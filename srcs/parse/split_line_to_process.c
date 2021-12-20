@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_line_to_process.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:24:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:00:06 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/19 22:37:12 by dokkim           ###   ########.fr        #
+#    Updated: 2021/12/20 16:08:11 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRCS		= main.c\
 			  split_utils.c\
 			  redirection.c\
 			  utils.c\
-			  #execute_instruction.c
+			  #execute_instruction_main.c
 
 OBJS		= $(addprefix build/, $(SRCS:.c=.o))
 
