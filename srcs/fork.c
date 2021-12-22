@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/22 20:31:52 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:36:01 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ static bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
 	}
 	else
 	{
-		printf("자식프로세스\n");
+		printf("여기선 출력이 되는데\n");
 		close(STDOUT_FILENO);
+		printf("여기선 출력이 안되는 이유는 무엇일까요?\n");
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		cur_process = &processes[child_index];
