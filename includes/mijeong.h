@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 17:05:05 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/22 15:18:30 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void		remove_outside_quotes_in_str(char **str);
 char		*get_env_value(t_env *env, const char *key);
 void		print_error_and_exit(char *output, int error_num);
 
-void		execute_instruction_main(t_info *info, t_process *processes);
+void		fork_main(t_info *info, t_process *processes);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 18:14:57 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:35:13 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		add_history(output);
 		processes = split_line_to_process(output, &info);
-		print_parsing_data_test(processes, info.process_count);
-		//execute_instruction_main(&info, processes);
+		print_parsing_data_test(processes, info.process_count); // test code ##
+		// single_process(); // only one process
+		// fork_main(&info, processes); // more than one process
 		free(output);
 	}
 	return (0);
