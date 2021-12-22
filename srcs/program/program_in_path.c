@@ -6,41 +6,52 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/22 17:24:31 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:18:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-char	*find_inst_in_env_path(const char *path, t_process *process)
+static char	*get_inst_with_path_route(const char *path,
+		const char *inst, int begin, int end)
 {
-	int		begin_index;
-	int		end_index;
-	char	*directory;
-	char	*instruction;
+	char	*route;
+	char	*ret;
 
-	begin_index = 0;
-	end_index = 0;
-	while (begin_index < ft_strlen(path))
-	{
-		while (path[end_index] != ':' && path[end_index] != '\0')
-			end_index++;
-		directory = (char *)malloc(sizeof(char) * (end_index - begin_index + 1));
-		if (!directory)
-			print_error_and_exit("cannot allocate memory\n", ENOMEM);
-		if (ft_strjoin(directory, process->instruction))
-		ft_strlcpy(directory, &process[begin_index], end_index - begin_index + 1);
-		instruction = find_inst_in_absolute_path();
-		if (instruction)
-			return (instruction);
-		end_index++;
-		begin_index = end_index;
-	}
-	return (NULL);
+	route = (char *)malloc(sizeof(char) * (end - begin + 1));
+	if (!route)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	ft_strlcpy(route, &path[begin], end - begin + 1);
+	ret = ft_strjoin(route, inst);
+	if (!ret)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	free(route);
+	return (ret);
 }
 
-int	get_argv_size(t_list *option, t_list *arguments)
+static void	execute_at_env_path(const char *path, t_process *process, char **argv)
+{
+	int		begin;
+	int		end;
+	char	*inst;
+
+	begin = 0;
+	end = 0;
+	while (begin < (int)ft_strlen(path))
+	{
+		while (path[end] != ':' && path[end] != '\0')
+			end++;
+		inst = get_inst_with_path_route(path, process->instruction,
+				begin, end);
+		printf("inst : %s\n", inst);
+		execve(inst, argv, NULL);
+		end++;
+		begin = end;
+	}
+}
+
+static int	get_argv_size(t_list *option, t_list *arguments)
 {
 	int	argv_size;
 
@@ -48,7 +59,7 @@ int	get_argv_size(t_list *option, t_list *arguments)
 	return (argv_size);
 }
 
-void	add_option_in_argv(t_list *option, char ***argv)
+static void	add_option_in_argv(t_list *option, char ***argv)
 {
 	int	i;
 
@@ -61,7 +72,7 @@ void	add_option_in_argv(t_list *option, char ***argv)
 	}
 }
 
-void	add_arguments_in_argv(t_list *arguments, char ***argv)
+static void	add_arguments_in_argv(t_list *arguments, char ***argv)
 {
 	int	i;
 
@@ -76,9 +87,8 @@ void	add_arguments_in_argv(t_list *arguments, char ***argv)
 	}
 }
 
-char	**setting_argv(t_process *process)
+static char	**setting_argv(t_process *process)
 {
-	int		i;
 	int		argv_size;
 	char	**argv;
 
@@ -106,19 +116,7 @@ void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하
 		execve(inst, argv, NULL);
 	else
 	{
-		path = get_env_value;
-		find_inst_in_env_path(path, process);
-	}
-
-	if (inst[0] == '.')
-		instruction = find_inst_in_relative_path();
-	else if (process->instruction[0] == '/' || process->instruction[0] == '~')
-		instruction = find_inst_in_absolute_path();
-	else
-	{
 		path = get_env_value(info->env, "PATH");
-		instruction = find_inst_in_env_path(path, process);
+		execute_at_env_path(path, process, argv);
 	}
-	if (instruction)
-		execve(); // 명령어 실행시키기
 }

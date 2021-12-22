@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/20 18:40:22 by jaejeong         ###   ########.fr        #
+#    Updated: 2021/12/22 20:15:24 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ OBJDIR		= build
 SUBDIR		= parse\
 			  program
 
-vpath %.c	= $(SRCDIR) $(SRCDIR)/$(SUBDIR)
+vpath %.c	= $(SRCDIR)\
+			  $(addprefix $(SRCDIR)/, $(SUBDIR))
+
 SRCS		= main.c\
 			  parse_env.c\
 			  split_line_to_process.c\
@@ -35,7 +37,8 @@ SRCS		= main.c\
 			  split_utils.c\
 			  redirection.c\
 			  utils.c\
-			  #execute_instruction_main.c
+			  fork.c\
+			  program_in_path.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
