@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/22 20:18:26 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 15:53:02 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ static char	*get_inst_with_path_route(const char *path,
 	char	*route;
 	char	*ret;
 
-	route = (char *)malloc(sizeof(char) * (end - begin + 1));
+	route = (char *)malloc(sizeof(char) * (end - begin + 2));
 	if (!route)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_strlcpy(route, &path[begin], end - begin + 1);
+	route[end - begin] = '/';
+	route[end - begin + 1] = '\0';
 	ret = ft_strjoin(route, inst);
+	free(route);
 	if (!ret)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	free(route);
 	return (ret);
 }
 
@@ -44,7 +46,6 @@ static void	execute_at_env_path(const char *path, t_process *process, char **arg
 			end++;
 		inst = get_inst_with_path_route(path, process->instruction,
 				begin, end);
-		printf("inst : %s\n", inst);
 		execve(inst, argv, NULL);
 		end++;
 		begin = end;
@@ -66,7 +67,7 @@ static void	add_option_in_argv(t_list *option, char ***argv)
 	i = 1;
 	while (option)
 	{
-		*argv[i] = (char *)(option->content);
+		(*argv)[i] = (char *)(option->content);
 		i++;
 		option = option->next;
 	}
@@ -77,11 +78,12 @@ static void	add_arguments_in_argv(t_list *arguments, char ***argv)
 	int	i;
 
 	i = 1;
-	while (*argv[i])
+	while ((*argv)[i])
 		i++;
 	while (arguments)
 	{
-		*argv[i] = (char *)(arguments->content);
+		(*argv)[i] = (char *)(arguments->content);
+		printf("%s\n", (*argv)[i]);
 		i++;
 		arguments = arguments->next;
 	}

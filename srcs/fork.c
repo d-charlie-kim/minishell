@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/22 20:36:01 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 15:56:58 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,30 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	print_error_and_exit("명령어를 못찾았어요 ㅠㅠ\n", 5555555);
 }
 
-static bool	make_pipe_and_fork(t_process *processes, t_process *cur_process,
+static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,
 			int child_index, int *exit_status)
 {
-	int		pipefd[2];
 	pid_t	pid;
+	char	buf[200];
+	int		pipefd[2];
 
 	pipe(&pipefd[2]);
 	pid = fork();
 	if (pid > 0)
 	{
-		close(STDIN_FILENO);
-		close(pipefd[1]);
+		//close(STDIN_FILENO);
+		//close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
-		printf("부모프로세스\n");
 		waitpid(pid, exit_status, 0);
+		read(STDIN_FILENO, buf, 200);
 		return (false);
 	}
 	else
 	{
-		printf("여기선 출력이 되는데\n");
-		close(STDOUT_FILENO);
-		printf("여기선 출력이 안되는 이유는 무엇일까요?\n");
-		close(pipefd[0]);
+		//close(STDOUT_FILENO); // 이거 close하면 자식프로세스 종료됨. 왜???
+		//close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
-		cur_process = &processes[child_index];
+		*cur_process = &processes[child_index];
 		return (true);
 	}
 }
@@ -78,12 +77,16 @@ static void	fork_num_of_inst(t_info *info, t_process *processes)
 	{
 		if (!can_fork)
 			break ;
-		can_fork = make_pipe_and_fork(processes, cur_process, child_index, &exit_status);
+		can_fork = make_pipe_and_fork(processes, &cur_process, child_index, &exit_status);
 		printf("%d\n", can_fork);
 		child_index--;
 	}
 	if (cur_process)
 		execute_program(info, cur_process);
+	
+	char buf[200];
+	write(1, buf, ft_strlen(buf));
+
 	exit(exit_status);
 }
 

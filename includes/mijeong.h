@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/22 20:04:49 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:45:18 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
