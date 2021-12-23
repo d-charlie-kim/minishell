@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 15:56:58 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 19:53:52 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,35 @@ static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,
 			int child_index, int *exit_status)
 {
 	pid_t	pid;
-	char	buf[200];
 	int		pipefd[2];
 
-	pipe(&pipefd[2]);
+	pipe(pipefd);
 	pid = fork();
 	if (pid > 0)
 	{
-		//close(STDIN_FILENO);
-		//close(pipefd[1]);
+		close(STDIN_FILENO);
+		close(pipefd[1]);
 		dup2(pipefd[0], STDIN_FILENO);
 		waitpid(pid, exit_status, 0);
-		read(STDIN_FILENO, buf, 200);
 		return (false);
 	}
 	else
 	{
-		//close(STDOUT_FILENO); // 이거 close하면 자식프로세스 종료됨. 왜???
-		//close(pipefd[0]);
+		close(STDOUT_FILENO); // 이거 close하면 자식프로세스 종료됨. 왜???
+		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		*cur_process = &processes[child_index];
 		return (true);
 	}
+}
+
+static void	print_result(int exit_status)
+{
+	char buf[200];
+
+	read(STDIN_FILENO, buf, 200);
+	write(STDOUT_FILENO, buf, ft_strlen(buf));
+	exit(exit_status);
 }
 
 static void	fork_num_of_inst(t_info *info, t_process *processes)
@@ -78,14 +85,16 @@ static void	fork_num_of_inst(t_info *info, t_process *processes)
 		if (!can_fork)
 			break ;
 		can_fork = make_pipe_and_fork(processes, &cur_process, child_index, &exit_status);
-		printf("%d\n", can_fork);
 		child_index--;
 	}
 	if (cur_process)
 		execute_program(info, cur_process);
-	
+	print_result(exit_status);
+
+
 	char buf[200];
-	write(1, buf, ft_strlen(buf));
+	read(STDIN_FILENO, buf, 200);
+	write(STDOUT_FILENO, buf, ft_strlen(buf));
 
 	exit(exit_status);
 }

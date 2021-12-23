@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 15:53:02 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 16:09:59 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	add_arguments_in_argv(t_list *arguments, char ***argv)
 	while (arguments)
 	{
 		(*argv)[i] = (char *)(arguments->content);
-		printf("%s\n", (*argv)[i]);
 		i++;
 		arguments = arguments->next;
 	}
