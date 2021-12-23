@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 19:53:52 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:44:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,16 @@ static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,
 
 static void	print_result(int exit_status)
 {
-	char buf[200];
+	//char buf[200];
 
-	read(STDIN_FILENO, buf, 200);
+	//read(STDIN_FILENO, buf, 200);
+	//write(STDOUT_FILENO, buf, ft_strlen(buf));
+	//exit(exit_status);
+
+	char	*buf;
+	get_next_line(STDIN_FILENO, &buf);
 	write(STDOUT_FILENO, buf, ft_strlen(buf));
-	exit(exit_status);
+	write(STDOUT_FILENO, "\n", 1);
 }
 
 static void	fork_num_of_inst(t_info *info, t_process *processes)
@@ -90,12 +95,6 @@ static void	fork_num_of_inst(t_info *info, t_process *processes)
 	if (cur_process)
 		execute_program(info, cur_process);
 	print_result(exit_status);
-
-
-	char buf[200];
-	read(STDIN_FILENO, buf, 200);
-	write(STDOUT_FILENO, buf, ft_strlen(buf));
-
 	exit(exit_status);
 }
 

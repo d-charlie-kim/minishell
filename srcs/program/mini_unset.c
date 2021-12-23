@@ -1,44 +1,31 @@
 #include "mijeong.h"
 #include "parsing.h"
 
-void	first_env_check(t_env *env, char *str)
+void	delete_env(t_env **env, char *str)
 {
 	t_env	*temp;
+	t_env	*target;
+	int		len;
 
-	temp = env;
-	if (ft_strncmp(str, env->key, ft_strlen(str)))
+	temp = *env;
+	len = ft_strlen(str);
+	if (!ft_strncmp(temp->key, str, len + 1))
 	{
-		if (env->next == NULL)
-		{
-			free (env);
-			return ;
-		}
-		temp = env->next;
-		free (env);
-		env = temp;
+		temp = temp->next;
+		free (*env);
+		*env = temp;
+		return ;
 	}
-
-}
-
-void	delete_env(t_env *env, char *str)
-{
-	t_env	*temp;
-	t_env	*previous_temp;
-
-
-	first_env_check(env, str);
-	temp = env->next;
-	previous_temp = env;
-	while (temp != NULL)
+	while (temp->next != NULL)
 	{
-		if (ft_strncmp(str, temp->key, ft_strlen(str)))
+		if (!ft_strncmp(temp->next->key, str, len + 1))
 		{
-			previous_temp->next = temp->next;
-			free (temp);
+			target = temp->next;
+			temp = target->next;
+			free (target);
 			return ;
 		}
 		temp = temp->next;
-		previous_temp = previous_temp->next;
 	}
 }
 

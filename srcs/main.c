@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/23 16:01:38 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:37:40 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc; (void)argv;
 	// signal 처리
 	info.env = NULL;
-	
+
 	parse_envp(&info, envp);
 	
 	while (1)

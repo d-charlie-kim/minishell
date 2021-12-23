@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/23 20:19:17 by jaejeong         ###   ########.fr       */
+/*   Updated: 2021/12/23 20:27:52 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include "libft.h"
 # include "parsing.h"
+# include "get_next_line.h"
 
 typedef struct s_info
 {
