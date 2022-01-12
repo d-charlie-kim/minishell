@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_unset.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/12 13:19:35 by dokkim            #+#    #+#             */
+/*   Updated: 2022/01/12 13:28:40 by dokkim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mijeong.h"
 #include "parsing.h"
 
@@ -21,7 +33,7 @@ void	delete_env(t_env **env, char *str)
 		if (!ft_strncmp(temp->next->key, str, len + 1))
 		{
 			target = temp->next;
-			temp = target->next;
+			temp->next = target->next;
 			free (target);
 			return ;
 		}
@@ -32,15 +44,15 @@ void	delete_env(t_env **env, char *str)
 void	mini_unset(t_info *info, t_process *process)
 {
 	t_list	*arguments;
-	char	*str;
+	char	*target;
 	
 	if (!info->env)
 		return ;
 	arguments = process->arguments;
 	while (arguments != NULL)
 	{
-		str = (char *)arguments->content;
-		delete_env(info->env, str);
+		target = (char *)arguments->content;
+		delete_env(info->env, target);
 		arguments = arguments->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_token_in_struct.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:58:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/13 16:41:48 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/01/12 13:20:06 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
