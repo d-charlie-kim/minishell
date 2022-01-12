@@ -50,4 +50,6 @@ void		print_error_and_exit(char *output, int error_num);
 void		fork_main(t_info *info, t_process *processes);
 void		find_instruction(t_info *info, t_process *process);
 
+void		ft_signal(void);
+
 # endif

@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	t_process	*processes;
 
 	(void)argc; (void)argv;
-	// signal 처리
+	ft_signal();
 	info.env = NULL;
 
 	parse_envp(&info, envp);
