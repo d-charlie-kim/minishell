@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 21:13:21 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:15:56 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	// 	mini_export(info, cur_process);
 	// else if (!ft_strncmp("unset", cur_process->instruction, 6)) // char
 	// 	mini_unset(info, cur_process);
-	// else if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
-	// 	mini_pwd(info, cur_process);
+	if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
+	 	mini_pwd(info, cur_process);
 	// else if (!ft_strncmp("echo", cur_process->instruction, 5))  // together
 	// 	mini_echo(info, cur_process);
-	// else
+	else
 		find_instruction(info, cur_process); // 명령어가 빈 문자열일 때 아직 처리하지 못함 // jae
 											 // ex) echo a | $rtjkgsrgsrth
 	print_error_and_exit("명령어를 못찾았어요 ㅠㅠ\n", 5555555);

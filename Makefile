@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by jaejeong          #+#    #+#              #
-#    Updated: 2021/12/23 20:16:41 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/01/13 20:01:12 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCS		= main.c\
 			  program_in_path.c\
 			  get_next_line.c\
 			  get_next_line_utils.c\
-			  signal.c
+			  signal.c\
+			  mini_pwd.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/23 20:27:52 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:01:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		print_error_and_exit(char *output, int error_num);
 
 void		fork_main(t_info *info, t_process *processes);
 void		find_instruction(t_info *info, t_process *process);
+
+void		mini_pwd(t_info *info, t_process *process);
 
 void		ft_signal(void);
 

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:47:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/01/13 19:50:17 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:17:22 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,18 @@
 void	mini_pwd(t_info *info, t_process *process)
 {
 	char	buf[PATH_MAX];
+	char	*option;
 
+	(void)info;
 	getcwd(buf, PATH_MAX);
-	write(STDOUT_FILENO, buf, ft_strlen(buf) + 1);
+	if (!process->option)
+	{
+		write(STDOUT_FILENO, buf, ft_strlen(buf) + 1);
+		exit(0);
+	}
+	option = (char *)(process->option->content);
+	write(STDERR_FILENO, "bash: pwd: -", 12);
+	write(STDERR_FILENO, &(option[1]), 1);
+	write(STDERR_FILENO, ": invalid option\n", 17);
+	exit(1);
 }
