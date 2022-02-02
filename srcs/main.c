@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/01 00:19:42 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:27:51 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	main(int argc, char **argv, char **envp)
 	info.env = NULL;
 
 	parse_envp(&info, envp);
-	
-	printf("minishell pid : %d\n", getpid());
 
 	while (1)
 	{

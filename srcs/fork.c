@@ -6,23 +6,15 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/01 00:20:53 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:28:29 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-static void	print_cur_process_info(t_process *cur_process)
-{
-	printf("process name : %s\n", cur_process->instruction);
-	printf("getpid : %d, getppid : %d\n", getpid(), getppid());
-}
-
 static void	execute_program(t_info *info, t_process *cur_process)
 {
-				print_cur_process_info(cur_process); // testcode ,......
-
 	// if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
 	// 	mini_cd(info, cur_process);
 	// else if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
@@ -73,11 +65,8 @@ static void	print_result(int exit_status)
 {
 	char	*buf;
 
-	printf("this is printer process\n");
-	printf("getpid : %d, getppid : %d\n", getpid(), getppid());
 	while (get_next_line(STDIN_FILENO, &buf) > 0)
 	{
-		printf("buf : %s\n", buf);
 		write(STDOUT_FILENO, buf, ft_strlen(buf));
 		write(STDOUT_FILENO, "\n", 1);
 	}

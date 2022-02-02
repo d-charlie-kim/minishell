@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:47:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/01 00:31:06 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:25:14 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	mini_pwd(t_info *info, t_process *process)
 	getcwd(buf, PATH_MAX);
 	if (!process->option)
 	{
-		printf("pwd buf : %s, buf length : %ld\n", buf, ft_strlen(buf));
-		write(STDOUT_FILENO, buf, ft_strlen(buf) + 1);
+		write(STDOUT_FILENO, buf, ft_strlen(buf));
+		write(STDOUT_FILENO, "\n", 1);
 		exit(0);
 	}
 	option = (char *)(process->option->content);
