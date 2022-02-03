@@ -27,11 +27,13 @@ void	put_new_node_to_sorted_env(t_env *sorted_env, t_env *new_node)
 		{
 			second_node->next = new_node;
 			new_node->next = front_node;
+			return ;
 		}
 		second_node = front_node;
 		front_node = front_node->next;
 	}
-
+	if (front_node == NULL)
+		second_node->next = new_node;
 }
 
 t_env	*make_sorted_env(t_env *env)
@@ -82,7 +84,7 @@ void	print_export(t_env *env)
 		if (sorted_env->value != NULL)
 		{
 			printf("%s=", sorted_env->key);
-			printf("\"%s\"", sorted_env->value);
+			printf("\"%s\"\n", sorted_env->value);
 		}
 		/*
 			만약에 value 값이 없을 경우 어떻게 출력되는지 확인
