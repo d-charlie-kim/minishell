@@ -73,7 +73,6 @@ void	print_export(t_env *env)
 {
 	t_env	*sorted_env;
 	t_env	*temp;
-	int		i;
 
 	sorted_env = make_sorted_env(env);
 	while (sorted_env!= NULL)
@@ -101,15 +100,16 @@ void	print_export(t_env *env)
 	*/
 }
 
-void	put_env(t_env *env, t_list *arguments)
-{
-	
-}
+// void	put_env(t_env *env, t_list *arguments)
+// {
+
+// }
 
 int	mini_export(t_info *info, t_process *process)
 {
 	if (!process->arguments)
 		print_export(info->env);
-	else
-		put_env(info->env, process->arguments);
+	// else
+	// 	put_env(info->env, process->arguments);
+	return (0);
 }

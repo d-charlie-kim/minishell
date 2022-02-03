@@ -31,7 +31,7 @@ void	mini_env(t_info *info, t_process *process)
 {
 	if (process->arguments)
 	{
-		printf("env: %s: No such file or directory", process->arguments->content);
+		printf("env: %s: No such file or directory", (char *)process->arguments->content);
 		return ;
 	}
 	else

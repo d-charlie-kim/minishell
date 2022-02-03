@@ -52,7 +52,7 @@ void	mini_unset(t_info *info, t_process *process)
 	while (arguments != NULL)
 	{
 		target = (char *)arguments->content;
-		delete_env(info->env, target);
+		delete_env(&info->env, target);
 		arguments = arguments->next;
 	}
 }

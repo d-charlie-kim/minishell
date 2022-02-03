@@ -52,6 +52,8 @@ void		find_instruction(t_info *info, t_process *process);
 
 void		mini_pwd(t_info *info, t_process *process);
 int			mini_export(t_info *info, t_process *process);
+void		mini_env(t_info *info, t_process *process);
+void	mini_unset(t_info *info, t_process *process);
 
 void		ft_signal(void);
 

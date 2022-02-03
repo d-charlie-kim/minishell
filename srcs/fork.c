@@ -19,12 +19,12 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	// 	mini_cd(info, cur_process);
 	// else if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
 	// 	mini_exit(info, cur_process);
-	// else if (!ft_strncmp("env", cur_process->instruction, 4))    // char
-	// 	mini_env(info, cur_process);
-	if (!ft_strncmp("export", cur_process->instruction, 7)) // char
+	if (!ft_strncmp("env", cur_process->instruction, 4))    // char
+		mini_env(info, cur_process);
+	else if (!ft_strncmp("export", cur_process->instruction, 7)) // char
 		mini_export(info, cur_process);
-	// else if (!ft_strncmp("unset", cur_process->instruction, 6)) // char
-	// 	mini_unset(info, cur_process);
+	else if (!ft_strncmp("unset", cur_process->instruction, 6)) // char
+		mini_unset(info, cur_process);
 	else if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
 	 	mini_pwd(info, cur_process);
 	// else if (!ft_strncmp("echo", cur_process->instruction, 5))  // together
