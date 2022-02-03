@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/01/13 20:15:56 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:28:29 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,
 	}
 	else
 	{
-		close(STDOUT_FILENO); // 이거 close하면 자식프로세스 종료됨. 왜???
+		close(STDOUT_FILENO);
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		*cur_process = &processes[child_index];
