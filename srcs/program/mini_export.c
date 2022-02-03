@@ -82,8 +82,11 @@ void	print_export(t_env *env)
 	{
 		temp = sorted_env;
 		printf("declare -x ");
-		printf("%s=", sorted_env->key);
-		printf("\"%s\"", sorted_env->value);
+		if (sorted_env->value != NULL)
+		{
+			printf("%s=", sorted_env->key);
+			printf("\"%s\"", sorted_env->value);
+		}
 		/*
 			만약에 value 값이 없을 경우 어떻게 출력되는지 확인
 			value 값이 비어 있어서 a=""  이렇게 출력되는 것과
