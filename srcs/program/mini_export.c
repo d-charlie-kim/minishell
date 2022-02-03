@@ -14,8 +14,6 @@
 #include "parsing.h"
 #include "libft.h"
 
-#define NUM 15 // strncmp를 수정하거나 strcmp를 만들 필요가 있음
-
 void	put_new_node_to_sorted_env(t_env *sorted_env, t_env *new_node)
 {
 	t_env	*front_node;
@@ -25,7 +23,7 @@ void	put_new_node_to_sorted_env(t_env *sorted_env, t_env *new_node)
 	front_node = second_node->next;
 	while (front_node != NULL)
 	{
-		if (ft_strncmp(front_node->key, new_node->key, NUM) > 0) // new node 보다 front node가 뒤에 있어야 한다면
+		if (ft_strncmp(front_node->key, new_node->key, ft_strlen(front_node->key) + 1) > 0)
 		{
 			second_node->next = new_node;
 			new_node->next = front_node;
