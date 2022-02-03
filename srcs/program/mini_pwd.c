@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:47:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/02 19:25:14 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:28:53 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-#define PATH_MAX 4096
+#ifndef PATH_MAX
+ #define PATH_MAX 4096
+#endif
 
 // PATH_MAX 는 linux 에서는 <linux/limits.h>에, 
 // mac os 에서는 <sys/syslimits.h>에 정의되어있다.

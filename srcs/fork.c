@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/02 19:28:29 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:33:45 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	// 	mini_exit(info, cur_process);
 	// else if (!ft_strncmp("env", cur_process->instruction, 4))    // char
 	// 	mini_env(info, cur_process);
-	// else if (!ft_strncmp("export", cur_process->instruction, 7)) // char
-	// 	mini_export(info, cur_process);
+	if (!ft_strncmp("export", cur_process->instruction, 7)) // char
+		mini_export(info, cur_process);
 	// else if (!ft_strncmp("unset", cur_process->instruction, 6)) // char
 	// 	mini_unset(info, cur_process);
-	if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
+	else if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
 	 	mini_pwd(info, cur_process);
 	// else if (!ft_strncmp("echo", cur_process->instruction, 5))  // together
 	// 	mini_echo(info, cur_process);
