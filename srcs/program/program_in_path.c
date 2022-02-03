@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 16:09:59 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:26:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하
 
 	inst = process->instruction;
 	argv = setting_argv(process);
-	if (inst[0] == '.' || inst[0] == '/' || inst[0] == '~')
-		execve(inst, argv, NULL);
+	if (inst[0] == '.' || inst[0] == '/' || inst[0] == '~') // 절대 경로, 상대 경로 찾는 방식이 잘못됨.
+		execve(inst, argv, NULL);							// 다시 생각해보기
 	else
 	{
 		path = get_env_value(info->env, "PATH");
