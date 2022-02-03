@@ -15,5 +15,7 @@
 
 int	mini_exit(t_info *info, t_process *process)
 {
-	
+	exit 가 오면
+	printf("exit\n");
+	exit (0);
 }

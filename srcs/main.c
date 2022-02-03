@@ -70,6 +70,8 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		output = readline("mijeong$ ");
+		if (!output)
+			exit(0);
 		if (output[0] == '\0')
 			continue ;
 		add_history(output);

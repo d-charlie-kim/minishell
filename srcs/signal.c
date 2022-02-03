@@ -3,12 +3,14 @@
 
 void	sigint_handler(void)
 {
-	write(1, "\b\b\n\b\b", 5);
+	write(1, "!!!!\n", 5);
+	write(1, "mijeong$ ", 9);
 }
 
 void	sigquit_handler(void)
 {
 	write(1, "\b\b", 2);
+	write(1, "mijeong$ ", 9);
 }
 
 void	ft_signal(void)
