@@ -6,16 +6,12 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:47:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/03 14:28:53 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:13:19 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
-
-#ifndef PATH_MAX
- #define PATH_MAX 4096
-#endif
 
 // PATH_MAX 는 linux 에서는 <linux/limits.h>에, 
 // mac os 에서는 <sys/syslimits.h>에 정의되어있다.

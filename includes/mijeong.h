@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/03 14:36:00 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:13:07 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include "libft.h"
 # include "parsing.h"
 # include "get_next_line.h"
+
+# ifndef PATHMAX
+#  define PATHMAX 4096
+# endif
 
 typedef struct s_info
 {

@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/03 14:33:45 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:10:18 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ static void	fork_num_of_inst(t_info *info, t_process *processes)
 	print_result(exit_status);
 }
 
-void	fork_main(t_info *info, t_process *processes)
+void	fork_main(t_info *info, t_process *processes) // printer process 없애기.
+// 파이프 연결이 마지막 프로세스 -> printer 프로세스가 아닌,
+// 마지막 프로세스 -> stdout으로 연결되도록 만들기
 {
 	int		exit_status;
 	pid_t	printer_pid;
