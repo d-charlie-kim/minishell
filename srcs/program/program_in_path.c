@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/03 17:26:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:15:36 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,8 @@ void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하
 
 	inst = process->instruction;
 	argv = setting_argv(process);
-	if (inst[0] == '.' || inst[0] == '/' || inst[0] == '~') // 절대 경로, 상대 경로 찾는 방식이 잘못됨.
-		execve(inst, argv, NULL);							// 다시 생각해보기
-	else
+	execve(inst, argv, NULL);
+	if (get_env_value(info->env, "PATH"))
 	{
 		path = get_env_value(info->env, "PATH");
 		execute_at_env_path(path, process, argv);
