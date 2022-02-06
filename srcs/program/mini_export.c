@@ -141,13 +141,11 @@ void	put_env(t_env *env, t_list *arguments)
 		while (scan[len] != '=' && scan[len] != '\0')
 			len++;
 		temp->key = (char *)malloc(sizeof(char) * len);
-		printf("@@@@@@@@@@@@@@@@@%d\n", len);
 		if (!temp->key)
 		{
 			//error
 		}
 		temp->key = ft_strncpy(temp->key, scan, len);
-		printf("!!!!!!!!!!!!!!!!!!%s\n", temp->key);
 		if (!scan[len])
 			temp->value = NULL;
 		else
