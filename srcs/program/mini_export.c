@@ -102,16 +102,60 @@ void	print_export(t_env *env)
 	*/
 }
 
-// void	put_env(t_env *env, t_list *arguments)
-// {
+void	put_env(t_env *env, t_list *arguments)
+{
+	char	*key;
+	char	*value;
+	char	*scan;
+	t_env	*temp;
+	int		len;
+	t_list	*arg_temp;
 
-// }
+	temp = env;
+	arg_temp = arguments;
+	while (temp->next != NULL)
+		temp = temp->next;
+	while (arg_temp != NULL)
+	{
+		len = 0;
+		scan = arg_temp->content;
+		temp->next = (t_env *)malloc(sizeof(t_env));
+		if (!temp->next)
+		{
+			//error
+		}
+		temp = temp->next;
+		temp->next = NULL;
+		while (!scan[len] && scan[len] != '=')
+			len++;
+		key = (char *)malloc(sizeof(char) * len);
+		if (!key)
+		{
+			//error
+		}
+		ft_strlcpy(&key, scan, len);
+		temp->key = key;
+		if (!scan[len])
+			temp->value = NULL;
+		else
+		{
+			value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len - 1));
+			if (!value)
+			{
+				//error
+			}
+			ft_strlcpy(value, scan + len + 1, ft_strlen(scan) - len - 1);
+			temp->value = value;
+		}
+		arg_temp = arg_temp->next;
+	}
+}
 
 int	mini_export(t_info *info, t_process *process)
 {
 	if (!process->arguments)
 		print_export(info->env);
-	// else
-	// 	put_env(info->env, process->arguments);
+	else
+		put_env(info->env, process->arguments);
 	return (0);
 }
