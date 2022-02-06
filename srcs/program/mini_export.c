@@ -102,20 +102,6 @@ void	print_export(t_env *env)
 	*/
 }
 
-char	*ft_strncpy(char *dest, char *src, int	size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 void	put_env(t_env *env, t_list *arguments)
 {
 	char	*scan;
@@ -140,22 +126,22 @@ void	put_env(t_env *env, t_list *arguments)
 		temp->next = NULL;
 		while (scan[len] != '=' && scan[len] != '\0')
 			len++;
-		temp->key = (char *)malloc(sizeof(char) * len);
+		temp->key = (char *)malloc(sizeof(char) * len + 1);
 		if (!temp->key)
 		{
 			//error
 		}
-		temp->key = ft_strncpy(temp->key, scan, len);
+		ft_strlcpy(temp->key, scan, len + 1);
 		if (!scan[len])
 			temp->value = NULL;
 		else
 		{
-			temp->value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len - 1));
+			temp->value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len));
 			if (!temp->value)
 			{
 				//error
 			}
-			temp->key = ft_strncpy(temp->value, scan + len + 1, ft_strlen(scan) - len - 1);
+			ft_strlcpy(temp->value, scan + len + 1, ft_strlen(scan) - len);
 		}
 		arg_temp = arg_temp->next;
 	}
