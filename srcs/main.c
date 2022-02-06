@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		add_history(output);
 		processes = split_line_to_process(output, &info);
-		//print_parsing_data_test(processes, info.process_count); // test code ##
+		// print_parsing_data_test(processes, info.process_count); // test code ##
 		fork_main(&info, processes);
 		free(output);
 	}

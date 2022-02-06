@@ -102,10 +102,22 @@ void	print_export(t_env *env)
 	*/
 }
 
+char	*ft_strncpy(char *dest, char *src, int	size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
 void	put_env(t_env *env, t_list *arguments)
 {
-	char	*key;
-	char	*value;
 	char	*scan;
 	t_env	*temp;
 	int		len;
@@ -118,7 +130,7 @@ void	put_env(t_env *env, t_list *arguments)
 	while (arg_temp != NULL)
 	{
 		len = 0;
-		scan = arg_temp->content;
+		scan = (char *)arg_temp->content;
 		temp->next = (t_env *)malloc(sizeof(t_env));
 		if (!temp->next)
 		{
@@ -126,29 +138,30 @@ void	put_env(t_env *env, t_list *arguments)
 		}
 		temp = temp->next;
 		temp->next = NULL;
-		while (!scan[len] && scan[len] != '=')
+		while (scan[len] != '=' && scan[len] != '\0')
 			len++;
-		key = (char *)malloc(sizeof(char) * len);
-		if (!key)
+		temp->key = (char *)malloc(sizeof(char) * len);
+		printf("@@@@@@@@@@@@@@@@@%d\n", len);
+		if (!temp->key)
 		{
 			//error
 		}
-		ft_strlcpy(&key, scan, len);
-		temp->key = key;
+		temp->key = ft_strncpy(temp->key, scan, len);
+		printf("!!!!!!!!!!!!!!!!!!%s\n", temp->key);
 		if (!scan[len])
 			temp->value = NULL;
 		else
 		{
-			value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len - 1));
-			if (!value)
+			temp->value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len - 1));
+			if (!temp->value)
 			{
 				//error
 			}
-			ft_strlcpy(value, scan + len + 1, ft_strlen(scan) - len - 1);
-			temp->value = value;
+			temp->key = ft_strncpy(temp->value, scan + len + 1, ft_strlen(scan) - len - 1);
 		}
 		arg_temp = arg_temp->next;
 	}
+	// print_env(env); // 출력 테스트용 코드인데 출력이 안됨
 }
 
 int	mini_export(t_info *info, t_process *process)
