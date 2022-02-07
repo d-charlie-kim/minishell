@@ -18,7 +18,7 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	// if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
 	// 	mini_cd(info, cur_process);
 	if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
-		mini_exit(info, cur_process);
+		mini_exit();
 	else if (!ft_strncmp("env", cur_process->instruction, 4))    // char
 		mini_env(info, cur_process);
 	else if (!ft_strncmp("export", cur_process->instruction, 7)) // char
@@ -32,7 +32,7 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	else
 		find_instruction(info, cur_process); // 명령어가 빈 문자열일 때 아직 처리하지 못함 // jae
 											 // ex) echo a | $rtjkgsrgsrth
-	print_error_and_exit("명령어를 못찾았어요 ㅠㅠ\n", 5555555);
+	print_error_and_exit("한 프로세스 끝!\n", 5555555);
 }
 
 static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,

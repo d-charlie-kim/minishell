@@ -13,7 +13,7 @@
 #include "mijeong.h"
 #include "parsing.h"
 
-int	mini_exit(t_info *info, t_process *process)
+int	mini_exit(void)
 {
 	printf("exit\n");
 	exit (0);

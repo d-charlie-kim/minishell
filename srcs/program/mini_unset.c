@@ -41,13 +41,13 @@ void	delete_env(t_env **env, char *str)
 	}
 }
 
-void	mini_unset(t_info *info, t_process *process)
+int	mini_unset(t_info *info, t_process *process)
 {
 	t_list	*arguments;
 	char	*target;
 	
 	if (!info->env)
-		return ;
+		return (exit_process(info, 0));
 	arguments = process->arguments;
 	while (arguments != NULL)
 	{
@@ -55,4 +55,5 @@ void	mini_unset(t_info *info, t_process *process)
 		delete_env(&info->env, target);
 		arguments = arguments->next;
 	}
+	return (exit_process(info, 0));
 }

@@ -47,7 +47,8 @@ SRCS		= main.c\
 			  mini_export.c\
 			  mini_unset.c\
 			  mini_env.c\
-			  mini_echo.c
+			  mini_echo.c\
+			  mini_exit.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

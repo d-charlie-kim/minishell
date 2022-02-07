@@ -30,7 +30,7 @@ void	print_error_and_exit(char *output, int error_num)
 	exit(error_num);
 }
 
-void	ret_handler(t_info *info, int exit_status)
+int	exit_process(t_info *info, int exit_status)
 {
 	if (info->process_count == 1)
 		return (exit_status);

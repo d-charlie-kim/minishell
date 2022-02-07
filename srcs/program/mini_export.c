@@ -95,11 +95,6 @@ void	print_export(t_env *env)
 		free (temp);
 	}
 	free (sorted_env);
-	/*
-		export용, env용 리스트를 따로 두지 않고, export 할때마다 정렬을 해주는 방향이 더 관리하기 편할 것 같다.
-		시간적인 부분은 비효율적일 수 있으나
-		환경변수가 엄청 많지 않기 때문에 괜찮.
-	*/
 }
 
 void	put_env(t_env *env, t_list *arguments)
@@ -145,7 +140,6 @@ void	put_env(t_env *env, t_list *arguments)
 		}
 		arg_temp = arg_temp->next;
 	}
-	// print_env(env); // 출력 테스트용 코드인데 출력이 안됨
 }
 
 int	mini_export(t_info *info, t_process *process)
@@ -154,5 +148,5 @@ int	mini_export(t_info *info, t_process *process)
 		print_export(info->env);
 	else
 		put_env(info->env, process->arguments);
-	return (0);
+	return (exit_process(info, 0));
 }

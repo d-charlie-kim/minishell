@@ -14,10 +14,8 @@
 
 int	mini_echo(t_info *info, t_process *process)
 {
-	int		i;
 	t_list	*temp;
 
-	i = 0;
 	temp = process->arguments;
 	while (temp != NULL)
 	{
@@ -27,5 +25,5 @@ int	mini_echo(t_info *info, t_process *process)
 			printf(" ");
 	}
 	printf("\n");
-	return (ret_handler(info, exit_status));
+	return (exit_process(info, 0));
 }
