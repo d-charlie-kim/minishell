@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/04 20:13:07 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:45:35 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ void		fork_main(t_info *info, t_process *processes);
 void		find_instruction(t_info *info, t_process *process);
 
 void		print_env(t_env *env);
+int			mini_echo(t_info *info, t_process *process);
 void		mini_pwd(t_info *info, t_process *process);
 int			mini_export(t_info *info, t_process *process);
 void		mini_env(t_info *info, t_process *process);
 void		mini_unset(t_info *info, t_process *process);
 
 void		ft_signal(void);
+void		ret_handler(t_info *info, int exit_status);
 
 # endif

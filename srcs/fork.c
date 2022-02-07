@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/04 20:10:18 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:47:55 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	execute_program(t_info *info, t_process *cur_process)
 {
 	// if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
 	// 	mini_cd(info, cur_process);
-	// else if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
-	// 	mini_exit(info, cur_process);
-	if (!ft_strncmp("env", cur_process->instruction, 4))    // char
+	if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
+		mini_exit(info, cur_process);
+	else if (!ft_strncmp("env", cur_process->instruction, 4))    // char
 		mini_env(info, cur_process);
 	else if (!ft_strncmp("export", cur_process->instruction, 7)) // char
 		mini_export(info, cur_process);
@@ -27,8 +27,8 @@ static void	execute_program(t_info *info, t_process *cur_process)
 		mini_unset(info, cur_process);
 	else if (!ft_strncmp("pwd", cur_process->instruction, 4))   // jae
 	 	mini_pwd(info, cur_process);
-	// else if (!ft_strncmp("echo", cur_process->instruction, 5))  // together
-	// 	mini_echo(info, cur_process);
+	else if (!ft_strncmp("echo", cur_process->instruction, 5))  // together
+		mini_echo(info, cur_process);
 	else
 		find_instruction(info, cur_process); // 명령어가 빈 문자열일 때 아직 처리하지 못함 // jae
 											 // ex) echo a | $rtjkgsrgsrth
