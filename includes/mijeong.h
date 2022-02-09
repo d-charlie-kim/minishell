@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/07 19:45:35 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/09 16:00:13 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <termios.h>
 # include <fcntl.h>
 # include <stdbool.h>
 # include <sys/wait.h>
@@ -34,8 +35,10 @@
 
 typedef struct s_info
 {
-	int		process_count;
-	int		last_exit_status;
+	int				process_count;
+	int				last_exit_status;
+	struct termios	org_term;
+	struct termios	new_term;
 	t_env	*env;
 }				t_info;
 

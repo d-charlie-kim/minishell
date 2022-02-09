@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/04 20:14:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:19:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	t_process	*processes;
 
 	(void)argc; (void)argv;
-	ft_signal();
+	//init_mon_setting(info);
 	info.env = NULL;
 
 	parse_envp(&info, envp);
@@ -71,12 +71,15 @@ int	main(int argc, char **argv, char **envp)
 	{
 		output = readline("mijeong$ ");
 		if (!output)
+		{
+			write(1, "exit\n", 5);
 			exit(0);
+		}
 		if (output[0] == '\0')
 			continue ;
 		add_history(output);
 		processes = split_line_to_process(output, &info);
-		// print_parsing_data_test(processes, info.process_count); // test code ##
+		//print_parsing_data_test(processes, info.process_count); // test code ##
 		fork_main(&info, processes);
 		free(output);
 	}

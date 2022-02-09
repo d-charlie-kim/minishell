@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/07 19:47:55 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/09 17:26:03 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,81 +32,50 @@ static void	execute_program(t_info *info, t_process *cur_process)
 	else
 		find_instruction(info, cur_process); // 명령어가 빈 문자열일 때 아직 처리하지 못함 // jae
 											 // ex) echo a | $rtjkgsrgsrth
-	print_error_and_exit("한 프로세스 끝!\n", 5555555);
+	print_error_and_exit("명령어를 찾지 못했어요ㅠㅠ\n", 5555555);
 }
 
-static bool	make_pipe_and_fork(t_process *processes, t_process **cur_process,
-			int child_index, int *exit_status)
+static void	set_output_fd(int pipe_fd[])
+{
+	close(pipe_fd[0]);
+	close(STDOUT_FILENO);
+	dup2(pipe_fd[1], STDOUT_FILENO);
+}
+
+static void	set_input_fd(int pipe_fd[])
+{
+	close(pipe_fd[1]);
+	close(STDIN_FILENO);
+	dup2(pipe_fd[0], STDIN_FILENO);
+}
+
+static void	fork_recursive(t_info *info, t_process *processes, int index)
 {
 	pid_t	pid;
-	int		pipefd[2];
+	int		pipe_fd[2];
 
-	pipe(pipefd);
+	if (index == 0)
+		execute_program(info, &processes[index]);
+	pipe(pipe_fd);
 	pid = fork();
-	if (pid > 0)
+	if (pid == 0)
 	{
-		close(STDIN_FILENO);
-		close(pipefd[1]);
-		dup2(pipefd[0], STDIN_FILENO);
-		waitpid(pid, exit_status, 0);
-		return (false);
+		set_output_fd(pipe_fd);
+		fork_recursive(info, processes, index - 1);
 	}
-	else
-	{
-		close(STDOUT_FILENO);
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
-		*cur_process = &processes[child_index];
-		return (true);
-	}
+	set_input_fd(pipe_fd);
+	waitpid(pid, NULL, 0);
+	execute_program(info, &processes[index]);
 }
 
-static void	print_result(int exit_status)
-{
-	char	*buf;
-
-	while (get_next_line(STDIN_FILENO, &buf) > 0)
-	{
-		write(STDOUT_FILENO, buf, ft_strlen(buf));
-		write(STDOUT_FILENO, "\n", 1);
-	}
-	exit(exit_status);
-}
-
-static void	fork_num_of_inst(t_info *info, t_process *processes)
-{
-	int			child_index;
-	int			exit_status;
-	bool		can_fork;
-	t_process	*cur_process;
-
-	child_index = info->process_count - 1;
-	cur_process = NULL;
-	can_fork = true;
-	while (child_index >= 0)
-	{
-		if (!can_fork)
-			break ;
-		can_fork = make_pipe_and_fork(processes, &cur_process, child_index, &exit_status);
-		child_index--;
-	}
-	if (cur_process)
-		execute_program(info, cur_process);
-	print_result(exit_status);
-}
-
-void	fork_main(t_info *info, t_process *processes) // printer process 없애기.
-// 파이프 연결이 마지막 프로세스 -> printer 프로세스가 아닌,
-// 마지막 프로세스 -> stdout으로 연결되도록 만들기
+void	fork_main(t_info *info, t_process *processes)
 {
 	int		exit_status;
-	pid_t	printer_pid;
+	pid_t	pid;
 
-	exit_status = 0;
-	printer_pid = fork();
-	if (printer_pid > 0)
-		waitpid(printer_pid, &exit_status, 0);
-	else
-		fork_num_of_inst(info, processes);
+	pid = fork();
+	if (pid == 0)
+		fork_recursive(info, processes, info->process_count - 1);
+	waitpid(pid, &exit_status, 0);
 	info->last_exit_status = exit_status;
 }
