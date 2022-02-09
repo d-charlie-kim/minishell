@@ -103,6 +103,7 @@ void	get_new_env(char **new_key, char **new_value, char *arg_str)
 {
 	int		len;
 
+	len = 0;
 	while (arg_str[len] != '=' && arg_str[len] != '\0')
 			len++;
 	*new_key = (char *)malloc(sizeof(char) * len + 1);
@@ -182,55 +183,12 @@ void	put_new_env(t_env *env, t_list *arguments)
 	{
 		arg_str = (char *)arg_ptr->content;
 		get_new_env(&new_key, &new_value, arg_str);
+		printf("!!!!1 %s\n", new_key);
+		printf("!!!!2 %s\n", new_value);
 		puttt(new_key, new_value, env);
 		arg_ptr = arg_ptr->next;
 	}
 }
-
-// void	put_new_env(t_env *env, t_list *arguments)
-// {
-// 	char	*scan;
-// 	t_env	*temp;
-// 	int		len;
-// 	t_list	*arg_temp;
-
-// 	arg_temp = arguments;
-// 	while (arg_temp != NULL)
-// 	{
-// 		temp = env;
-// 		while (temp->next != NULL)
-// 			temp = temp->next;
-// 		len = 0;
-// 		scan = (char *)arg_temp->content;
-// 		temp->next = (t_env *)malloc(sizeof(t_env));
-// 		if (!temp->next)
-// 		{
-// 			//error
-// 		}
-// 		temp = temp->next;
-// 		temp->next = NULL;
-// 		while (scan[len] != '=' && scan[len] != '\0')
-// 			len++;
-// 		temp->key = (char *)malloc(sizeof(char) * len + 1);
-// 		if (!temp->key)
-// 		{
-// 			//error
-// 		}
-// 		ft_strlcpy(temp->key, scan, len + 1);
-// 		if (!scan[len])
-// 			temp->value = NULL;
-// 		else
-// 		{
-// 			temp->value = (char *)malloc(sizeof(char) * (ft_strlen(scan) - len));
-// 			if (!temp->value)
-// 			{
-// 				//error
-// 			}
-// 			ft_strlcpy(temp->value, scan + len + 1, ft_strlen(scan) - len);
-// 		}
-// 		arg_temp = arg_temp->next;
-// 	}
-// }
 
 int	mini_export(t_info *info, t_process *process)
 {
