@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:39 by dokkim            #+#    #+#             */
-/*   Updated: 2022/01/12 14:12:24 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/09 18:19:23 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	print_export(t_env *env)
 			printf("%s=", sorted_env->key);
 			printf("\"%s\"\n", sorted_env->value);
 		}
+		else
+			printf("%s\n", sorted_env->key);
 		/*
 			만약에 value 값이 없을 경우 어떻게 출력되는지 확인
 			value 값이 비어 있어서 a=""  이렇게 출력되는 것과
@@ -104,12 +106,12 @@ void	put_env(t_env *env, t_list *arguments)
 	int		len;
 	t_list	*arg_temp;
 
-	temp = env;
 	arg_temp = arguments;
-	while (temp->next != NULL)
-		temp = temp->next;
 	while (arg_temp != NULL)
 	{
+		temp = env;
+		while (temp->next != NULL)
+			temp = temp->next;
 		len = 0;
 		scan = (char *)arg_temp->content;
 		temp->next = (t_env *)malloc(sizeof(t_env));

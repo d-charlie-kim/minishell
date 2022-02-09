@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 17:29:20 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:36:42 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void save_input_mode(struct termios org_term);
 void set_input_mode(struct termios new_term);
 void reset_input_mode(struct termios org_term);
 
+void	execute_program(t_info *info, t_process *cur_process);
 
 int			exit_process(t_info *info, int exit_status);
 
