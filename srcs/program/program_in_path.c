@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/04 17:15:36 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 00:09:41 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,20 @@ static char	**setting_argv(t_process *process)
 	return (argv);
 }
 
-void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
+int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
 {
+	int		exit_status;
+	pid_t	pid;
 	char	*inst;
 	char	*path;
 	char	**argv;
 
+	pid = fork();
+	if (pid > 0)
+	{
+		waitpid(pid, &exit_status, 0);
+		return (exit_status);
+	}
 	inst = process->instruction;
 	argv = setting_argv(process);
 	execve(inst, argv, NULL);
@@ -119,4 +127,6 @@ void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하
 		path = get_env_value(info->env, "PATH");
 		execute_at_env_path(path, process, argv);
 	}
+	print_error_and_exit(strerror(ENOENT), ENOENT);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/09 17:29:31 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/10 00:08:36 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS		= main.c\
 			  redirection.c\
 			  utils.c\
 			  fork.c\
+			  execute.c\
 			  program_in_path.c\
 			  get_next_line.c\
 			  get_next_line_utils.c\
@@ -49,7 +50,7 @@ SRCS		= main.c\
 			  mini_env.c\
 			  mini_echo.c\
 			  mini_exit.c\
-			  terminal.c
+			  terminal.c\
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

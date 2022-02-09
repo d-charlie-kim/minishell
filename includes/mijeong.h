@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 17:36:42 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 00:09:01 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		remove_outside_quotes_in_str(char **str);
 char		*get_env_value(t_env *env, const char *key);
 void		print_error_and_exit(char *output, int error_num);
 
+int			find_instruction(t_info *info, t_process *process);
+int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);
-void		find_instruction(t_info *info, t_process *process);
 
 int			mini_exit(void);
 void		print_env(t_env *env);
@@ -71,11 +72,10 @@ void		sigquit_handler_child(void);
 void		sigint_handler_child(void);
 void		sigint_handler_mom(void);
 
-void save_input_mode(struct termios org_term);
-void set_input_mode(struct termios new_term);
-void reset_input_mode(struct termios org_term);
+void		save_input_mode(struct termios org_term);
+void		set_input_mode(struct termios new_term);
+void		reset_input_mode(struct termios org_term);
 
-void	execute_program(t_info *info, t_process *cur_process);
 
 int			exit_process(t_info *info, int exit_status);
 

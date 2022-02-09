@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/07 19:43:35 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/10 00:15:17 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_env_value(t_env *env, const char *key)
 
 void	print_error_and_exit(char *output, int error_num)
 {
-	write(STDERR_FILENO, output, ft_strlen(output) + 1);
+	write(STDERR_FILENO, output, ft_strlen(output));
+	write(STDERR_FILENO, "\n", 1);
 	exit(error_num);
 }
 
