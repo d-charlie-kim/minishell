@@ -13,7 +13,7 @@
 #include "mijeong.h"
 #include "parsing.h"
 
-void	heredoc(t_process *process)
+void	heredoc(t_info *info, t_process *process)
 {
 	t_list			*temp;
 	t_redirect_pair	*here_doc;
@@ -23,7 +23,7 @@ void	heredoc(t_process *process)
 	int				flag;
 
 	flag = 0;
-	count = 0;
+	count = 1;
 	temp = process->redirect;
 	while (temp != NULL) // heredoc 몇개인지 체크하는 함수 따로 뺄거
 	{
@@ -34,7 +34,6 @@ void	heredoc(t_process *process)
 	}
 
 
-	temp = process->redirect;
 	if (!process->arguments) // 임시 빈 노드
 	{
 		flag = 1;
@@ -49,6 +48,7 @@ void	heredoc(t_process *process)
 	arg_temp = process->arguments;
 
 	
+	temp = process->redirect;
 	while (count > 0 && temp != NULL)
 	{
 		here_doc = (t_redirect_pair *)temp->content;
@@ -70,10 +70,16 @@ void	heredoc(t_process *process)
 			ft_strlcpy((char *)arg_temp->content, output, ft_strlen(output));
 		}
 		if (strncmp(here_doc->file_name, output, ft_strlen(here_doc->file_name) + 1) == 0)
+		{
 			count--;
-		temp = temp->next;	
+			temp = temp->next;
+		}
 	}
-	arg_temp = process->arguments->next;
-	free (process->arguments);
-	process->arguments = arg_temp;
+	if (flag)
+	{
+		arg_temp = process->arguments->next;
+		free (process->arguments);
+		process->arguments = arg_temp;
+	}
+	execute_program(info, process); //여기서 실행!!
 }

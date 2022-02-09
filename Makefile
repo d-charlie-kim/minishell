@@ -24,7 +24,8 @@ SRCDIR		= srcs
 OBJDIR		= build
 SUBDIR		= parse\
 			  program\
-			  gnl
+			  gnl\
+			  redirection
 
 vpath %.c	= $(SRCDIR)\
 			  $(addprefix $(SRCDIR)/, $(SUBDIR))
@@ -51,6 +52,7 @@ SRCS		= main.c\
 			  mini_echo.c\
 			  mini_exit.c\
 			  terminal.c\
+			  heredoc.c\
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
