@@ -61,4 +61,5 @@ void	heredoc(t_process *process)
 
 		==> 새로 배열같은거 만들어서 저장해줘야 하는 것은 동일 (history 위해서)
 		==> arguments 유무에 따라서 업데이트 해준다 만다 차이.
+	*/
 }
