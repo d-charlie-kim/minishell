@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 16:00:13 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:28:35 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ int			mini_export(t_info *info, t_process *process);
 int			mini_env(t_info *info, t_process *process);
 int			mini_unset(t_info *info, t_process *process);
 
-void		ft_signal(void);
+void		init_child_setting(t_info *info);
+void		init_mom_setting(t_info *info);
+void		sigquit_handler_child(void);
+void		sigint_handler_child(void);
+void		sigint_handler_mom(void);
+
 int			exit_process(t_info *info, int exit_status);
 
 # endif
