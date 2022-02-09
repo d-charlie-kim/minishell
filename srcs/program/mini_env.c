@@ -16,15 +16,22 @@
 void	print_env(t_env *env)
 {
 	t_env	*temp;
+	char	*address;
 
 	temp = env;
 	while (temp != NULL)
 	{
+		if (strncmp("_", temp->key, 2) == 0)
+		{
+			address = temp->value;
+			temp = temp->next;
+			continue ;
+		}
 		if (temp->value)
 			printf("%s=%s\n", temp->key, temp->value);
 		temp = temp->next;
 	}
-	//printf("_=/ pwd (현재 디렉토리)/./minishell");
+	printf("_=%s\n", address);
 }
 
 int	mini_env(t_info *info, t_process *process)
