@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 17:28:35 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:29:20 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void		init_mom_setting(t_info *info);
 void		sigquit_handler_child(void);
 void		sigint_handler_child(void);
 void		sigint_handler_mom(void);
+
+void save_input_mode(struct termios org_term);
+void set_input_mode(struct termios new_term);
+void reset_input_mode(struct termios org_term);
+
 
 int			exit_process(t_info *info, int exit_status);
 

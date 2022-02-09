@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/09 15:38:35 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/09 17:20:52 by jaejeong         ###   ########.fr       */
+/*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
+/*   Updated: 2022/02/09 17:30:07 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termios.h>
+#include "mijeong.h"
 
 void save_input_mode(struct termios org_term)
 {

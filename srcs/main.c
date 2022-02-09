@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 17:19:47 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:31:00 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	t_process	*processes;
 
 	(void)argc; (void)argv;
-	//init_mon_setting(info);
+	init_mom_setting(&info);
 	info.env = NULL;
 
 	parse_envp(&info, envp);
