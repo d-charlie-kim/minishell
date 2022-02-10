@@ -1,7 +1,7 @@
 # Minishell
 
 # Team_Project
-# Contributor : dokkim && jaejeong
+# Contributor : jaejeong only
 
 # commit type
 
