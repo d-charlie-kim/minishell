@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 18:58:19 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:32:17 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		add_history(output);
 		processes = split_line_to_process(output, &info);
-		// print_parsing_data_test(processes, info.process_count); // test code ##
+		print_parsing_data_test(processes, info.process_count); // test code ##
 		if (info.process_count == 1)
 			info.last_exit_status = execute_program(&info, &processes[0]);
 		else

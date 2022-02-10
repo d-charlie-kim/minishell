@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 20:07:47 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:15:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	mini_env(t_info *info, t_process *process)
 		write(STDERR_FILENO, "env : illegal option -- ", 24);
 		write(STDERR_FILENO, &(option[1]), 1);
 		write(STDERR_FILENO, "\n", 1);		
+		return (exit_process(info, 1));
 	}
 	else
 		print_env(info->env);

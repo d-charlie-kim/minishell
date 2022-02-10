@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 20:08:34 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:27:42 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	delete_env(t_env **env, char *str)
 
 int	mini_unset(t_info *info, t_process *process)
 {
-	int		flag;
 	t_list	*arguments;
 	char	*target;
+	char	*option;
 	
 	if (!info->env)
 		return (exit_process(info, 0));
@@ -55,13 +55,20 @@ int	mini_unset(t_info *info, t_process *process)
 		write(STDERR_FILENO, "bash: unset: -", 14);
 		write(STDERR_FILENO, &(option[1]), 1);
 		write(STDERR_FILENO, ": invalid option\n", 17);
-		return (exit_proces)
+		return (exit_process(info, 1));
 	}
 	arguments = process->arguments;
 	while (arguments != NULL)
 	{
 		target = (char *)arguments->content;
-		delete_env(&info->env, target);
+		if (env_is_valid(target))
+			delete_env(&info->env, target);
+		else
+		{
+			write(STDERR_FILENO, "bash: unset: `", 14);
+			write(STDERR_FILENO, &target, 1);
+			write(STDERR_FILENO, "\': not a valid identifier\n", 26);
+		}
 		arguments = arguments->next;
 	}
 	return (exit_process(info, 0));

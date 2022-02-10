@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 00:15:17 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:30:48 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,21 @@ int	exit_process(t_info *info, int exit_status)
 		return (exit_status);
 	else
 		exit(exit_status);
+}
+
+int	env_is_valid(char *target)
+{
+	int	i;
+
+	i = 1;
+	if (target[0] != '_' && !ft_isalpha(target[0]))
+		return (0);
+	while (target[i])
+	{
+		if (ft_isalpha(target[i]) || ft_isdigit(target[i]) || target[i] == '_')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }

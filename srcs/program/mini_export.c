@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:39 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 00:13:54 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:31:18 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,16 +183,36 @@ void	put_new_env(t_env *env, t_list *arguments)
 	{
 		arg_str = (char *)arg_ptr->content;
 		get_new_env(&new_key, &new_value, arg_str);
-		printf("!!!!1 %s\n", new_key);
-		printf("!!!!2 %s\n", new_value);
-		puttt(new_key, new_value, env);
+		if (env_is_valid(new_key))
+			puttt(new_key, new_value, env);
+		else
+		{
+			write(STDERR_FILENO, "bash: export: `", 15);
+			write(STDERR_FILENO, new_key, ft_strlen(new_key));
+			if (new_value)
+			{
+				write(STDERR_FILENO, "=", 1);
+				write(STDERR_FILENO, new_value, ft_strlen(new_value));
+			}
+			write(STDERR_FILENO, "\': not a valid identifier\n", 26);
+		}
 		arg_ptr = arg_ptr->next;
 	}
 }
 
 int	mini_export(t_info *info, t_process *process)
 {
-	if (!process->arguments)
+	char	*option;
+
+	if(process->option)
+	{
+		option = (char *)(process->option->content);
+		write(STDERR_FILENO, "bash: export: -", 15);
+		write(STDERR_FILENO, &(option[1]), 1);
+		write(STDERR_FILENO, ": invalid option\n", 17);
+		return (exit_process(info, 1));
+	}
+	else if (!process->arguments)
 		print_export(info->env);
 	else
 		put_new_env(info->env, process->arguments);

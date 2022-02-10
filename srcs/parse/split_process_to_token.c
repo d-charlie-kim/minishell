@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/01/12 13:20:01 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/10 20:36:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		return (FILENAME);
 	if (!process->instruction)
 		return (INST);
-	if (token[0] == '-')
+	if (token[0] == '-' && !process->arguments)
 	{
 		i = 1;
 		while (token[i] == '"' || token[i] == '\'')
