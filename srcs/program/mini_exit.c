@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 16:07:34 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:55:04 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mini_exit(t_info *info, t_process *process)
 	int		exit_status;
 	char	*arg;
 
-	if (process->arguments->next)
+	if (process->arguments && process->arguments->next)
 	{
 		write(STDERR_FILENO, "bash: exit: too many arguments\n", 31);
 		if (info->process_count == 1)

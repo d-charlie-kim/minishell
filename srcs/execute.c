@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 15:52:36 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:51:58 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	execute_program(t_info *info, t_process *cur_process)
 {
+	if (!cur_process->instruction)
+		return (exit_process(info, info->last_exit_status));
 	if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
 		return (mini_cd(info, cur_process));
 	else if (!ft_strncmp("exit", cur_process->instruction, 5))   // char

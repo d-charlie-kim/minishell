@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 15:08:39 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:12:22 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mini_env(t_info *info, t_process *process)
 {
 	if (process->arguments)
 	{
-		printf("env: %s: No such file or directory", (char *)process->arguments->content);
+		printf("env: %s: No such file or directory\n", (char *)process->arguments->content);
 		return (exit_process(info, 1));
 	}
 	else
