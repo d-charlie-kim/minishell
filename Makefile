@@ -6,14 +6,14 @@
 #    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/10 14:31:26 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/10 16:08:37 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
 CC			= gcc
-CFLAGS		= $(INCFLAGS) $(WFLAGS)  #$(GFLAGS)
+CFLAGS		= $(INCFLAGS) $(WFLAGS)  $(GFLAGS)
 WFLAGS		= -Wall -Wextra -Werror
 GFLAGS		= -g -fsanitize=address
 INCFLAGS	= -I$(INCDIR)
@@ -53,6 +53,7 @@ SRCS		= main.c\
 			  mini_env.c\
 			  mini_echo.c\
 			  mini_exit.c\
+			  mini_cd.c\
 			  terminal.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

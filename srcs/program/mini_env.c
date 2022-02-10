@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/01/12 13:57:39 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/10 15:08:39 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-void	print_env(t_env *env)
+static void	print_env(t_env *env)
 {
 	t_env	*temp;
 	char	*address;

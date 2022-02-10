@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/09 23:30:46 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:52:36 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	execute_program(t_info *info, t_process *cur_process)
 {
-	// if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
-	// 	mini_cd(info, cur_process);
-	if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
-		return (mini_exit());
+	if (!ft_strncmp("cd", cur_process->instruction, 3))          // together
+		return (mini_cd(info, cur_process));
+	else if (!ft_strncmp("exit", cur_process->instruction, 5))   // char
+		return (mini_exit(info, cur_process));
 	else if (!ft_strncmp("env", cur_process->instruction, 4))    // char
 		return (mini_env(info, cur_process));
 	else if (!ft_strncmp("export", cur_process->instruction, 7)) // char

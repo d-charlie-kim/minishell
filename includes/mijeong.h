@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 14:15:26 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:53:08 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_info
 {
 	int				process_count;
 	int				last_exit_status;
+	t_env			*env;
 	struct termios	org_term;
 	struct termios	new_term;
-	t_env	*env;
 }				t_info;
 
 t_process	*split_line_to_process(const char *str, t_info *info);
@@ -59,13 +59,13 @@ int			find_instruction(t_info *info, t_process *process);
 int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);
 
-int			mini_exit(void);
-void		print_env(t_env *env);
+int			mini_exit(t_info *info, t_process *process);
 int			mini_echo(t_info *info, t_process *process);
 int			mini_pwd(t_info *info, t_process *process);
 int			mini_export(t_info *info, t_process *process);
 int			mini_env(t_info *info, t_process *process);
 int			mini_unset(t_info *info, t_process *process);
+int			mini_cd(t_info *info, t_process *process);
 
 void		init_child_setting(t_info *info);
 void		init_mom_setting(t_info *info);
