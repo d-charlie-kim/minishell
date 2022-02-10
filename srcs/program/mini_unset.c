@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/01/12 13:28:40 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/10 20:08:34 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,20 @@ void	delete_env(t_env **env, char *str)
 
 int	mini_unset(t_info *info, t_process *process)
 {
+	int		flag;
 	t_list	*arguments;
 	char	*target;
 	
 	if (!info->env)
 		return (exit_process(info, 0));
+	if (process->option)
+	{	
+		option = (char *)(process->option->content);
+		write(STDERR_FILENO, "bash: unset: -", 14);
+		write(STDERR_FILENO, &(option[1]), 1);
+		write(STDERR_FILENO, ": invalid option\n", 17);
+		return (exit_proces)
+	}
 	arguments = process->arguments;
 	while (arguments != NULL)
 	{

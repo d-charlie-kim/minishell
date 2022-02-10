@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/09 23:59:34 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 20:07:50 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,20 @@ static void	fork_recursive(t_info *info, t_process *processes, int index)
 	int		pipe_fd[2];
 
 	if (index == 0)
+	{
+		set_input_redirect();
 		execute_program(info, &processes[index]);
+	}
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0)
 	{
 		set_output_fd(pipe_fd);
+		set_output_redirect();
 		fork_recursive(info, processes, index - 1);
 	}
 	set_input_fd(pipe_fd);
+	set_input_redirect();
 	waitpid(pid, NULL, 0);
 	execute_program(info, &processes[index]);
 }
@@ -53,7 +58,10 @@ void	fork_main(t_info *info, t_process *processes)
 
 	pid = fork();
 	if (pid == 0)
+	{
+		set_output_redirect();
 		fork_recursive(info, processes, info->process_count - 1);
+	}
 	waitpid(pid, &exit_status, 0);
 	info->last_exit_status = exit_status;
 }
