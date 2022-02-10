@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 19:12:22 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:23:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,12 @@ int	mini_env(t_info *info, t_process *process)
 {
 	if (process->arguments)
 	{
-		printf("env: %s: No such file or directory\n", (char *)process->arguments->content);
+		write(STDERR_FILENO, "bash: env: too many arguments\n", 33);
 		return (exit_process(info, 1));
+	}
+	else if (process->option)
+	{
+		
 	}
 	else
 		print_env(info->env);

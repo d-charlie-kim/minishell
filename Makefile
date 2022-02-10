@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/10 16:08:37 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/10 19:19:01 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCDIR		= srcs
 OBJDIR		= build
 SUBDIR		= parse\
 			  program\
-			  gnl
+			  gnl\
+			  redirection
 
 RL_LIB_DIR	= ${HOME}/.brew/opt/readline/lib
 RL_INC_DIR	= ${HOME}/.brew/opt/readline/include
@@ -54,7 +55,8 @@ SRCS		= main.c\
 			  mini_echo.c\
 			  mini_exit.c\
 			  mini_cd.c\
-			  terminal.c
+			  terminal.c\
+			  heredoc.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
