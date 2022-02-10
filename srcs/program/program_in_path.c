@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 00:09:41 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:59:13 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하�
 	if (pid > 0)
 	{
 		waitpid(pid, &exit_status, 0);
-		return (exit_status);
+		if (info->process_count == 1)
+			return (exit_status);
+		else
+			exit(exit_status);
 	}
 	inst = process->instruction;
 	argv = setting_argv(process);

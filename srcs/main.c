@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 14:13:31 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:00:36 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		output = readline("mijeong$ ");
 		if (!output)
 		{
-			write(1, "exit\n", 5);
+			write(1, "exit\n", 5); // 현재 개행이 나오고 exit이 출력됨. 개행이 나오지 않도록 수정
 			exit(0);
 		}
 		if (output[0] == '\0')
