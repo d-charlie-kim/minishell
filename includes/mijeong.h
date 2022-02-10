@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 00:09:01 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:15:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 # include <termios.h>
 # include <fcntl.h>
@@ -76,7 +77,7 @@ void		save_input_mode(struct termios org_term);
 void		set_input_mode(struct termios new_term);
 void		reset_input_mode(struct termios org_term);
 
-void	heredoc(t_info *info, t_process *process);
+// void	heredoc(t_info *info, t_process *process);
 int			exit_process(t_info *info, int exit_status);
 
 # endif

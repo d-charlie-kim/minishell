@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/09 23:25:10 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:13:31 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		processes = split_line_to_process(output, &info);
 		//print_parsing_data_test(processes, info.process_count); // test code ##
 		if (info.process_count == 1)
-		{
-			heredoc(&info, &processes[0]);
-			// info.last_exit_status = execute_program(&info, &processes[0]);
-		}
+			info.last_exit_status = execute_program(&info, &processes[0]);
 		else
 			fork_main(&info, processes);
 		free(output);

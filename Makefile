@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/10 00:08:36 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/10 14:31:26 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
 
 CC			= gcc
-CFLAGS		= $(INCFLAGS) $(WFLAGS) #$(GFLAGS)
+CFLAGS		= $(INCFLAGS) $(WFLAGS)  #$(GFLAGS)
 WFLAGS		= -Wall -Wextra -Werror
 GFLAGS		= -g -fsanitize=address
 INCFLAGS	= -I$(INCDIR)
@@ -24,8 +24,10 @@ SRCDIR		= srcs
 OBJDIR		= build
 SUBDIR		= parse\
 			  program\
-			  gnl\
-			  redirection
+			  gnl
+
+RL_LIB_DIR	= ${HOME}/.brew/opt/readline/lib
+RL_INC_DIR	= ${HOME}/.brew/opt/readline/include
 
 vpath %.c	= $(SRCDIR)\
 			  $(addprefix $(SRCDIR)/, $(SUBDIR))
@@ -51,8 +53,7 @@ SRCS		= main.c\
 			  mini_env.c\
 			  mini_echo.c\
 			  mini_exit.c\
-			  terminal.c\
-			  heredoc.c\
+			  terminal.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
@@ -62,13 +63,13 @@ LIB			= $(LIBDIR)/libft.a
 all			: $(NAME)
 
 $(NAME)		: $(LIB) $(OBJS)
-	$(CC) -o $@ $(OBJS) $(CFLAGS) -L$(LIBDIR) -l$(LIBNAME) -lreadline
+	$(CC) -o $@ $(OBJS) $(CFLAGS) -L$(LIBDIR) -L$(RL_LIB_DIR) -l$(LIBNAME) -lreadline
 
 $(LIB)		:
 	make -C $(LIBDIR) bonus
 
 $(OBJDIR)/%.o	: %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -o $@ -c $^
+	$(CC) $(CFLAGS) -o $@ -c $^ -I$(RL_INC_DIR)
 
 $(OBJDIR)	:
 	mkdir build

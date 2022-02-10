@@ -8,6 +8,7 @@
 		"libft.h": "c",
 		"mijeong.h": "c",
 		"limits.h": "c",
-		"termios.h": "c"
+		"termios.h": "c",
+		"cstring": "c"
 	}
 }
