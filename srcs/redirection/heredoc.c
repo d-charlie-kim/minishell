@@ -31,14 +31,13 @@ int	check_heredoc_count(t_process *process)
 	return (count);
 }
 
-void	heredoc(t_info *info, t_process *process)
+void	heredoc(t_process *process)
 {
 	t_list			*temp;
 	t_redirect_pair	*redir_pair;
 	char			*output;
 	int				count;
 
-	info = NULL;
 	count = check_heredoc_count(process);
 	temp = process->redirect;
 	while (count > 0 && temp != NULL)
@@ -60,4 +59,3 @@ void	heredoc(t_info *info, t_process *process)
 		}
 	}
 }
-	/* execute_program(info, process); // 이거는 heredoc 호출하는 함수에서 실행하는걸로 */
