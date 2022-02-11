@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:54:25 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:12:58 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	mini_exit(t_info *info, t_process *process)
 		arg = (char *)(process->option->content);
 	else
 		arg = (char *)(process->arguments->content);
-	if (arg_is_num(arg))
+	if (!arg_is_num(arg))
 		exit_status = ft_atoi(arg);
 	else
 	{
