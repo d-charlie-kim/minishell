@@ -67,11 +67,12 @@ int	mini_exit(t_info *info, t_process *process)
 	{
 		print_exit(info, STDERR_FILENO);
 		ft_putstr_fd("bash: exit: too many arguments\n", STDERR_FILENO);
+		return (exit_process(info, 1));
 	}
 	else
 	{
 		print_exit(info, STDOUT_FILENO);
 		exit(exit_status);
 	}
-	return (0);
+	return (1);
 }
