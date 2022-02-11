@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:54:07 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:15:53 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct s_info
 }				t_info;
 
 t_process	*split_line_to_process(const char *str, t_info *info);
-void		split_process_to_token(t_process *process, t_info *info, const char *str, int len);
+void		split_process_to_token(t_process *process, t_info *info, \
+			const char *str, int len);
 void		save_token_in_struct(t_process *process, char *token, int tag);
 char		*replace_env_value(t_info *info, const char *str, int len);
 void		parse_envp(t_info *info, char **envp);
@@ -58,6 +59,8 @@ void		print_error_and_exit(char *output, int error_num);
 int			find_instruction(t_info *info, t_process *process);
 int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);
+
+void		set_output_redirect(t_process *process);
 
 int			mini_exit(t_info *info, t_process *process);
 int			mini_echo(t_info *info, t_process *process);
@@ -81,4 +84,13 @@ void		heredoc(t_info *info, t_process *process);
 int			exit_process(t_info *info, int exit_status);
 int			env_is_valid(char *target);
 
-# endif
+int			err_option(char	*inst, t_info *info, t_process *process);
+
+void		put_new_node_to_sorted_env(t_env *sorted_env, t_env *new_node);
+t_env		*init_new_node(t_env *temp);
+t_env		*make_sorted_env(t_env *env);
+void		print_export(t_env *env);
+
+void		quit_handler(void);
+
+#endif

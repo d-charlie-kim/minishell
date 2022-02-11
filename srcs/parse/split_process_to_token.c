@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 20:36:14 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:57:15 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static char	*get_str_token(const char *str)
 
 	i = 0;
 	is_in_quotes = 0;
-	while ((str[i] != ' ' && str[i] != '<' && str[i] != '>' && str[i] != '\0')
-			|| (is_in_quotes != NOT && str[i] != '\0'))
+	while ((str[i] != ' ' && str[i] != '<' && str[i] != '>' && str[i] != '\0') \
+		|| (is_in_quotes != NOT && str[i] != '\0'))
 	{
 		check_quotes(str[i], &is_in_quotes);
 		i++;
@@ -62,6 +62,9 @@ static char	*get_one_token(const char *str)
 	else
 		return (get_str_token(str));
 }
+/*
+	에러 확인 및 출력하는 부분 싹 고쳐야 함
+*/
 
 static int	classyfy_token(t_process *process, const char *token, int tag)
 {
@@ -70,7 +73,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	if (token[0] == '<' || token[0] == '>')
 	{
 		if (tag == REDIRECTION)
-			print_error_and_exit("syntax error near unexpected token\n", 0); // 올바른 에러코드 못찾음..
+			print_error_and_exit("syntax error near unexpected token\n", 0);
 		else
 			return (REDIRECTION);
 	}
@@ -83,13 +86,15 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		i = 1;
 		while (token[i] == '"' || token[i] == '\'')
 			i++;
-		if (('a' <= token[i] && token[i] <= 'z') || ('A' <= token[i] && token[i] <= 'Z'))
+		if (('a' <= token[i] && token[i] <= 'z') \
+			|| ('A' <= token[i] && token[i] <= 'Z'))
 			return (OPTION);
 	}
 	return (ARG);
 }
 
-void	split_process_to_token(t_process *process, t_info *info, const char *str, int len)
+void	split_process_to_token(t_process *process, t_info *info, \
+		const char *str, int len)
 {
 	int		i;
 	int		tag;

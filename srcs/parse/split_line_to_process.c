@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/01/12 13:20:03 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:59:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	num_of_character_in_pipe(const char *ptr)
 {
-	int size;
+	int	size;
 	int	is_in_quotes;
 
 	size = 0;
@@ -25,8 +25,6 @@ static int	num_of_character_in_pipe(const char *ptr)
 		check_quotes(ptr[size], &is_in_quotes);
 		if (ptr[size] == '|' && is_in_quotes == NOT)
 			return (size);
-		// if (ptr[size] == '$' && is_in_quotes == NOT)
-		// 	size += 2;
 		size++;
 	}
 	return (size);
@@ -34,8 +32,8 @@ static int	num_of_character_in_pipe(const char *ptr)
 
 static int	get_pipe_count(const char *str)
 {
-	int i;
-	int pipe_count;
+	int	i;
+	int	pipe_count;
 	int	is_in_quotes;
 
 	i = 0;

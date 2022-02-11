@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   input_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 01:09:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/07 14:57:06 by jaejeong         ###   ########.fr       */
+/*   Created: 2022/02/11 19:57:05 by jaejeong          #+#    #+#             */
+/*   Updated: 2022/02/11 21:31:41 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-// redirect 구조체에 대한 모든 처리.
-// 프로그램이 입력 받을 파일과 출력할 파일 반환
-// 파일 내 데이터의 삭제, heredoc 처리
-
-
+int	set_input_redirect(t_process *process)
+{
+	
+}

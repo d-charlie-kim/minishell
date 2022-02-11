@@ -6,71 +6,58 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 18:38:09 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:22:27 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
+int	check_heredoc_count(t_process *process)
+{
+	t_list			*redir_lst;
+	t_redirect_pair	*redirect;
+	int				count;
+
+	count = 1;
+	redir_lst = process->redirect;
+	while (redir_lst != NULL)
+	{
+		redirect = (t_redirect_pair *)redir_lst->content;
+		if (redirect->symbol == 2)
+			count++;
+		redir_lst = redir_lst->next;
+	}
+	return (count);
+}
+
 void	heredoc(t_info *info, t_process *process)
 {
 	t_list			*temp;
-	t_redirect_pair	*here_doc;
-	t_list			*arg_temp;
+	t_redirect_pair	*redir_pair;
 	char			*output;
 	int				count;
-	int				flag;
 
-	flag = 0;
-	count = 1;
-	temp = process->redirect;
-	while (temp != NULL) // heredoc 몇개인지 체크하는 함수 따로 뺄거
-	{
-		here_doc = (t_redirect_pair *)temp->content;
-		if (here_doc->symbol == 2)
-			count++;
-		temp = temp->next;
-	}
-
-
-	if (!process->arguments) // 임시 빈 노드
-	{
-		flag = 1;
-		process->arguments = (t_list *)malloc(sizeof(t_list));
-		if (!process->arguments)
-		{
-			//error
-		}
-		process->arguments->content = NULL;
-		process->arguments->next = NULL;
-	}
-	arg_temp = process->arguments;
-
-	
+	info = NULL;
+	count = check_heredoc_count(process);
 	temp = process->redirect;
 	while (count > 0 && temp != NULL)
 	{
-		here_doc = (t_redirect_pair *)temp->content;
-		if (here_doc->symbol != 2)
-		{
+		redir_pair = (t_redirect_pair *)temp->content;
+		if (redir_pair->symbol != 2)
 			temp = temp->next;
-			continue ;
-		}
-		output = readline("> ");
-		if (count == 1 && flag)
-			printf("%s\n", output);
-		if (strncmp(here_doc->file_name, output, ft_strlen(here_doc->file_name) + 1) == 0)
+		else
 		{
-			count--;
-			temp = temp->next;
+			output = readline("> ");
+			if (count == 1)
+				ft_putstr_fd(output, STDOUT_FILENO);
+			if (!strncmp(redir_pair->file_name, output, \
+							ft_strlen(redir_pair->file_name) + 1))
+			{
+				count--;
+				temp = temp->next;
+			}
 		}
 	}
-	if (flag)
-	{
-		arg_temp = process->arguments->next;
-		free (process->arguments);
-		process->arguments = arg_temp;
-	}
-	execute_program(info, process); //여기서 실행!!
 }
+	/* execute_program(info, process); // 이거는 heredoc 호출하는 함수에서 실행하는걸로 */

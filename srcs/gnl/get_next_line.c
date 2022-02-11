@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:18:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 17:03:39 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 19:16:19 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,10 @@ static int	one_ret(char **line, char **save, char *temp)
 		null++;
 	*line = (char *)malloc(sizeof(char) * (new + 1));
 	if (!*line)
-	{
-		free(temp);
 		return (-1);
-	}
 	*save = (char *)malloc(sizeof(char) * (null - new));
 	if (!*save)
 	{
-		free(temp);
 		free(*line);
 		return (-1);
 	}
@@ -116,12 +112,8 @@ int	get_next_line(int fd, char **line)
 	temp = NULL;
 	if (save[fd])
 	{
-		temp = (char *)malloc(sizeof(char) * (ft_strlen(save[fd]) + 1));
-		if (!temp)
+		if (put_save_in_temp(&temp, &save[fd]) == -1)
 			return (-1);
-		ft_strlcpy(temp, save[fd], ft_strlen(save[fd]) + 1);
-		free(save[fd]);
-		save[fd] = NULL;
 	}
 	while (!newline_check(temp))
 	{

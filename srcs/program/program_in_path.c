@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 16:36:05 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:31:41 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static char	*get_inst_with_path_route(const char *path,
 	return (ret);
 }
 
-static void	execute_at_env_path(const char *path, t_process *process, char **argv)
+static void	execute_at_env_path(const char *path, \
+						t_process *process, char **argv)
 {
 	int		begin;
 	int		end;

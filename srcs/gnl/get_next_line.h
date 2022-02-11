@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:19:37 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 20:21:47 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:16:27 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 int		get_next_line(int fd, char **line);
 int		newline_check(char *s);
+int		put_save_in_temp(char **temp, char **save);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);

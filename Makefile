@@ -6,7 +6,7 @@
 #    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/10 19:19:01 by dokkim           ###   ########.fr        #
+#    Updated: 2022/02/11 21:04:45 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,16 @@ vpath %.c	= $(SRCDIR)\
 			  $(addprefix $(SRCDIR)/, $(SUBDIR))
 
 SRCS		= main.c\
+			  \
 			  parse_env.c\
 			  split_line_to_process.c\
 			  split_process_to_token.c\
 			  replace_env_value.c\
 			  save_token_in_struct.c\
 			  split_utils.c\
-			  redirection.c\
+			  \
+			  output_redir.c\
+			  \
 			  utils.c\
 			  fork.c\
 			  execute.c\
@@ -50,13 +53,15 @@ SRCS		= main.c\
 			  signal.c\
 			  mini_pwd.c\
 			  mini_export.c\
+			  mini_export_print.c\
 			  mini_unset.c\
 			  mini_env.c\
 			  mini_echo.c\
 			  mini_exit.c\
 			  mini_cd.c\
 			  terminal.c\
-			  heredoc.c
+			  heredoc.c\
+			  error.c
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:32:55 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:14:25 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,44 @@ void	print_parsing_data_test(t_process *processes, int process_count)
 	}
 }
 
+void	init_minishell(t_info *info, t_process *processes)
+{
+	char	*output;
+
+	output = readline("mijeong$ ");
+	if (!output)
+		quit_handler();
+	if (output[0] == '\0')
+		return ;
+	add_history(output);
+	processes = split_line_to_process(output, info);
+	// print_parsing_data_test(processes, info.process_count); // test code ##
+	if (info->process_count == 1)
+		info->last_exit_status = execute_program(info, &processes[0]);
+	else
+		fork_main(info, processes);
+	free(output);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char		*output;
 	t_info		info;
 	t_process	*processes;
 
-	(void)argc; (void)argv;
+	(void)argc;
+	(void)argv;
+	processes = NULL;
 	init_mom_setting(&info);
-	info.env = NULL;
-
 	parse_envp(&info, envp);
-
 	while (1)
-	{
+		init_minishell(&info, processes);
+	return (0);
+}
+
+		/*
 		output = readline("mijeong$ ");
 		if (!output)
-		{
-			write(1, "\033[1A", 5);
-			write(1, "\033[9C", 5);
-			write(1, "exit\n", 5);
-			exit(0);
-		}
+			quit_handler();
 		if (output[0] == '\0')
 			continue ;
 		add_history(output);
@@ -87,6 +103,4 @@ int	main(int argc, char **argv, char **envp)
 		else
 			fork_main(&info, processes);
 		free(output);
-	}
-	return (0);
-}
+		*/

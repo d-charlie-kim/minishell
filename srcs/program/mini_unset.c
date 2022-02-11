@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:47:49 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:29:03 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,11 @@ int	mini_unset(t_info *info, t_process *process)
 {
 	t_list	*arguments;
 	char	*target;
-	char	*option;
 
 	if (!info->env)
 		return (exit_process(info, 0));
 	if (process->option)
-	{	
-		option = (char *)(process->option->content);
-		write(STDERR_FILENO, "bash: unset: -", 14);
-		write(STDERR_FILENO, &(option[1]), 1);
-		write(STDERR_FILENO, ": invalid option\n", 17);
-		return (exit_process(info, 1));
-	}
+		return (err_option("unset", info, process));
 	arguments = process->arguments;
 	while (arguments != NULL)
 	{
@@ -65,9 +58,9 @@ int	mini_unset(t_info *info, t_process *process)
 			delete_env(&info->env, target);
 		else
 		{
-			write(STDERR_FILENO, "bash: unset: `", 14);
-			write(STDERR_FILENO, &target, 1);
-			write(STDERR_FILENO, "\': not a valid identifier\n", 26);
+			ft_putstr_fd("bash: unset: `", STDERR_FILENO);
+			ft_putstr_fd(target, STDERR_FILENO);
+			ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
 		}
 		arguments = arguments->next;
 	}

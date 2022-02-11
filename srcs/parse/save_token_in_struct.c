@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:58:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/01/12 13:20:06 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:43:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	save_filename(t_process *process, char *str)
 {
 	t_list			*temp;
 	t_redirect_pair	*pair;
-	
+
 	temp = ft_lstlast(process->redirect);
 	pair = (t_redirect_pair *)temp->content;
 	pair->file_name = str;
@@ -50,7 +50,7 @@ static void	save_filename(t_process *process, char *str)
 static void	save_option(t_process *process, char *token)
 {
 	t_list	*new_node;
-		
+
 	new_node = (t_list *)malloc(sizeof(t_list));
 	if (!new_node)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:56:32 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 18:53:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*find_key_in_str(const char *str)
 		ret[1] = '\0';
 		return (ret);
 	}
-	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z')\
+	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z') \
 	|| ('0' <= str[i] && str[i] <= '9') || str[i] == '_')
 		i++;
 	if (i == 0)
@@ -53,7 +53,8 @@ static char	*find_key_in_str(const char *str)
 	return (ret);
 }
 
-static void	add_env_value(t_info *info, const char *key, char **str, int is_in_quotes)
+static void	add_env_value(t_info *info, const char *key, \
+								char **str, int is_in_quotes)
 {
 	char	*value;
 
@@ -95,17 +96,11 @@ char	*replace_env_value(t_info *info, const char *str, int len)
 	{
 		check_quotes(str[i], &is_in_quotes);
 		if (str[i] != '$' || is_in_quotes == SINGLE)
-		{
-			add_character_to_str(&ret, str[i]);
+			add_character_to_str(&ret, str[i++]);
+		else if (str[i + 1] == '\'' || str[i + 1] == '\"')
 			i++;
-		}
 		else
 		{
-			if (str[i + 1] == '\'' || str[i + 1] == '\"')
-			{
-				i++;
-				continue ;
-			}
 			key = find_key_in_str(&str[i + 1]);
 			add_env_value(info, key, &ret, is_in_quotes);
 			i += ft_strlen(key) + 1;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:19:18 by jaejeong          #+#    #+#             */
-/*   Updated: 2021/12/23 20:16:14 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:16:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int			newline_check(char *s)
+int	newline_check(char *s)
 {
 	if (!s)
 		return (0);
@@ -25,9 +25,20 @@ int			newline_check(char *s)
 	return (0);
 }
 
-size_t		ft_strlen(const char *str)
+int	put_save_in_temp(char **temp, char **save)
 {
-	size_t i;
+	*temp = (char *)malloc(sizeof(char) * (ft_strlen(*save) + 1));
+	if (!*temp)
+		return (-1);
+	ft_strlcpy(*temp, *save, ft_strlen(*save) + 1);
+	free(*save);
+	*save = NULL;
+	return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
 	if (!str)
 		return (0);
@@ -37,7 +48,7 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-size_t		ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
 
@@ -57,7 +68,7 @@ size_t		ft_strlcpy(char *dest, const char *src, size_t size)
 	return (i);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*jstr;
 	char	*ret;

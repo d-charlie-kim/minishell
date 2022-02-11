@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 16:49:19 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 21:31:10 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ int	mini_env(t_info *info, t_process *process)
 
 	if (process->arguments)
 	{
-		write(STDERR_FILENO, "bash: env: too many arguments\n", 30);
+		ft_putstr_fd("bash: env: too many arguments\n", STDERR_FILENO);
 		return (exit_process(info, 1));
 	}
 	else if (process->option)
 	{
 		option = (char *)(process->option->content);
-		write(STDERR_FILENO, "env : illegal option -- ", 24);
-		write(STDERR_FILENO, &(option[1]), 1);
-		write(STDERR_FILENO, "\n", 1);
+		ft_putstr_fd("env : illegal option -- ", STDERR_FILENO);
+		ft_putstr_fd(&(option[1]), STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		return (exit_process(info, 1));
 	}
 	else

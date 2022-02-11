@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 16:46:42 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 20:14:02 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ char	*get_env_value(t_env *env, const char *key)
 		env = env->next;
 	}
 	return (NULL);
-}
-
-void	print_error_and_exit(char *output, int error_num)
-{
-	write(STDERR_FILENO, output, ft_strlen(output));
-	write(STDERR_FILENO, "\n", 1);
-	exit(error_num);
 }
 
 int	exit_process(t_info *info, int exit_status)

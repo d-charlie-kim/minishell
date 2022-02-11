@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_cd.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 19:06:37 by dokkim            #+#    #+#             */
+/*   Created: 2022/02/11 19:45:41 by dokkim            #+#    #+#             */
 /*   Updated: 2022/02/11 21:31:41 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
-#include "parsing.h"
 
-static void	print_error(char *arg)
+void	print_error_and_exit(char *output, int error_num)
 {
-	char	*error_message;
-
-	error_message = strerror(ENOENT);
-	ft_putstr_fd("bash: cd:", STDERR_FILENO);
-	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(error_message, STDERR_FILENO);
+	ft_putstr_fd(output, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
+	exit(error_num);
 }
 
-int	mini_cd(t_info *info, t_process *process)
+int	err_option(char	*inst, t_info *info, t_process *process)
 {
-	int		ret;
-	char	*arg;
+	char	*option;
 
-	if (process->option)
-		return (err_option("cd", info, process));
-	if (process->arguments)
-		arg = (char *)(process->arguments->content);
-	else
-		arg = get_env_value(info->env, "HOME");
-	ret = chdir(arg);
-	if (ret == -1)
-		print_error(arg);
-	return (exit_process(info, ret));
+	option = (char *)(process->option->content);
+	ft_putstr_fd("bash: ", STDERR_FILENO);
+	ft_putstr_fd(inst, STDERR_FILENO);
+	ft_putstr_fd(": -", STDERR_FILENO);
+	ft_putstr_fd(&option[1], STDERR_FILENO);
+	ft_putstr_fd(": invalid option\n", STDERR_FILENO);
+	return (exit_process(info, 1));
 }
