@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 20:27:42 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:47:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	mini_unset(t_info *info, t_process *process)
 	t_list	*arguments;
 	char	*target;
 	char	*option;
-	
+
 	if (!info->env)
 		return (exit_process(info, 0));
 	if (process->option)

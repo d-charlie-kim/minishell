@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 20:27:25 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:54:07 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void		save_input_mode(struct termios org_term);
 void		set_input_mode(struct termios new_term);
 void		reset_input_mode(struct termios org_term);
 
-void	heredoc(t_info *info, t_process *process);
+void		heredoc(t_info *info, t_process *process);
 int			exit_process(t_info *info, int exit_status);
-int	env_is_valid(char *target);
+int			env_is_valid(char *target);
 
 # endif

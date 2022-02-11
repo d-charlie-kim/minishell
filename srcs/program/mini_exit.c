@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 15:47:24 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:54:25 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int	mini_exit(t_info *info, t_process *process)
 		exit(1);
 	}
 	if (process->arguments->next)
-	{
 		write(STDERR_FILENO, "bash: exit: too many arguments\n", 31);
-		return (exit_process(info, 1));
-	}
 	else
 		exit(exit_status);
+	return (0);
+	info = NULL;
 }

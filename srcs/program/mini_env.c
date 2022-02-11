@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:32:02 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/10 20:15:16 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:49:19 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,10 @@ int	mini_env(t_info *info, t_process *process)
 		option = (char *)(process->option->content);
 		write(STDERR_FILENO, "env : illegal option -- ", 24);
 		write(STDERR_FILENO, &(option[1]), 1);
-		write(STDERR_FILENO, "\n", 1);		
+		write(STDERR_FILENO, "\n", 1);
 		return (exit_process(info, 1));
 	}
 	else
 		print_env(info->env);
 	return (exit_process(info, 0));
-
-	/*
-		arguments 가 있으면 error 출력
-		env 단독으로 등장해야만 정상 출력
-		export a 처럼 key 값은 주지만, value를 주지 않을 경우
-		export 만 입력하면 정상 출력이 되고(key값만), env 만 입력하면 출력되지 않는다.
-	*/
 }

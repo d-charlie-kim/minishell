@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:34:32 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/07 19:45:17 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:55:27 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	mini_echo(t_info *info, t_process *process)
 	temp = process->arguments;
 	while (temp != NULL)
 	{
-		printf("%s", (char*)temp->content);
+		printf("%s", (char *)temp->content);
 		temp = temp->next;
 		if (temp != NULL)
 			printf(" ");

@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:39 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 20:31:18 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/11 16:55:59 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,6 @@ void	print_export(t_env *env)
 		}
 		else
 			printf("%s\n", sorted_env->key);
-		/*
-			만약에 value 값이 없을 경우 어떻게 출력되는지 확인
-			value 값이 비어 있어서 a=""  이렇게 출력되는 것과
-			value 값이 없어서 a 만 출력되는 것을 구분해줘야 한다.
-		*/
 		sorted_env = sorted_env->next;
 		free (temp);
 	}
@@ -164,13 +159,7 @@ void	puttt(char *new_key, char *new_value, t_env *env)
 		temp->value = new_value;
 	}
 }
-/*
-	key와 value값 찾아 오는거 - 함수 하나
-	대조해서 같은거 있는지 검사
-	없으면 마지막 노드
-	있으면 해당 노드 - 함수 하나
-	넣는 작업 (있으면 free하고 넣어주는거 잊지 말기)
-*/
+
 void	put_new_env(t_env *env, t_list *arguments)
 {
 	t_list	*arg_ptr;

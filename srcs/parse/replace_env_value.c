@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/20 18:47:09 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:56:32 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static char	*find_key_in_str(const char *str)
 		ret[1] = '\0';
 		return (ret);
 	}
-	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z')
-			|| ('0' <= str[i] && str[i] <= '9') || str[i] == '_')
+	while (('A' <= str[i] && str[i] <= 'Z') || ('a' <= str[i] && str[i] <= 'z')\
+	|| ('0' <= str[i] && str[i] <= '9') || str[i] == '_')
 		i++;
 	if (i == 0)
 		return (NULL);
