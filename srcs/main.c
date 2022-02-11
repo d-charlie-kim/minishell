@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 00:54:31 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 00:59:10 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	init_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
 
-	init_mom_setting(info);
 	output = readline("mijeong$ ");
 	if (!output)
 		quit_handler(info);
@@ -83,6 +82,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	processes = NULL;
+	init_mom_setting(&info);
 	parse_envp(&info, envp);
 	while (1)
 		init_minishell(&info, processes);

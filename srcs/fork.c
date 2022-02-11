@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 00:54:17 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 00:58:33 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	fork_main(t_info *info, t_process *processes)
 	pid = fork();
 	if (pid == 0)
 	{
-		init_child_setting(info);
 		set_output_redirect(&processes[info->process_count - 1]);
 		fork_recursive(info, processes, info->process_count - 1);
 	}
