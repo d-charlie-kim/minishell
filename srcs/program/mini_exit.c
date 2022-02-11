@@ -3,32 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/10 18:55:04 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:47:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
+int	arg_is_num(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (ft_isdigit(arg[i] - '0'))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int	mini_exit(t_info *info, t_process *process)
 {
 	int		exit_status;
 	char	*arg;
 
-	if (process->arguments && process->arguments->next)
+	write(STDERR_FILENO, "exit\n", 5);
+	if (!process->arguments && !process->option)
+		exit(0);
+	if (process->option)
+		arg = (char *)(process->option->content);
+	else
+		arg = (char *)(process->arguments->content);
+	if (arg_is_num(arg))
+		exit_status = ft_atoi(arg);
+	else
+	{
+		write(STDERR_FILENO, "bash: exit: ", 12);
+		write(STDERR_FILENO, arg, ft_strlen(arg));
+		write(STDERR_FILENO, ": numeric argument required\n", 28);
+		exit(1);
+	}
+	if (process->arguments->next)
 	{
 		write(STDERR_FILENO, "bash: exit: too many arguments\n", 31);
-		if (info->process_count == 1)
-			return (1); // 에러 코드 무엇임
-		else
-			exit(1); // 에러 코드 무엇임
+		return (exit_process(info, 1));
 	}
-	if (info->process_count == 1)
-		write(1, "exit\n", 5);
-	arg = (char *)(process->arguments->content);
-	exit_status = ft_atoi(arg);
-	exit(exit_status);
+	else
+		exit(exit_status);
 }
