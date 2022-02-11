@@ -30,10 +30,13 @@ void	reset_input_mode(struct termios org_term)
 	tcsetattr(STDIN_FILENO, TCSANOW, &org_term);
 }
 
-void	quit_handler(void)
+void	quit_handler(t_info *info)
 {
-	write(1, "\033[1A", 5);
-	write(1, "\033[9C", 5);
+	if (info->process_count == 1)
+	{
+		write(1, "\033[1A", 5);
+		write(1, "\033[9C", 5);
+	}
 	write(1, "exit\n", 5);
 	exit(0);
 }

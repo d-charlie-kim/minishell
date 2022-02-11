@@ -91,6 +91,6 @@ t_env		*init_new_node(t_env *temp);
 t_env		*make_sorted_env(t_env *env);
 void		print_export(t_env *env);
 
-void		quit_handler(void);
+void		quit_handler(t_info *info);
 
 #endif

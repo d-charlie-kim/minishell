@@ -61,7 +61,7 @@ void	init_minishell(t_info *info, t_process *processes)
 
 	output = readline("mijeong$ ");
 	if (!output)
-		quit_handler();
+		quit_handler(info);
 	if (output[0] == '\0')
 		return ;
 	add_history(output);
