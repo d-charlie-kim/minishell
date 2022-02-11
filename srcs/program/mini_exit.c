@@ -20,7 +20,7 @@ int	str_is_num(char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (ft_isdigit(arg[i] - '0'))
+		if (ft_isdigit(arg[i]))
 			i++;
 		else
 			return (0);

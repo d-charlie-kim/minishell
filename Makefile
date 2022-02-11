@@ -15,7 +15,7 @@ NAME		= minishell
 CC			= gcc
 CFLAGS		= $(INCFLAGS) $(WFLAGS)  $(GFLAGS)
 WFLAGS		= -Wall -Wextra -Werror
-GFLAGS		= -g -fsanitize=address
+GFLAGS		= #-g -fsanitize=address
 INCFLAGS	= -I$(INCDIR)
 
 INCDIR		= includes
