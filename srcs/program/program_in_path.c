@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 22:33:08 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 00:27:41 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_inst_with_path_route(const char *path,
 }
 
 static void	execute_at_env_path(const char *path, \
-						t_process *process, char **argv)
+						t_process *process, char **argv, char **envp)
 {
 	int		begin;
 	int		end;
@@ -47,7 +47,7 @@ static void	execute_at_env_path(const char *path, \
 			end++;
 		inst = get_inst_with_path_route(path, process->instruction,
 				begin, end);
-		execve(inst, argv, NULL);
+		execve(inst, argv, envp);
 		end++;
 		begin = end;
 	}
@@ -102,34 +102,75 @@ static char	**setting_argv(t_process *process)
 	argv[0] = process->instruction;
 	add_option_in_argv(process->option, &argv);
 	add_arguments_in_argv(process->arguments, &argv);
-	argv[argv_size] = NULL;
+	//argv[argv_size] = NULL;
 	return (argv);
+}
+
+static int	get_envp_size(t_env *env)
+{
+	int	size;
+
+	size = 0;
+	while (env)
+	{
+		size++;
+		env = env->next;
+	}
+	return (size);
+}
+
+static void	add_value_in_envp(t_env *env, char **envp)
+{
+	int	i;
+	int key_len;
+	int value_len;
+
+	i = 0;
+	while (env)
+	{
+		key_len = ft_strlen(env->key);
+		value_len = ft_strlen(env->value);
+		envp[i] = (char *)malloc(sizeof(char) * (key_len + value_len + 2));
+		if (!envp[i])
+			print_error_and_exit("cannot allocate memory\n", ENOMEM);
+		ft_strlcpy(&envp[i][0], env->key, key_len);
+		envp[i][key_len] = '=';
+		ft_strlcpy(&envp[i][key_len + 1], env->value, value_len);
+		i++;
+		env = env->next;
+	}
+}
+
+static char	**setting_envp(t_env *env)
+{
+	int		envp_size;
+	char	**envp;
+
+	envp_size = get_envp_size(env);
+	envp = (char **)malloc(sizeof(char *) * (envp_size + 1));
+	if (!envp)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	ft_bzero(envp, sizeof(char *) * (envp_size + 1));
+	add_value_in_envp(env, envp);
+	//envp[envp_size] = NULL;
+	return (envp);
 }
 
 int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
 {
-	//int		exit_status;
-	//pid_t	pid;
 	char	*inst;
 	char	*path;
 	char	**argv;
+	char	**envp;
 
-	//pid = fork();
-	//if (pid > 0)
-	//{
-	//	waitpid(pid, &exit_status, 0);
-	//	if (info->process_count == 1)
-	//		return (exit_status);
-	//	else
-	//		exit(exit_status);
-	//}
 	inst = process->instruction;
 	argv = setting_argv(process);
-	execve(inst, argv, NULL);
+	envp = setting_envp(info->env);
+	execve(inst, argv, envp);
 	if (get_env_value(info->env, "PATH"))
 	{
 		path = get_env_value(info->env, "PATH");
-		execute_at_env_path(path, process, argv);
+		execute_at_env_path(path, process, argv, envp);
 	}
 	print_error_and_exit(strerror(ENOENT), ENOENT);
 	return (0);
