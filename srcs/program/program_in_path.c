@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 00:27:41 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 01:43:21 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하�
 		path = get_env_value(info->env, "PATH");
 		execute_at_env_path(path, process, argv, envp);
 	}
-	print_error_and_exit(strerror(ENOENT), ENOENT);
+	ft_putstr_fd(process->instruction, STDERR_FILENO);
+	print_error_and_exit(": command not found", 127);
 	return (0);
 }
