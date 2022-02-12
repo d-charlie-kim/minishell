@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 19:10:35 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 02:44:36 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ void	reset_input_mode(struct termios org_term)
 
 void	quit_handler(t_info *info)
 {
-	if (info->process_count == 1)
-	{
-		write(1, "\033[1A", 5);
-		write(1, "\033[9C", 5);
-	}
+	(void)info;
+	//if (info->process_count == 1)
+	//{
+	//	write(1, "\033[1A", 5);
+	//	write(1, "\033[9C", 5);
+	//}
 	write(1, "exit\n", 5);
 	exit(0);
 }
