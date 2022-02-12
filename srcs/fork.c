@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 00:58:33 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 23:59:52 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	set_output_fd(int pipe_fd[])
 	close(pipe_fd[0]);
 	close(STDOUT_FILENO);
 	dup2(pipe_fd[1], STDOUT_FILENO);
+	close(pipe_fd[1]);
 }
 
 static void	set_input_fd(int pipe_fd[])
@@ -25,6 +26,7 @@ static void	set_input_fd(int pipe_fd[])
 	close(pipe_fd[1]);
 	close(STDIN_FILENO);
 	dup2(pipe_fd[0], STDIN_FILENO);
+	close(pipe_fd[0]);
 }
 
 static void	fork_recursive(t_info *info, t_process *processes, int index)
@@ -42,12 +44,12 @@ static void	fork_recursive(t_info *info, t_process *processes, int index)
 	if (pid == 0)
 	{
 		set_output_fd(pipe_fd);
-		set_output_redirect(&processes[index - 1]);
+		//set_output_redirect(&processes[index - 1]);
 		fork_recursive(info, processes, index - 1);
 	}
 	set_input_fd(pipe_fd);
 	// set_input_redirect(process);
-	waitpid(pid, NULL, 0);
+	//waitpid(pid, NULL, 0);
 	execute_program(info, &processes[index]);
 }
 
@@ -59,7 +61,7 @@ void	fork_main(t_info *info, t_process *processes)
 	pid = fork();
 	if (pid == 0)
 	{
-		set_output_redirect(&processes[info->process_count - 1]);
+		//set_output_redirect(&processes[info->process_count - 1]);
 		fork_recursive(info, processes, info->process_count - 1);
 	}
 	waitpid(pid, &exit_status, 0);
