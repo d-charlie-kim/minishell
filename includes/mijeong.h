@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 15:34:41 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 22:44:24 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		remove_outside_quotes_in_str(char **str);
 char		*get_env_value(t_env *env, const char *key);
 void		print_error_and_exit(char *output, int error_num);
 
+bool		is_builtin_function(t_process *cur_process);
 int			find_instruction(t_info *info, t_process *process);
 int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);

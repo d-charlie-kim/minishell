@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 21:31:41 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/12 22:33:08 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,21 @@ static char	**setting_argv(t_process *process)
 
 int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
 {
-	int		exit_status;
-	pid_t	pid;
+	//int		exit_status;
+	//pid_t	pid;
 	char	*inst;
 	char	*path;
 	char	**argv;
 
-	pid = fork();
-	if (pid > 0)
-	{
-		waitpid(pid, &exit_status, 0);
-		if (info->process_count == 1)
-			return (exit_status);
-		else
-			exit(exit_status);
-	}
+	//pid = fork();
+	//if (pid > 0)
+	//{
+	//	waitpid(pid, &exit_status, 0);
+	//	if (info->process_count == 1)
+	//		return (exit_status);
+	//	else
+	//		exit(exit_status);
+	//}
 	inst = process->instruction;
 	argv = setting_argv(process);
 	execve(inst, argv, NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 19:38:39 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 22:43:25 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	init_minishell(t_info *info, t_process *processes)
 	add_history(output);
 	processes = split_line_to_process(output, info);
 	// print_parsing_data_test(processes, info->process_count); // test code ##
-	if (info->process_count == 1)
+	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_program(info, &processes[0]);
 	else
 		fork_main(info, processes);

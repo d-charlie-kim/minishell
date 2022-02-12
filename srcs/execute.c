@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 16:53:01 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/12 22:42:42 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
+
+bool	is_builtin_function(t_process *cur_process)
+{
+	if ((!ft_strncmp("cd", cur_process->instruction, 3)) ||\
+		(!ft_strncmp("exit", cur_process->instruction, 5)) ||\
+		(!ft_strncmp("env", cur_process->instruction, 4)) ||\
+		(!ft_strncmp("export", cur_process->instruction, 7)) ||\
+		(!ft_strncmp("unset", cur_process->instruction, 6)) ||\
+		(!ft_strncmp("pwd", cur_process->instruction, 4)) ||\
+		(!ft_strncmp("echo", cur_process->instruction, 5)))
+		return (true);
+	else
+		return (false);
+}
 
 int	execute_program(t_info *info, t_process *cur_process)
 {
