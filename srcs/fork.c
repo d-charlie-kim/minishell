@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 23:59:52 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 00:34:40 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	set_output_fd(int pipe_fd[])
 	close(pipe_fd[0]);
 	close(STDOUT_FILENO);
 	dup2(pipe_fd[1], STDOUT_FILENO);
-	close(pipe_fd[1]);
+	//close(pipe_fd[1]);
 }
 
 static void	set_input_fd(int pipe_fd[])
@@ -26,7 +26,7 @@ static void	set_input_fd(int pipe_fd[])
 	close(pipe_fd[1]);
 	close(STDIN_FILENO);
 	dup2(pipe_fd[0], STDIN_FILENO);
-	close(pipe_fd[0]);
+	//close(pipe_fd[0]);
 }
 
 static void	fork_recursive(t_info *info, t_process *processes, int index)
