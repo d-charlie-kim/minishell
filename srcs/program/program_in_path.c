@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 01:43:21 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 03:07:48 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static char	**setting_argv(t_process *process)
 	argv[0] = process->instruction;
 	add_option_in_argv(process->option, &argv);
 	add_arguments_in_argv(process->arguments, &argv);
-	//argv[argv_size] = NULL;
 	return (argv);
 }
 
@@ -133,9 +132,9 @@ static void	add_value_in_envp(t_env *env, char **envp)
 		envp[i] = (char *)malloc(sizeof(char) * (key_len + value_len + 2));
 		if (!envp[i])
 			print_error_and_exit("cannot allocate memory\n", ENOMEM);
-		ft_strlcpy(&envp[i][0], env->key, key_len);
+		ft_strlcpy(&envp[i][0], env->key, key_len + 1);
 		envp[i][key_len] = '=';
-		ft_strlcpy(&envp[i][key_len + 1], env->value, value_len);
+		ft_strlcpy(&envp[i][key_len + 1], env->value, value_len + 1);
 		i++;
 		env = env->next;
 	}
@@ -147,12 +146,11 @@ static char	**setting_envp(t_env *env)
 	char	**envp;
 
 	envp_size = get_envp_size(env);
-	envp = (char **)malloc(sizeof(char *) * (envp_size + 1));
+	envp = (char **)malloc(sizeof(char *) * (envp_size + 1)); // free 해주기
 	if (!envp)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_bzero(envp, sizeof(char *) * (envp_size + 1));
 	add_value_in_envp(env, envp);
-	//envp[envp_size] = NULL;
 	return (envp);
 }
 
