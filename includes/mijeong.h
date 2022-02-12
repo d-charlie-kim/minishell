@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 21:15:53 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/12 15:34:41 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		save_input_mode(struct termios org_term);
 void		set_input_mode(struct termios new_term);
 void		reset_input_mode(struct termios org_term);
 
-void		heredoc(t_process *process);
+void		heredoc(t_process *process, int last);
 int			exit_process(t_info *info, int exit_status);
 int			env_is_valid(char *target);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/11 21:04:45 by dokkim           ###   ########.fr        #
+#    Updated: 2022/02/12 18:07:58 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME		= minishell
 CC			= gcc
 CFLAGS		= $(INCFLAGS) $(WFLAGS)  $(GFLAGS)
 WFLAGS		= -Wall -Wextra -Werror
-GFLAGS		= #-g -fsanitize=address
 INCFLAGS	= -I$(INCDIR)
 
 INCDIR		= includes

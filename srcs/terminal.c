@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 00:55:29 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/12 19:10:35 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 void	save_input_mode(struct termios org_term)
 {
-	tcgetattr(STDIN_FILENO, &org_term);
+	tcgetattr(STDOUT_FILENO, &org_term);
 }
 
 void	set_input_mode(struct termios new_term)
 {
-	tcgetattr(STDIN_FILENO, &new_term);
+	tcgetattr(STDOUT_FILENO, &new_term);
 	new_term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
 }
 
 void	reset_input_mode(struct termios org_term)
 {
-	tcsetattr(STDIN_FILENO, TCSANOW, &org_term);
+	tcsetattr(STDOUT_FILENO, TCSANOW, &org_term);
 }
 
 void	quit_handler(t_info *info)
@@ -42,10 +42,10 @@ void	quit_handler(t_info *info)
 }
 
 /*
-		tcgetattr(STDIN_FILENO, &org_term); 
+		tcgetattr(STDOUT_FILENO, &org_term); 
 			// STDIN으로부터 터미널 속성을 받아온다 (초기화 용도)
 
-		tcgetattr(STDIN_FILENO, &new_term); 
+		tcgetattr(STDOUT_FILENO, &new_term); 
 			// STDOUT으로부터 터미널 속성을 받아온다
 		new_term.c_lflag &= ~(ECHOCTL);  
 			// ECHOCTL 속성을 off

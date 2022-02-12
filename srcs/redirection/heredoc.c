@@ -3,17 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 21:22:27 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/12 15:34:24 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-int	check_heredoc_count(t_process *process)
+static bool	is_heredoc(t_process *process, int last)
+{
+	t_list			*node;
+	t_redirect_pair	*redir_pair;
+
+	node = ft_lstfind_node(process->redirect, last);
+	redir_pair = (t_redirect_pair *)(node->content);
+	if (redir_pair->symbol == DOUBLE_IN)
+		return (true);
+	else
+		return (false);
+}
+
+static int	check_heredoc_count(t_process *process)
 {
 	t_list			*redir_lst;
 	t_redirect_pair	*redirect;
@@ -31,7 +44,7 @@ int	check_heredoc_count(t_process *process)
 	return (count);
 }
 
-void	heredoc(t_process *process)
+void	heredoc(t_process *process, int last)
 {
 	t_list			*temp;
 	t_redirect_pair	*redir_pair;
@@ -48,7 +61,7 @@ void	heredoc(t_process *process)
 		else
 		{
 			output = readline("> ");
-			if (count == 1)
+			if (count == 1 && is_heredoc(process, last))
 				ft_putstr_fd(output, STDOUT_FILENO);
 			if (!strncmp(redir_pair->file_name, output, \
 							ft_strlen(redir_pair->file_name) + 1))
