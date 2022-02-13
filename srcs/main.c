@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 22:43:25 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:15:25 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,29 @@ void	print_parsing_data_test(t_process *processes, int process_count)
 	}
 }
 
+void	free_all(t_info *info, t_process *processes, char *output)
+{
+	int			i;
+	t_process	*temp;
+
+	i = 0;
+	free (output);
+	while (i < info->process_count)
+	{
+		temp = &processes[i];
+		if (temp->instruction)
+			free (temp->instruction);
+		if (temp->option)
+			ft_lstclear(&temp->option, free);
+		if (temp->arguments)
+			ft_lstclear(&temp->arguments, free);
+		if (temp->redirect)
+			ft_lstclear(&temp->redirect, free);
+		i++;
+	}
+	free (processes);
+}
+
 void	init_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
@@ -71,7 +94,7 @@ void	init_minishell(t_info *info, t_process *processes)
 		info->last_exit_status = execute_program(info, &processes[0]);
 	else
 		fork_main(info, processes);
-	free(output);
+	free_all(info, processes, output);
 }
 
 int	main(int argc, char **argv, char **envp)

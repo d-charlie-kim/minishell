@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/11 16:57:45 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 17:16:55 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	sigquit_handler_child(void)
 
 void	init_mom_setting(t_info *info)
 {
-	save_input_mode(info->org_term);
-	set_input_mode(info->new_term);
+	save_output_mode(info->org_term);
+	set_output_mode(info->new_term);
 	signal(SIGINT, (void *)sigint_handler_mom);
 	signal(SIGQUIT, SIG_IGN);
 }
 
 void	init_child_setting(t_info *info)
 {
-	reset_input_mode(info->org_term);
+	(void)info;
 	signal(SIGINT, (void *)sigint_handler_child);
 	signal(SIGQUIT, (void *)sigquit_handler_child);
 }

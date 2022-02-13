@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/12 22:44:24 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:13:32 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void		sigquit_handler_child(void);
 void		sigint_handler_child(void);
 void		sigint_handler_mom(void);
 
-void		save_input_mode(struct termios org_term);
-void		set_input_mode(struct termios new_term);
-void		reset_input_mode(struct termios org_term);
+void		save_output_mode(struct termios org_term);
+void		set_output_mode(struct termios new_term);
+void		reset_output_mode(struct termios org_term);
 
 void		heredoc(t_process *process, int last);
 int			exit_process(t_info *info, int exit_status);
