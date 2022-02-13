@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 00:57:10 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 01:27:13 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,25 @@ void	free_all(t_info *info, t_process *processes, char *output)
 	free (processes);
 }
 
+int	execute_single_builtin(t_info *info, t_process *process)
+// mac 환경에서 파이프 누수 테스트 해볼 것
+{
+	int	ret;
+	//int save_stdin;
+	int save_stdout;
+
+	//save_stdin = dup(STDIN_FILENO);
+	save_stdout = dup(STDOUT_FILENO);
+	//set_input_redirect();
+	set_output_redirect(process);
+	ret = execute_program(info, process);
+	//dup2(save_stdin, STDIN_FILENO);
+	//close(save_stdin));
+	dup2(save_stdout, STDOUT_FILENO);
+	close(save_stdout);
+	return (ret);
+}
+
 void	init_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
@@ -94,7 +113,7 @@ void	init_minishell(t_info *info, t_process *processes)
 		return ;
 	//print_parsing_data_test(processes, info->process_count); // test code ##
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
-		info->last_exit_status = execute_program(info, &processes[0]); // redirection 연결
+		info->last_exit_status = execute_single_builtin(info, &processes[0]);
 	else
 		fork_main(info, processes);
 	free_all(info, processes, output);
