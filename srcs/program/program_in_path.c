@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 03:07:48 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 01:09:09 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,20 @@ static char	**setting_envp(t_env *env)
 	return (envp);
 }
 
-int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
+void	free_envp(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
+}
+
+void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
 {
 	char	*inst;
 	char	*path;
@@ -164,13 +177,18 @@ int	find_instruction(t_info *info, t_process *process) // fork 이후 실행하�
 	inst = process->instruction;
 	argv = setting_argv(process);
 	envp = setting_envp(info->env);
-	execve(inst, argv, envp);
-	if (get_env_value(info->env, "PATH"))
+	if (process->instruction[0] == '.' || process->instruction[0] == '/')
+		execve(inst, argv, envp);
+	else if (get_env_value(info->env, "PATH"))
 	{
 		path = get_env_value(info->env, "PATH");
 		execute_at_env_path(path, process, argv, envp);
+		ft_putstr_fd(process->instruction, STDERR_FILENO);
+		print_error_and_exit(": command not found", 127);
 	}
+	else
+		execve(inst, argv, envp);
+	ft_putstr_fd("bash: ", STDERR_FILENO);
 	ft_putstr_fd(process->instruction, STDERR_FILENO);
-	print_error_and_exit(": command not found", 127);
-	return (0);
+	print_error_and_exit(": No such file or directory", 127);
 }

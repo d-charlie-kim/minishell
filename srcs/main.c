@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 19:49:09 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 00:57:10 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	free_all(t_info *info, t_process *processes, char *output)
 		if (temp->arguments)
 			ft_lstclear(&temp->arguments, free);
 		if (temp->redirect)
-			ft_lstclear(&temp->redirect, free);
+			ft_lstclear(&temp->redirect, free); // redirect pair 안에 있는 filename도 free 해줘야 함
 		i++;
 	}
 	free (processes);
@@ -92,9 +92,9 @@ void	init_minishell(t_info *info, t_process *processes)
 	processes = split_line_to_process(output, info);
 	if (!processes[0].instruction && !processes[0].redirect)
 		return ;
-	print_parsing_data_test(processes, info->process_count); // test code ##
+	//print_parsing_data_test(processes, info->process_count); // test code ##
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
-		info->last_exit_status = execute_program(info, &processes[0]);
+		info->last_exit_status = execute_program(info, &processes[0]); // redirection 연결
 	else
 		fork_main(info, processes);
 	free_all(info, processes, output);

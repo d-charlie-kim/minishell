@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 22:42:42 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 01:07:43 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	execute_program(t_info *info, t_process *cur_process)
 	else if (!ft_strncmp("echo", cur_process->instruction, 5))
 		return (mini_echo(info, cur_process));
 	else
-		return (find_instruction(info, cur_process));
-	print_error_and_exit("명령어를 찾지 못했어요ㅠㅠ\n", 5555555);
+		find_instruction(info, cur_process);
+	return (0);
 }

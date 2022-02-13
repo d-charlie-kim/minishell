@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 19:27:40 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 00:38:45 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*get_env_value(t_env *env, const char *key);
 void		print_error_and_exit(char *output, int error_num);
 
 bool		is_builtin_function(t_process *cur_process);
-int			find_instruction(t_info *info, t_process *process);
+void		find_instruction(t_info *info, t_process *process);
 int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);
 
