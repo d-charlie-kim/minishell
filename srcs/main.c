@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 17:15:25 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 19:49:09 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
 
+	init_mom_setting(info);
 	output = readline("mijeong$ ");
 	if (!output)
 		quit_handler(info);
@@ -89,7 +90,9 @@ void	init_minishell(t_info *info, t_process *processes)
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
-	// print_parsing_data_test(processes, info->process_count); // test code ##
+	if (!processes[0].instruction && !processes[0].redirect)
+		return ;
+	print_parsing_data_test(processes, info->process_count); // test code ##
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_program(info, &processes[0]);
 	else
@@ -105,7 +108,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	processes = NULL;
-	init_mom_setting(&info);
 	parse_envp(&info, envp);
 	while (1)
 		init_minishell(&info, processes);

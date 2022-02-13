@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 21:31:41 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 19:36:22 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char	*get_arg(t_info *info, t_process *process)
 
 int	mini_exit(t_info *info, t_process *process)
 {
-	int		exit_status;
-	char	*arg;
+	unsigned char	exit_status;
+	char			*arg;
 
 	arg = get_arg(info, process);
 	if (str_is_num(arg))

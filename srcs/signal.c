@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 17:16:55 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 19:10:02 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	sigint_handler_mom(void)
 {
+	rl_on_new_line();
+	rl_redisplay();
 	write(STDIN_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -23,7 +25,7 @@ void	sigint_handler_mom(void)
 
 void	sigint_handler_child(void)
 {
-	write(STDIN_FILENO, "\n", 1);
+	write(1, "\n", 1);
 }
 
 void	sigquit_handler_child(void)

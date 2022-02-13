@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 17:13:32 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 19:27:40 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 typedef struct s_info
 {
 	int				process_count;
-	int				last_exit_status;
+	unsigned char	last_exit_status;
 	t_env			*env;
 	struct termios	org_term;
 	struct termios	new_term;

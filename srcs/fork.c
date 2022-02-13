@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 15:37:53 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 19:23:15 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	fork_main(t_info *info, t_process *processes)
 	int		exit_status;
 	pid_t	pid;
 
+	init_child_setting(info);
 	pid = fork();
 	if (pid == 0)
 	{

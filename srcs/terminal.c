@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 17:18:00 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/13 18:46:56 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void	reset_output_mode(struct termios org_term)
 void	quit_handler(t_info *info)
 {
 	(void)info;
-	//if (info->process_count == 1)
-	//{
-	//	write(1, "\033[1A", 5);
-	//	write(1, "\033[9C", 5);
-	//}
+
+	write(1, "\033[1A", 5);
+	write(1, "\033[9C", 5);
 	write(1, "exit\n", 5);
 	// reset_output_mode(info->org_term);
 	exit(0);
