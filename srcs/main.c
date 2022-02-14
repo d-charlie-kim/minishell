@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 21:02:54 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:34:59 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,26 @@ int	execute_single_builtin(t_info *info, t_process *process)
 	return (ret);
 }
 
+int	validate_output(t_info *info, char *output)
+{
+	if (!output)
+		quit_handler(info);
+	if (output[0] == '\0')
+		return (1);
+}
+
 void	run_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
 
 	init_mom_setting(info);
 	output = readline("mijeong$ ");
-	if (!output)
-		quit_handler(info);
-	if (output[0] == '\0')
+	if (validate_output) // 여기서 싹 다 검사해주고, split 파싱으로 가면 아래 부분들이 전부 필요 없다.
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
 	if (!processes)
 		return ;
-	// if (!processes[0].instruction && !processes[0].redirect)
-	// 	return ;
 	//print_parsing_data_test(processes, info->process_count); // test code ##
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_single_builtin(info, &processes[0]);
@@ -138,6 +142,7 @@ void	set_shlvl(t_info *info)
 	puttt("SHLVL", shlvl, info->env);
 }
 
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_info		info;
@@ -153,18 +158,18 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-		/*
-		output = readline("mijeong$ ");
-		if (!output)
-			quit_handler();
-		if (output[0] == '\0')
-			continue ;
-		add_history(output);
-		processes = split_line_to_process(output, &info);
-		// print_parsing_data_test(processes, info.process_count); // test code ##
-		if (info.process_count == 1)
-			info.last_exit_status = execute_program(&info, &processes[0]);
-		else
-			fork_main(&info, processes);
-		free(output);
-		*/
+	/*
+	output = readline("mijeong$ ");
+	if (!output)
+		quit_handler();
+	if (output[0] == '\0')
+		continue ;
+	add_history(output);
+	processes = split_line_to_process(output, &info);
+	// print_parsing_data_test(processes, info.process_count); // test code ##
+	if (info.process_count == 1)
+		info.last_exit_status = execute_program(&info, &processes[0]);
+	else
+		fork_main(&info, processes);
+	free(output);
+	*/
