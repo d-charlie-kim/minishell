@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 01:07:43 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:12:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 bool	is_builtin_function(t_process *cur_process)
 {
-	if ((!ft_strncmp("cd", cur_process->instruction, 3)) ||\
-		(!ft_strncmp("exit", cur_process->instruction, 5)) ||\
-		(!ft_strncmp("env", cur_process->instruction, 4)) ||\
-		(!ft_strncmp("export", cur_process->instruction, 7)) ||\
-		(!ft_strncmp("unset", cur_process->instruction, 6)) ||\
-		(!ft_strncmp("pwd", cur_process->instruction, 4)) ||\
+	if ((!ft_strncmp("cd", cur_process->instruction, 3)) || \
+		(!ft_strncmp("exit", cur_process->instruction, 5)) || \
+		(!ft_strncmp("env", cur_process->instruction, 4)) || \
+		(!ft_strncmp("export", cur_process->instruction, 7)) || \
+		(!ft_strncmp("unset", cur_process->instruction, 6)) || \
+		(!ft_strncmp("pwd", cur_process->instruction, 4)) || \
 		(!ft_strncmp("echo", cur_process->instruction, 5)))
 		return (true);
 	else

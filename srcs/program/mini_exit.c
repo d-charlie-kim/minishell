@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 18:02:56 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:14:21 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	num_is_valid(char *arg)
 														&& minus == '-'))
 		return (1);
 	else
-		return (0);	
+		return (0);
 }
 
 int	mini_exit(t_info *info, t_process *process)

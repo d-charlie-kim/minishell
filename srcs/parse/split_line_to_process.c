@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 16:52:23 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:14:11 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	get_pipe_count(const char *str)
 	}
 	if (is_in_quotes != NOT)
 	{
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", STDERR_FILENO);
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", \
+														STDERR_FILENO);
 		return (-2);
 	}
 	return (pipe_count);
