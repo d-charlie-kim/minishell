@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 16:59:35 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 16:52:23 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ static int	get_pipe_count(const char *str)
 			pipe_count++;
 		i++;
 	}
+	if (is_in_quotes != NOT)
+	{
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", STDERR_FILENO);
+		return (-2);
+	}
 	return (pipe_count);
 }
 
@@ -56,6 +61,8 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	t_process	*processes;
 
 	info->process_count = get_pipe_count(str) + 1;
+	if (info->process_count == -1)
+		return (NULL);
 	processes = (t_process *)malloc(sizeof(t_process) * info->process_count);
 	if (!processes)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);

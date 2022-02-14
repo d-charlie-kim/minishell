@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/13 19:36:22 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:02:56 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ int	str_is_num(char *arg)
 	int	i;
 
 	i = 0;
+	while (arg[i] && arg[i] == ' ')
+		i++;
+	if (arg[i] && (arg[i] == '+' || arg[i] == '-'))
+		i++;
+	if (arg[i] == '\0')
+		return (0);
 	while (arg[i])
 	{
 		if (ft_isdigit(arg[i]))
@@ -47,13 +53,41 @@ char	*get_arg(t_info *info, t_process *process)
 	}
 }
 
+int	num_is_valid(char *arg)
+{
+	int		i;
+	int		len;
+	char	minus;
+
+	i = 0;
+	len = 0;
+	while (arg[i] && arg[i] == ' ')
+		i++;
+	minus = '+';
+	if (arg[i] == '+' || arg[i] == '-')
+		minus = arg[i++];
+	while (arg[i])
+	{
+		i++;
+		len++;
+	}
+	if (len > 19)
+		return (0);
+	if ((ft_strncmp("9223372036854775808", arg + i - len, len) > 0) \
+	|| ((ft_strncmp("9223372036854775808", arg + i - len, len) == 0) \
+														&& minus == '-'))
+		return (1);
+	else
+		return (0);	
+}
+
 int	mini_exit(t_info *info, t_process *process)
 {
 	unsigned char	exit_status;
 	char			*arg;
 
 	arg = get_arg(info, process);
-	if (str_is_num(arg))
+	if (str_is_num(arg) && num_is_valid(arg))
 		exit_status = ft_atoi(arg);
 	else
 	{

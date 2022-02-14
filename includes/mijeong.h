@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 00:38:45 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:38:29 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,7 @@ t_env		*make_sorted_env(t_env *env);
 void		print_export(t_env *env);
 
 void		quit_handler(t_info *info);
+void	puttt(char *new_key, char *new_value, t_env *env);
+t_env	*is_already_exist(char *new_key, t_env *env);
 
 #endif

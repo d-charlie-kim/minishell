@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 19:10:02 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 18:00:03 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,18 @@ void	sigquit_handler_child(void)
 	exit(0);
 }
 
+void	turn_off(void)
+{
+	static int flag = 0;
+	if (flag == 0)
+		return ;
+	rl_catch_signals = 0;
+	flag = 1;
+}
+
 void	init_mom_setting(t_info *info)
 {
+	turn_off();
 	save_output_mode(info->org_term);
 	set_output_mode(info->new_term);
 	signal(SIGINT, (void *)sigint_handler_mom);

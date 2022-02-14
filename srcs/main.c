@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 01:27:13 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/14 16:50:26 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,33 @@ void	init_minishell(t_info *info, t_process *processes)
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
-	if (!processes[0].instruction && !processes[0].redirect)
+	if (!processes)
 		return ;
+	// if (!processes[0].instruction && !processes[0].redirect)
+	// 	return ;
 	//print_parsing_data_test(processes, info->process_count); // test code ##
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_single_builtin(info, &processes[0]);
 	else
 		fork_main(info, processes);
 	free_all(info, processes, output);
+}
+
+void	set_shlvl(t_info *info)
+{
+	int		num;
+	char	*value;
+	char	*shlvl;
+
+	value = getenv("SHLVL");
+	if (!value)
+		shlvl = ft_strdup("1");
+	else
+	{
+		num = ft_atoi(value);
+		shlvl = ft_itoa(num + 1);
+	}
+	puttt("SHLVL", shlvl, info->env);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -128,6 +147,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	processes = NULL;
 	parse_envp(&info, envp);
+	set_shlvl(&info);
 	while (1)
 		init_minishell(&info, processes);
 	return (0);
