@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 17:59:53 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 20:25:05 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	quit_handler(t_info *info)
 	write(1, "\033[1A", 5);
 	write(1, "\033[9C", 5);
 	write(1, "exit\n", 5);
-	reset_output_mode(info->org_term);
+	// reset_output_mode(info->org_term);
 	exit(0);
 }
 

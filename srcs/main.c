@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 16:50:26 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 21:02:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	execute_single_builtin(t_info *info, t_process *process)
 	return (ret);
 }
 
-void	init_minishell(t_info *info, t_process *processes)
+void	run_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
 
@@ -149,7 +149,7 @@ int	main(int argc, char **argv, char **envp)
 	parse_envp(&info, envp);
 	set_shlvl(&info);
 	while (1)
-		init_minishell(&info, processes);
+		run_minishell(&info, processes);
 	return (0);
 }
 

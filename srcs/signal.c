@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 18:00:03 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/14 20:59:04 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sigint_handler_mom(void)
 {
 	rl_on_new_line();
 	rl_redisplay();
-	write(STDIN_FILENO, "\n", 1);
+	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -37,17 +37,18 @@ void	sigquit_handler_child(void)
 void	turn_off(void)
 {
 	static int flag = 0;
-	if (flag == 0)
+	if (flag == 1)
 		return ;
+	printf("turn off!!!!!\n");
 	rl_catch_signals = 0;
 	flag = 1;
 }
 
 void	init_mom_setting(t_info *info)
 {
-	turn_off();
+	//turn_off();
 	save_output_mode(info->org_term);
-	set_output_mode(info->new_term);
+	//set_output_mode(info->new_term);
 	signal(SIGINT, (void *)sigint_handler_mom);
 	signal(SIGQUIT, SIG_IGN);
 }
