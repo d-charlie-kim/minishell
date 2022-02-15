@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 01:09:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 01:20:07 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/16 02:18:16 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	connect_last_file(t_list *redirect, int last)
 	fd = open(pair->file_name, O_RDWR | O_APPEND);
 	close(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }
 
 void	set_output_redirect(t_process *process)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 19:57:05 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 17:05:39 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/16 02:32:31 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	connect_last_file(t_list *redirect, int last)
 		fd = open(pair->file_name, O_RDONLY);
 		close(STDIN_FILENO);
 		dup2(fd, STDIN_FILENO);
+		close(fd);
 	}
 }
 
