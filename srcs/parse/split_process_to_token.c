@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 18:57:15 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 18:16:28 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	return (ARG);
 }
 
-void	split_process_to_token(t_process *process, t_info *info, \
+int	split_process_to_token(t_process *process, t_info *info, \
 		const char *str, int len)
 {
 	int		i;
@@ -103,12 +103,11 @@ void	split_process_to_token(t_process *process, t_info *info, \
 
 	cur_token = NULL;
 	new_str = replace_env_value(info, str, len);
-	if (!new_str)
-		return ;
 	tag = 0;
 	i = 0;
-	while (new_str[i] == ' ')
-		i++;
+	while (new_str && new_str[i] == ' ')
+		i++;	if (!new_str || new_str[i] == 0)
+		return (1);
 	while (new_str[i])
 	{
 		cur_token = get_one_token(&new_str[i]);
@@ -120,4 +119,5 @@ void	split_process_to_token(t_process *process, t_info *info, \
 			i++;
 	}
 	free(new_str);
+	return (0);
 }

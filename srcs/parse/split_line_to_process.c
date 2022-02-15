@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 21:14:11 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 18:13:23 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	int			i;
 	int			len;
 	t_process	*processes;
-
 	info->process_count = get_pipe_count(str) + 1;
 	if (info->process_count == -1)
 		return (NULL);
@@ -72,7 +71,13 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	while (i < info->process_count)
 	{
 		len = num_of_character_in_pipe(str);
-		split_process_to_token(&processes[i], info, str, len);
+		if (split_process_to_token(&processes[i], info, str, len))
+		{
+			if (info->process_count != 1)
+				ft_putstr_fd("syntax error near unexpected token '|'\n", \
+														STDERR_FILENO);
+			return (NULL);
+		}
 		str += len + 1;
 		i++;
 	}

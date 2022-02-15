@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 16:38:29 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 18:12:07 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_info
 }				t_info;
 
 t_process	*split_line_to_process(const char *str, t_info *info);
-void		split_process_to_token(t_process *process, t_info *info, \
+int			split_process_to_token(t_process *process, t_info *info, \
 			const char *str, int len);
 void		save_token_in_struct(t_process *process, char *token, int tag);
 char		*replace_env_value(t_info *info, const char *str, int len);
@@ -93,7 +93,7 @@ t_env		*make_sorted_env(t_env *env);
 void		print_export(t_env *env);
 
 void		quit_handler(t_info *info);
-void	puttt(char *new_key, char *new_value, t_env *env);
-t_env	*is_already_exist(char *new_key, t_env *env);
+void		puttt(char *new_key, char *new_value, t_env *env);
+t_env		*is_already_exist(char *new_key, t_env *env);
 
 #endif
