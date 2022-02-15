@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 21:34:59 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 16:53:00 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	validate_output(t_info *info, char *output)
 		quit_handler(info);
 	if (output[0] == '\0')
 		return (1);
+	return (0);
 }
 
 void	run_minishell(t_info *info, t_process *processes)
@@ -111,7 +112,7 @@ void	run_minishell(t_info *info, t_process *processes)
 
 	init_mom_setting(info);
 	output = readline("mijeong$ ");
-	if (validate_output) // 여기서 싹 다 검사해주고, split 파싱으로 가면 아래 부분들이 전부 필요 없다.
+	if (validate_output(info, output)) // 여기서 싹 다 검사해주고, split 파싱으로 가면 아래 부분들이 전부 필요 없다.
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
