@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/13 19:23:15 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 21:00:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ void	fork_main(t_info *info, t_process *processes)
 	int		exit_status;
 	pid_t	pid;
 
-	init_child_setting(info);
 	pid = fork();
 	if (pid == 0)
 	{
+		reset_output_mode(&(info->org_term));
 		set_output_redirect(&processes[info->process_count - 1]);
 		fork_recursive(info, processes, info->process_count - 1);
 	}
+	init_child_setting(info);
 	waitpid(pid, &exit_status, 0);
 	info->last_exit_status = exit_status;
 }

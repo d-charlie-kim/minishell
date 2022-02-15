@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 18:16:28 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 19:40:15 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	if (token[0] == '<' || token[0] == '>')
 	{
 		if (tag == REDIRECTION)
-			print_error_and_exit("syntax error near unexpected token\n", 0);
+		{
+			ft_putstr_fd("bash: syntax error near unexpected", STDERR_FILENO);
+			ft_putstr_fd(" token\n", STDERR_FILENO);
+			return (258);
+		}
 		else
 			return (REDIRECTION);
 	}
@@ -106,13 +110,16 @@ int	split_process_to_token(t_process *process, t_info *info, \
 	tag = 0;
 	i = 0;
 	while (new_str && new_str[i] == ' ')
-		i++;	if (!new_str || new_str[i] == 0)
+		i++;
+	if (!new_str || new_str[i] == 0)
 		return (1);
 	while (new_str[i])
 	{
 		cur_token = get_one_token(&new_str[i]);
 		i += ft_strlen(cur_token);
 		tag = classyfy_token(process, cur_token, tag);
+		if (tag == 258)
+			return (1);
 		remove_outside_quotes_in_str(&cur_token);
 		save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')

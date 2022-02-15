@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 18:13:23 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 19:43:54 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static int	get_pipe_count(const char *str)
 	}
 	if (is_in_quotes != NOT)
 	{
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", \
-														STDERR_FILENO);
+		ft_putstr_fd("bash: syntax error near unexpected", STDERR_FILENO);
+		ft_putstr_fd(" token `newline'\n", STDERR_FILENO);
 		return (-2);
 	}
 	return (pipe_count);
@@ -60,6 +60,7 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	int			i;
 	int			len;
 	t_process	*processes;
+
 	info->process_count = get_pipe_count(str) + 1;
 	if (info->process_count == -1)
 		return (NULL);
@@ -74,8 +75,11 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 		if (split_process_to_token(&processes[i], info, str, len))
 		{
 			if (info->process_count != 1)
-				ft_putstr_fd("syntax error near unexpected token '|'\n", \
+			{
+				ft_putstr_fd("bash: syntax error near unexpected", \
 														STDERR_FILENO);
+				ft_putstr_fd(" token '|'\n", STDERR_FILENO);
+			}
 			return (NULL);
 		}
 		str += len + 1;

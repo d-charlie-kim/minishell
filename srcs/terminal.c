@@ -6,28 +6,25 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:38:35 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 21:13:30 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 20:39:43 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termios.h>
 #include "mijeong.h"
 
-void	save_output_mode(struct termios org_term)
+void	set_output_mode(struct termios *new_term)
 {
-	tcgetattr(STDOUT_FILENO, &org_term);
+	tcgetattr(STDOUT_FILENO, new_term);
+	new_term->c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDOUT_FILENO, TCSANOW, new_term);
 }
 
-void	set_output_mode(struct termios new_term)
+void	reset_output_mode(struct termios *org_term)
 {
-	tcgetattr(STDOUT_FILENO, &new_term);
-	new_term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
-}
-
-void	reset_output_mode(struct termios org_term)
-{
-	tcsetattr(STDOUT_FILENO, TCSANOW, &org_term);
+	tcgetattr(STDOUT_FILENO, org_term);
+	org_term->c_lflag |= (ECHOCTL);
+	tcsetattr(STDOUT_FILENO, TCSANOW, org_term);
 }
 
 void	quit_handler(t_info *info)
@@ -36,7 +33,7 @@ void	quit_handler(t_info *info)
 	write(1, "\033[1A", 5);
 	write(1, "\033[9C", 5);
 	write(1, "exit\n", 5);
-	// reset_output_mode(info->org_term);
+	reset_output_mode(&(info->org_term));
 	exit(0);
 }
 

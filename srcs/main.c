@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 17:51:02 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 20:44:38 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,34 @@ int	validate_output(t_info *info, char *output)
 	return (0);
 }
 
+int	validate_process(t_info *info, t_process *processes)
+{
+	int				i;
+	t_list			*ptr;
+	t_redirect_pair	*redirect_ptr;
+
+	i = 0;
+	if (!processes)
+		return (1);
+	while (i < info->process_count)
+	{
+		ptr = processes[i].redirect;
+		while (ptr)
+		{
+			redirect_ptr = (t_redirect_pair *)ptr->content;
+			if (!redirect_ptr->file_name)
+			{
+				ft_putstr_fd("bash: syntax error near unexpected", STDERR_FILENO);
+				ft_putstr_fd(" token `newline'\n", STDERR_FILENO);
+				return (1);
+			}
+			ptr = ptr->next;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	run_minishell(t_info *info, t_process *processes)
 {
 	char	*output;
@@ -116,9 +144,10 @@ void	run_minishell(t_info *info, t_process *processes)
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
-	if (!processes)
+	if (validate_process(info, processes))
 		return ;
 	//print_parsing_data_test(processes, info->process_count); // test code ##
+	//reset_output_mode(&(info->org_term));
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_single_builtin(info, &processes[0]);
 	else

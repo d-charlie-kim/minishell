@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 18:01:22 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/15 20:48:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	exit_process(t_info *info, int exit_status)
 	if (info->process_count == 1)
 		return (exit_status);
 	else
+	{
 		exit(exit_status);
+	}
 }
 
 int	env_is_valid(char *target)
