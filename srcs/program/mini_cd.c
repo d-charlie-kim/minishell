@@ -18,7 +18,7 @@ static void	print_error(char *arg)
 	char	*error_message;
 
 	error_message = strerror(ENOENT);
-	ft_putstr_fd("bash: cd:", STDERR_FILENO);
+	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(error_message, STDERR_FILENO);

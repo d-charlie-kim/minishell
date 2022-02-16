@@ -104,6 +104,8 @@ static pid_t	create_processes(t_info *info, t_process *processes)
 		if (i < info->process_count - 1)
 			pipe(pipe_fd);
 		pid = fork();
+		if (i == 0)
+			info->first_process_pid = pid;
 		if (pid == 0)
 		{
 			set_input_fd(&processes[i], input_fd);
@@ -123,11 +125,17 @@ static pid_t	create_processes(t_info *info, t_process *processes)
 void	fork_main(t_info *info, t_process *processes)
 {
 	int		exit_status;
+	int		first_process_exit_status;
 	pid_t	pid;
 
 	reset_output_mode(&(info->org_term));
 	pid = create_processes(info, processes);
 	init_child_setting(info);
+	waitpid(info->first_process_pid, &first_process_exit_status, 0);
+	if (first_process_exit_status == 2)
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	else if (first_process_exit_status == 3)
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 	waitpid(pid, &exit_status, 0);
 	while (wait(NULL) > 0);
 	info->last_exit_status = exit_status;

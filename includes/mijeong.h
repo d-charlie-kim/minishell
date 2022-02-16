@@ -41,6 +41,7 @@ typedef struct s_info
 	t_env			*env;
 	struct termios	org_term;
 	struct termios	new_term;
+	int				first_process_pid;
 }				t_info;
 
 t_process	*split_line_to_process(const char *str, t_info *info);
