@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:02:24 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 20:44:38 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/17 23:50:19 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ int	execute_single_builtin(t_info *info, t_process *process)
 // mac 환경에서 파이프 누수 테스트 해볼 것
 {
 	int	ret;
-	//int save_stdin;
+	int save_stdin;
 	int save_stdout;
 
-	//save_stdin = dup(STDIN_FILENO);
+	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
-	//set_input_redirect();
+	set_input_redirect(process);
 	set_output_redirect(process);
 	ret = execute_program(info, process);
-	//dup2(save_stdin, STDIN_FILENO);
-	//close(save_stdin));
+	dup2(save_stdin, STDIN_FILENO);
+	close(save_stdin);
 	dup2(save_stdout, STDOUT_FILENO);
 	close(save_stdout);
 	return (ret);
