@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/17 10:29:51 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/17 12:30:20 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@
 
 typedef struct s_info
 {
-	int				process_count;
 	unsigned char	last_exit_status;
+	int				process_count;
 	t_env			*env;
 	struct termios	org_term;
 	struct termios	new_term;
-	int				first_process_pid;
 }				t_info;
 
 t_process	*split_line_to_process(const char *str, t_info *info);
