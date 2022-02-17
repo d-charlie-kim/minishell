@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 19:06:37 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 16:42:11 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/17 23:14:13 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	print_error(char *arg)
 {
 	char	*error_message;
 
-	error_message = strerror(ENOENT);
+	error_message = strerror(errno);
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
@@ -61,7 +61,10 @@ int	mini_cd(t_info *info, t_process *process)
 		arg = get_env_value(info->env, "HOME");
 	ret = chdir(arg);
 	if (ret == -1)
+	{
 		print_error(arg);
+		ret = 1;
+	}
 	update_pwd(info->env);
-	return (exit_process(info, ret));
+	return (exit_process(info, errno));
 }
