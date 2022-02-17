@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 19:57:05 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/17 10:35:44 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 00:18:09 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static void	check_file_is_exist(t_list *redirect)
 			{
 				ft_putstr_fd("bash: ", STDERR_FILENO);
 				ft_putstr_fd(pair->file_name, STDERR_FILENO);
+				ft_putstr_fd(": ", STDERR_FILENO);
 				ft_putstr_fd(strerror(ENOENT), STDERR_FILENO);
+				ft_putchar_fd('\n', STDERR_FILENO);
 				exit(ENOENT);
 			}
 			close(fd);
