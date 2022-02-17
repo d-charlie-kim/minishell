@@ -27,7 +27,7 @@ int	err_option(char	*inst, t_info *info, t_process *process)
 	ft_putstr_fd("bash: ", STDERR_FILENO);
 	ft_putstr_fd(inst, STDERR_FILENO);
 	ft_putstr_fd(": -", STDERR_FILENO);
-	ft_putstr_fd(&option[1], STDERR_FILENO);
+	ft_putchar_fd(option[1], STDERR_FILENO);
 	ft_putstr_fd(": invalid option\n", STDERR_FILENO);
 	return (exit_process(info, 1));
 }

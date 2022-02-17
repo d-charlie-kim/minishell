@@ -61,7 +61,10 @@ int	mini_cd(t_info *info, t_process *process)
 		arg = get_env_value(info->env, "HOME");
 	ret = chdir(arg);
 	if (ret == -1)
+	{
 		print_error(arg);
+		ret = 1;
+	}
 	update_pwd(info->env);
 	return (exit_process(info, ret));
 }

@@ -90,9 +90,9 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		i = 1;
 		while (token[i] == '"' || token[i] == '\'')
 			i++;
-		if (('a' <= token[i] && token[i] <= 'z') \
-			|| ('A' <= token[i] && token[i] <= 'Z'))
-			return (OPTION);
+		// if (('a' <= token[i] && token[i] <= 'z')
+		// 	|| ('A' <= token[i] && token[i] <= 'Z'))
+		return (OPTION);
 	}
 	return (ARG);
 }

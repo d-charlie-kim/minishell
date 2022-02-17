@@ -12,18 +12,41 @@
 
 #include "mijeong.h"
 
-int	mini_echo(t_info *info, t_process *process)
+void	printing_echo(t_list *ptr)
 {
 	t_list	*temp;
 
-	temp = process->arguments;
-	while (temp != NULL)
+	if (!ptr)
+		return ;
+	temp = ptr->content;
+	while (!temp)
 	{
-		printf("%s", (char *)temp->content);
+		ft_putstr_fd((char *)temp->content, STDOUT_FILENO);
 		temp = temp->next;
-		if (temp != NULL)
-			printf(" ");
+		if (!temp)
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	printf("\n");
+}
+
+int	mini_echo(t_info *info, t_process *process)
+{
+	int		flag;
+
+	flag = 1;
+	if (process->option && ((char *)process->option->content)[1] == 'n' \
+			&& ((char *)process->option->content)[2] == '\0')
+		printing_echo(process->option->next);
+	else
+	{
+		printing_echo(process->option);
+		flag = 0;
+	}
+	if (process->arguments)
+	{
+		ft_putchar_fd(' ', STDOUT_FILENO);
+		printing_echo(process->arguments);
+	}
+	if (flag)
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (exit_process(info, 0));
 }
