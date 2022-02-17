@@ -13,7 +13,15 @@
 #include <signal.h>
 #include "mijeong.h"
 
-void	sigint_handler_mom(void)
+void	sig_exit_handler(int sig)
+{
+	if (sig == SIGINT)
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	else if (sig == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
+}
+
+void	sigint_handler(void)
 {
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
@@ -21,37 +29,12 @@ void	sigint_handler_mom(void)
 	rl_redisplay();
 }
 
-void	sigint_handler_child(void)
-{
-	write(1, "\n", 1);
-}
-
-void	sigquit_handler_child(void)
-{
-	write(1, "exit\n", 5);
-	exit(0);
-}
-
-void	turn_off(void)
-{
-	printf("turn off!!!!!\n");
-	rl_catch_signals = 0;
-}
-
 void	init_mom_setting(t_info *info)
 {
 	(void)info;
-	// turn_off();
-	signal(SIGINT, (void *)sigint_handler_mom);
+	signal(SIGINT, (void *)sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	set_output_mode(&(info->new_term));
-}
-
-void	init_child_setting(t_info *info)
-{
-	(void)info;
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
 }
 
 /*

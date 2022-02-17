@@ -72,11 +72,8 @@ int			mini_env(t_info *info, t_process *process);
 int			mini_unset(t_info *info, t_process *process);
 int			mini_cd(t_info *info, t_process *process);
 
-void		init_child_setting(t_info *info);
 void		init_mom_setting(t_info *info);
-void		sigquit_handler_child(void);
-void		sigint_handler_child(void);
-void		sigint_handler_mom(void);
+void		sigint_handler(void);
 
 void		set_output_mode(struct termios *new_term);
 void		reset_output_mode(struct termios *org_term);
@@ -92,6 +89,7 @@ t_env		*init_new_node(t_env *temp);
 t_env		*make_sorted_env(t_env *env);
 void		print_export(t_env *env);
 
+void		sig_exit_handler(int sig);
 void		quit_handler(t_info *info);
 void		puttt(char *new_key, char *new_value, t_env *env);
 t_env		*is_already_exist(char *new_key, t_env *env);

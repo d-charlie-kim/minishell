@@ -112,9 +112,9 @@ int	validate_process(t_info *info, t_process *processes)
 	t_list			*ptr;
 	t_redirect_pair	*redirect_ptr;
 
-	i = 0;
 	if (!processes)
 		return (1);
+	i = 0;
 	while (i < info->process_count)
 	{
 		ptr = processes[i].redirect;

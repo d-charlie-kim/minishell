@@ -53,6 +53,7 @@ static void	create_processes(t_info *info, t_process *processes)
 		(&processes[i])->pid = fork();
 		if (processes[i].pid == 0)
 		{
+			signal(SIGQUIT, SIG_DFL);
 			set_input_fd(&processes[i], input_fd);
 			set_output_fd(&processes[i], pipe_fd, info->process_count, i);
 			execute_program(info, &processes[i]);
@@ -67,18 +68,15 @@ static void	create_processes(t_info *info, t_process *processes)
 
 void	fork_main(t_info *info, t_process *processes)
 {
-	int		exit_status;
-	int		first_process_exit_status;
+	int		last_exit_status;
+	int		first_exit_status;
 
 	reset_output_mode(&(info->org_term));
 	create_processes(info, processes);
-	init_child_setting(info);
-	waitpid(processes[0].pid, &first_process_exit_status, 0);
-	if (first_process_exit_status == 2)
-		ft_putstr_fd("\n", STDOUT_FILENO);
-	else if (first_process_exit_status == 3)
-		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
-	waitpid(processes[info->process_count - 1].pid, &exit_status, 0);
+	signal(SIGINT, SIG_IGN);
+	waitpid(processes[0].pid, &first_exit_status, 0);
+	sig_exit_handler(first_exit_status);
+	waitpid(processes[info->process_count - 1].pid, &last_exit_status, 0);
 	while (wait(NULL) > 0);
-	info->last_exit_status = exit_status;
+	info->last_exit_status = last_exit_status;
 }
