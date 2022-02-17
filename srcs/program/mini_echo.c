@@ -18,7 +18,7 @@ void	printing_echo(t_list *ptr)
 
 	if (!ptr)
 		return ;
-	temp = ptr->content;
+	temp = ptr;
 	while (!temp)
 	{
 		ft_putstr_fd((char *)temp->content, STDOUT_FILENO);
@@ -35,12 +35,12 @@ int	mini_echo(t_info *info, t_process *process)
 	flag = 1;
 	if (process->option && ((char *)process->option->content)[1] == 'n' \
 			&& ((char *)process->option->content)[2] == '\0')
-		printing_echo(process->option->next);
-	else
 	{
-		printing_echo(process->option);
+		printing_echo(process->option->next);
 		flag = 0;
 	}
+	else
+		printing_echo(process->option);
 	if (process->arguments)
 	{
 		ft_putchar_fd(' ', STDOUT_FILENO);
