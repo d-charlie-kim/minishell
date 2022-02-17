@@ -74,9 +74,12 @@ void	fork_main(t_info *info, t_process *processes)
 	reset_output_mode(&(info->org_term));
 	create_processes(info, processes);
 	signal(SIGINT, SIG_IGN);
-	waitpid(processes[0].pid, &first_exit_status, 0);
-	sig_exit_handler(first_exit_status);
 	waitpid(processes[info->process_count - 1].pid, &last_exit_status, 0);
+	waitpid(processes[0].pid, &first_exit_status, 0);
+	if (info->process_count == 1)
+		sig_exit_handler(last_exit_status);
+	else
+		sig_exit_handler(first_exit_status);
 	while (wait(NULL) > 0);
 	info->last_exit_status = last_exit_status;
 }

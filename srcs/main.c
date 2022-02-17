@@ -72,7 +72,7 @@ void	free_all(t_info *info, t_process *processes, char *output)
 		if (temp->arguments)
 			ft_lstclear(&temp->arguments, free);
 		if (temp->redirect)
-			ft_lstclear(&temp->redirect, free); // redirect pair 안에 있는 filename도 free 해줘야 함
+			ft_lstclear(&temp->redirect, free);    // redirect pair 안에 있는 filename도 free 해줘야 함
 		i++;
 	}
 	free (processes);
@@ -182,6 +182,7 @@ int	main(int argc, char **argv, char **envp)
 	processes = NULL;
 	parse_envp(&info, envp);
 	set_shlvl(&info);
+	printf("%c\n", aaa);
 	while (1)
 		run_minishell(&info, processes);
 	return (0);
