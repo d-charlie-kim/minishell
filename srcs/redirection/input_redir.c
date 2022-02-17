@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 19:57:05 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/16 02:32:31 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/17 10:35:44 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,27 +73,27 @@ static void	connect_last_file(t_list *redirect, int last)
 	}
 }
 
-static bool	heredoc_is_exist(t_list *redirect)
-{
-	t_redirect_pair	*pair;
+//static bool	heredoc_is_exist(t_list *redirect)
+//{
+//	t_redirect_pair	*pair;
 
-	while (redirect)
-	{
-		pair = (t_redirect_pair *)(redirect->content);
-		if (pair->symbol == DOUBLE_IN)
-			return (true);
-		redirect = redirect->next;
-	}
-	return (false);
-}
+//	while (redirect)
+//	{
+//		pair = (t_redirect_pair *)(redirect->content);
+//		if (pair->symbol == DOUBLE_IN)
+//			return (true);
+//		redirect = redirect->next;
+//	}
+//	return (false);
+//}
 
-static void	exec_heredoc(t_process *process, int last)
-{
-	pid_t	pid;
+//static void	exec_heredoc(t_process *process, int last)
+//{
+//	pid_t	pid;
 
-	pid = fork();
-	if (pid )
-}
+//	pid = fork();
+//	if (pid )
+//}
 
 void	set_input_redirect(t_process *process)
 {
@@ -106,6 +106,6 @@ void	set_input_redirect(t_process *process)
 		return ;
 	check_file_is_exist(redirect);
 	connect_last_file(redirect, last);
-	if (heredoc_is_exist(redirect))
-		exec_heredoc(process, last);
+	//if (heredoc_is_exist(redirect))
+	//	exec_heredoc(process, last);
 }

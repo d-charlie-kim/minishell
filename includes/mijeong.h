@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 20:04:39 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/17 10:29:51 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int			execute_program(t_info *info, t_process *cur_process);
 void		fork_main(t_info *info, t_process *processes);
 
 void		set_output_redirect(t_process *process);
+void		set_input_redirect(t_process *process);
 
 int			mini_exit(t_info *info, t_process *process);
 int			mini_echo(t_info *info, t_process *process);
