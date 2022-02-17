@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/16 02:04:13 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/17 10:18:49 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,25 @@
 void	set_input_fd(t_process *process, int input_fd)
 {
 	(void)process;
+	//set_input_redirect();
 	if (input_fd == 0)
 		return ;
 	close(STDIN_FILENO);
 	dup2(input_fd, STDIN_FILENO);
 	close(input_fd);
-	//set_input_redirect();
 }
 
-void	set_output_fd(t_process *process, int pipe_fd[2])
+void	set_output_fd(t_process *process, int pipe_fd[2],\
+										int process_count, int i)
 {
 	//(void)process;
+	set_output_redirect(process);
+	if (i >= process_count - 1)
+		return ;
 	close(pipe_fd[0]);
 	close(STDOUT_FILENO);
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
-	set_output_redirect(process);
 }
 
 static pid_t	create_processes(t_info *info, t_process *processes)
@@ -109,8 +112,7 @@ static pid_t	create_processes(t_info *info, t_process *processes)
 		if (pid == 0)
 		{
 			set_input_fd(&processes[i], input_fd);
-			if (i < info->process_count - 1)
-				set_output_fd(&processes[i], pipe_fd);
+			set_output_fd(&processes[i], pipe_fd, info->process_count, i);
 			execute_program(info, &processes[i]);
 		}
 		if (input_fd != 0)
