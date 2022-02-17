@@ -81,5 +81,5 @@ void	fork_main(t_info *info, t_process *processes)
 	else
 		sig_exit_handler(first_exit_status);
 	while (wait(NULL) > 0);
-	info->last_exit_status = last_exit_status;
+	info->last_exit_status = last_exit_status / 256;
 }

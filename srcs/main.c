@@ -182,7 +182,6 @@ int	main(int argc, char **argv, char **envp)
 	processes = NULL;
 	parse_envp(&info, envp);
 	set_shlvl(&info);
-	printf("%c\n", aaa);
 	while (1)
 		run_minishell(&info, processes);
 	return (0);
