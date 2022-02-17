@@ -51,6 +51,11 @@ int	echo_option_print(t_process *process)
 				temp = temp->next;
 				continue ;
 			}
+			else
+			{
+				printing_echo(temp);
+				return (ret);
+			}
 		}
 		else
 		{
