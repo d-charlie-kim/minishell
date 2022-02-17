@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program_in_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:09:49 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 21:15:33 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 01:27:16 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하
 	{
 		path = get_env_value(info->env, "PATH");
 		execute_at_env_path(path, process, argv, envp);
+		ft_putstr_fd("bash: ", STDERR_FILENO);
 		ft_putstr_fd(process->instruction, STDERR_FILENO);
 		print_error_and_exit(": command not found", 127);
 	}
