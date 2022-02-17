@@ -19,11 +19,11 @@ void	printing_echo(t_list *ptr)
 	if (!ptr)
 		return ;
 	temp = ptr;
-	while (!temp)
+	while (temp)
 	{
 		ft_putstr_fd((char *)temp->content, STDOUT_FILENO);
 		temp = temp->next;
-		if (!temp)
+		if (temp)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
 }
@@ -43,7 +43,8 @@ int	mini_echo(t_info *info, t_process *process)
 		printing_echo(process->option);
 	if (process->arguments)
 	{
-		ft_putchar_fd(' ', STDOUT_FILENO);
+		if (process->option)
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		printing_echo(process->arguments);
 	}
 	if (flag)
