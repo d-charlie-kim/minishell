@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:54:02 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/17 12:24:00 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:38:24 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_process
 	t_list		*option;
 	t_list		*arguments;
 	t_list		*redirect;
+	char		*heredoc_str;
 }				t_process;
 
 typedef struct s_env

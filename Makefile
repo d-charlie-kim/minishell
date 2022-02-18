@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/18 20:58:13 by dokkim           ###   ########.fr        #
+#    Updated: 2022/02/18 22:34:54 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,16 +42,16 @@ SRCS		= main.c\
 			  save_token_in_struct.c\
 			  parse_utils.c\
 			  \
+			  heredoc.c\
 			  output_redir.c\
 			  input_redir.c\
 			  \
-			  utils.c\
-			  fork.c\
-			  execute.c\
-			  program_in_path.c\
 			  get_next_line.c\
 			  get_next_line_utils.c\
-			  signal.c\
+			  \
+			  fork.c\
+			  execute.c\
+			  \
 			  mini_pwd.c\
 			  mini_export.c\
 			  mini_export_print.c\
@@ -60,12 +60,15 @@ SRCS		= main.c\
 			  mini_echo.c\
 			  mini_exit.c\
 			  mini_cd.c\
+			  program_in_path.c\
+			  \
+			  signal.c\
 			  terminal.c\
-			  heredoc.c\
-			  error.c\
 			  init_minishell.c\
+			  error.c\
 			  clear.c\
 			  validate.c\
+			  utils.c\
 			  
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

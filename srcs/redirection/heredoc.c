@@ -3,72 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/12 15:34:24 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 22:32:15 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-static bool	is_heredoc(t_process *process, int last)
+static void	save_str(char **save, char *output)
 {
-	t_list			*node;
-	t_redirect_pair	*redir_pair;
+	char	*temp;
 
-	node = ft_lstfind_node(process->redirect, last);
-	redir_pair = (t_redirect_pair *)(node->content);
-	if (redir_pair->symbol == DOUBLE_IN)
-		return (true);
-	else
-		return (false);
+	add_character_to_str(save, '\n');
+	temp = *save;
+	*save = ft_strjoin(*save, output);
+	free(temp);
 }
 
-static int	check_heredoc_count(t_process *process)
+static void	exec_heredoc(t_process *process, char *exit_str)
 {
-	t_list			*redir_lst;
-	t_redirect_pair	*redirect;
-	int				count;
+	char	*save;
+	char	*output;
 
-	count = 1;
-	redir_lst = process->redirect;
-	while (redir_lst != NULL)
+	if (process->heredoc_str)
+		free(process->heredoc_str);
+	save = (char *)malloc(sizeof(char) * 1);
+	save[0] = '\0';
+	while (1)
 	{
-		redirect = (t_redirect_pair *)redir_lst->content;
-		if (redirect->symbol == 2)
-			count++;
-		redir_lst = redir_lst->next;
-	}
-	return (count);
-}
-
-void	heredoc(t_process *process, int last)
-{
-	t_list			*temp;
-	t_redirect_pair	*redir_pair;
-	char			*output;
-	int				count;
-
-	count = check_heredoc_count(process);
-	temp = process->redirect;
-	while (count > 0 && temp != NULL)
-	{
-		redir_pair = (t_redirect_pair *)temp->content;
-		if (redir_pair->symbol != 2)
-			temp = temp->next;
-		else
+		output = readline("> ");
+		if (!ft_strncmp(output, exit_str, ft_strlen(output)))
 		{
-			output = readline("> ");
-			if (count == 1 && is_heredoc(process, last))
-				ft_putstr_fd(output, STDOUT_FILENO);
-			if (!strncmp(redir_pair->file_name, output, \
-							ft_strlen(redir_pair->file_name) + 1))
-			{
-				count--;
-				temp = temp->next;
-			}
+			free(output);
+			break ;
 		}
+		save_str(&save, output);
+		free(output);
+	}
+	add_character_to_str(&save, '\n');
+	process->heredoc_str = save;
+}
+
+void	save_heredoc_str(t_info *info, t_process *processes)
+{
+	int 			i;
+	char			*exit_str;
+	t_list			*redirect;
+	t_redirect_pair	*pair;
+
+	i = 0;
+	while (i < info->process_count)
+	{
+		redirect = (&processes[i])->redirect;
+		while (redirect)
+		{
+			pair = (t_redirect_pair *)(redirect->content);
+			if (pair->symbol == DOUBLE_IN)
+			{
+				exit_str = pair->file_name;
+				exec_heredoc(&processes[i], exit_str);
+			}
+			redirect = redirect->next;
+		}
+		i++;
 	}
 }
