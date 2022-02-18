@@ -66,5 +66,5 @@ int	mini_cd(t_info *info, t_process *process)
 		ret = 1;
 	}
 	update_pwd(info->env);
-	return (exit_process(info, errno));
+	return (exit_process(info, process, errno));
 }

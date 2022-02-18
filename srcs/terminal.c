@@ -34,6 +34,7 @@ void	quit_handler(t_info *info)
 	write(1, "\033[9C", 5);
 	write(1, "exit\n", 5);
 	reset_output_mode(&(info->org_term));
+	free_envp(info);
 	exit(0);
 }
 

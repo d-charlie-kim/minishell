@@ -47,7 +47,7 @@ int	mini_unset(t_info *info, t_process *process)
 	char	*target;
 
 	if (!info->env)
-		return (exit_process(info, 0));
+		return (exit_process(info, process, 0));
 	if (process->option)
 		return (err_option("unset", info, process));
 	arguments = process->arguments;
@@ -64,5 +64,5 @@ int	mini_unset(t_info *info, t_process *process)
 		}
 		arguments = arguments->next;
 	}
-	return (exit_process(info, 0));
+	return (exit_process(info, process, 0));
 }

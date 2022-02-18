@@ -111,5 +111,5 @@ int	mini_export(t_info *info, t_process *process)
 		print_export(info->env);
 	else
 		put_new_env(info->env, process->arguments);
-	return (exit_process(info, 0));
+	return (exit_process(info, process, 0));
 }

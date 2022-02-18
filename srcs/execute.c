@@ -29,7 +29,7 @@ bool	is_builtin_function(t_process *cur_process)
 int	execute_program(t_info *info, t_process *cur_process)
 {
 	if (!cur_process->instruction)
-		return (exit_process(info, info->last_exit_status));
+		return (exit_process(info, cur_process, info->last_exit_status));
 	if (!ft_strncmp("cd", cur_process->instruction, 3))
 		return (mini_cd(info, cur_process));
 	else if (!ft_strncmp("exit", cur_process->instruction, 5))

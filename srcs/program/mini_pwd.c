@@ -27,7 +27,7 @@ int	mini_pwd(t_info *info, t_process *process)
 	{
 		ft_putstr_fd(buf, STDOUT_FILENO);
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		return (exit_process(info, 0));
+		return (exit_process(info, process, 0));
 	}
 	else
 		return (err_option("pwd", info, process));

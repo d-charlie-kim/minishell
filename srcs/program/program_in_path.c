@@ -95,7 +95,7 @@ static char	**setting_argv(t_process *process)
 	char	**argv;
 
 	argv_size = get_argv_size(process->option, process->arguments);
-	argv = (char **)malloc(sizeof(char *) * (argv_size + 1)); // free 해주기
+	argv = (char **)malloc(sizeof(char *) * (argv_size + 1));
 	if (!argv)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_bzero(argv, sizeof(char *) * (argv_size + 1));
@@ -146,7 +146,7 @@ static char	**setting_envp(t_env *env)
 	char	**envp;
 
 	envp_size = get_envp_size(env);
-	envp = (char **)malloc(sizeof(char *) * (envp_size + 1)); // free 해주기
+	envp = (char **)malloc(sizeof(char *) * (envp_size + 1));
 	if (!envp)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_bzero(envp, sizeof(char *) * (envp_size + 1));
@@ -154,18 +154,18 @@ static char	**setting_envp(t_env *env)
 	return (envp);
 }
 
-void	free_envp(char **envp)
-{
-	int	i;
+// void	free_envp(char **envp)
+// {
+// 	int	i;
 
-	i = 0;
-	while (envp[i])
-	{
-		free(envp[i]);
-		i++;
-	}
-	free(envp);
-}
+// 	i = 0;
+// 	while (envp[i])
+// 	{
+// 		free(envp[i]);
+// 		i++;
+// 	}
+// 	free(envp);
+// }
 
 void	find_instruction(t_info *info, t_process *process) // fork 이후 실행하도록.
 {

@@ -80,7 +80,7 @@ void		set_output_mode(struct termios *new_term);
 void		reset_output_mode(struct termios *org_term);
 
 void		save_heredoc_str(t_info *info, t_process *processes);
-int			exit_process(t_info *info, int exit_status);
+int			exit_process(t_info *info, t_process *processes, int exit_status);
 int			env_is_valid(char *target);
 
 int			str_is_num(char *arg);
@@ -109,6 +109,7 @@ void		set_shlvl(t_info *info);
 
 int			validate_output(t_info *info, char *output);
 int			validate_process(t_info *info, t_process *processes);
-
+void		free_envp(t_info *info);
+void	free_process(t_process *process);
 
 #endif

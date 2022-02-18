@@ -83,5 +83,5 @@ int	mini_echo(t_info *info, t_process *process)
 	echo_arg_print(process, flag);
 	if (flag)
 		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (exit_process(info, 0));
+	return (exit_process(info, process, 0));
 }

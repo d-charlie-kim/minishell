@@ -87,16 +87,20 @@ int	mini_exit(t_info *info, t_process *process)
 	else
 	{
 		exit_error_print(info, 1, arg);
+		free_process(process);
+		free_envp(info);
 		exit(1);
 	}
 	if (process->arguments->next)
 	{
 		exit_error_print(info, 2, arg);
-		return (exit_process(info, 1));
+		return (exit_process(info, process, 1));
 	}
 	else
 	{
 		print_exit(info, STDOUT_FILENO);
+		free_process(process);
+		free_envp(info);
 		exit(exit_status);
 	}
 	return (1);

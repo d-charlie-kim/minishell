@@ -24,12 +24,14 @@ char	*get_env_value(t_env *env, const char *key)
 	return (NULL);
 }
 
-int	exit_process(t_info *info, int exit_status)
+int	exit_process(t_info *info, t_process *process, int exit_status)
 {
 	if (info->process_count == 1)
 		return (exit_status);
 	else
 	{
+		free_process(process);
+		free_envp(info);
 		exit(exit_status);
 	}
 }

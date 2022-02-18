@@ -62,9 +62,6 @@ static char	*get_one_token(const char *str)
 	else
 		return (get_str_token(str));
 }
-/*
-	에러 확인 및 출력하는 부분 싹 고쳐야 함
-*/
 
 static int	classyfy_token(t_process *process, const char *token, int tag)
 {

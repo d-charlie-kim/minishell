@@ -32,24 +32,48 @@ void	free_redirect(t_list *redirect)
 	ft_lstclear(&redirect, free);
 }
 
+void	free_envp(t_info *info)
+{
+	t_env	*temp;
+	t_env	*next;
+
+	temp = info->env;
+	while (temp)
+	{
+		free (temp->key);
+		free (temp->value);
+		next = temp->next;
+		free (temp);
+		temp = next;
+	}
+}
+
+void	free_process(t_process *process)
+{
+	t_process	*temp;
+
+	temp = process;
+	if (temp->instruction)
+		free (temp->instruction);
+	if (temp->option)
+		ft_lstclear(&temp->option, free);
+	if (temp->arguments)
+		ft_lstclear(&temp->arguments, free);
+	if (temp->redirect)
+		free_redirect(temp->redirect);
+	if (temp->heredoc_str)
+		free (temp->heredoc_str);
+}
+
 void	free_all(t_info *info, t_process *processes, char *output)
 {
 	int			i;
-	t_process	*temp;
 
 	i = 0;
 	free (output);
 	while (i < info->process_count)
 	{
-		temp = &processes[i];
-		if (temp->instruction)
-			free (temp->instruction);
-		if (temp->option)
-			ft_lstclear(&temp->option, free);
-		if (temp->arguments)
-			ft_lstclear(&temp->arguments, free);
-		if (temp->redirect)
-			free_redirect(temp->redirect);
+		free_process(&processes[i]);
 		i++;
 	}
 	free (processes);
