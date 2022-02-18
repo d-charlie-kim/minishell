@@ -6,12 +6,19 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 19:43:54 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:49:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
+
+void	parsing_error_print(char *str)
+{
+	ft_putstr_fd("bash: syntax error near unexpected token ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
 
 static int	num_of_character_in_pipe(const char *ptr)
 {
@@ -48,8 +55,7 @@ static int	get_pipe_count(const char *str)
 	}
 	if (is_in_quotes != NOT)
 	{
-		ft_putstr_fd("bash: syntax error near unexpected", STDERR_FILENO);
-		ft_putstr_fd(" token `newline'\n", STDERR_FILENO);
+		parsing_error_print("`newline'");
 		return (-2);
 	}
 	return (pipe_count);
@@ -75,11 +81,7 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 		if (split_process_to_token(&processes[i], info, str, len))
 		{
 			if (info->process_count != 1)
-			{
-				ft_putstr_fd("bash: syntax error near unexpected", \
-														STDERR_FILENO);
-				ft_putstr_fd(" token '|'\n", STDERR_FILENO);
-			}
+				parsing_error_print("`|'");
 			return (NULL);
 		}
 		str += len + 1;

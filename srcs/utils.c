@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/15 20:48:49 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 18:20:57 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,27 @@ int	env_is_valid(char *target)
 	while (target[i])
 	{
 		if (ft_isalpha(target[i]) || ft_isdigit(target[i]) || target[i] == '_')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	str_is_num(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] && arg[i] == ' ')
+		i++;
+	if (arg[i] && (arg[i] == '+' || arg[i] == '-'))
+		i++;
+	if (arg[i] == '\0')
+		return (0);
+	while (arg[i])
+	{
+		if (ft_isdigit(arg[i]))
 			i++;
 		else
 			return (0);

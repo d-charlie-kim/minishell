@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2021/12/14 15:31:45 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:40:44 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,19 @@ void	remove_outside_quotes_in_str(char **str)
 	}
 	free(*str);
 	*str = new_str;
+}
+
+int	input_delete_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return (-1);
+	else
+		return (i);
 }

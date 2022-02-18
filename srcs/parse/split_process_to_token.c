@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 19:40:15 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 18:40:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	{
 		if (tag == REDIRECTION)
 		{
-			ft_putstr_fd("bash: syntax error near unexpected", STDERR_FILENO);
-			ft_putstr_fd(" token\n", STDERR_FILENO);
+			parsing_error_print("");
 			return (258);
 		}
 		else
@@ -90,9 +89,8 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 		i = 1;
 		while (token[i] == '"' || token[i] == '\'')
 			i++;
-		if (('a' <= token[i] && token[i] <= 'z')
-			|| ('A' <= token[i] && token[i] <= 'Z'))
-		return (OPTION);
+		if (ft_isalpha(token[i]))
+			return (OPTION);
 	}
 	return (ARG);
 }
@@ -108,10 +106,8 @@ int	split_process_to_token(t_process *process, t_info *info, \
 	cur_token = NULL;
 	new_str = replace_env_value(info, str, len);
 	tag = 0;
-	i = 0;
-	while (new_str && new_str[i] == ' ')
-		i++;
-	if (!new_str || new_str[i] == 0)
+	i = input_delete_space(new_str);
+	if (i == -1)
 		return (1);
 	while (new_str[i])
 	{

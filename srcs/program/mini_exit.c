@@ -6,33 +6,12 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/15 20:49:04 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 18:11:36 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
-
-int	str_is_num(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i] && arg[i] == ' ')
-		i++;
-	if (arg[i] && (arg[i] == '+' || arg[i] == '-'))
-		i++;
-	if (arg[i] == '\0')
-		return (0);
-	while (arg[i])
-	{
-		if (ft_isdigit(arg[i]))
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 void	print_exit(t_info *info, int fd)
 {
@@ -81,6 +60,22 @@ int	num_is_valid(char *arg)
 		return (0);
 }
 
+void	exit_error_print(t_info *info, int num, char *arg)
+{
+	if (num == 1)
+	{
+		print_exit(info, STDERR_FILENO);
+		ft_putstr_fd("bash: exit: ", STDERR_FILENO);
+		ft_putstr_fd(arg, STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+	}
+	else if (num == 2)
+	{
+		print_exit(info, STDERR_FILENO);
+		ft_putstr_fd("bash: exit: too many arguments\n", STDERR_FILENO);
+	}
+}
+
 int	mini_exit(t_info *info, t_process *process)
 {
 	unsigned char	exit_status;
@@ -91,16 +86,12 @@ int	mini_exit(t_info *info, t_process *process)
 		exit_status = ft_atoi(arg);
 	else
 	{
-		print_exit(info, STDERR_FILENO);
-		ft_putstr_fd("bash: exit: ", STDERR_FILENO);
-		ft_putstr_fd(arg, STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		exit_error_print(info, 1, arg);
 		exit(1);
 	}
 	if (process->arguments->next)
 	{
-		print_exit(info, STDERR_FILENO);
-		ft_putstr_fd("bash: exit: too many arguments\n", STDERR_FILENO);
+		exit_error_print(info, 2, arg);
 		return (exit_process(info, 1));
 	}
 	else

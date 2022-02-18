@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/17 12:30:20 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:11:36 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void		heredoc(t_process *process, int last);
 int			exit_process(t_info *info, int exit_status);
 int			env_is_valid(char *target);
 
+int			str_is_num(char *arg);
+
 int			err_option(char	*inst, t_info *info, t_process *process);
 
 void		put_new_node_to_sorted_env(t_env *sorted_env, t_env *new_node);
@@ -93,5 +95,19 @@ void		sig_exit_handler(int sig);
 void		quit_handler(t_info *info);
 void		puttt(char *new_key, char *new_value, t_env *env);
 t_env		*is_already_exist(char *new_key, t_env *env);
+void		parsing_error_print(char *str);
+
+int			input_delete_space(char *str);
+void	free_all(t_info *info, t_process *processes, char *output);
+
+void	print_error_and_exit(char *output, int error_num);
+int	err_option(char	*inst, t_info *info, t_process *process);
+int	execute_single_builtin(t_info *info, t_process *process);
+void	run_minishell(t_info *info, t_process *processes);
+void	set_shlvl(t_info *info);
+
+int	validate_output(t_info *info, char *output);
+int	validate_process(t_info *info, t_process *processes);
+
 
 #endif

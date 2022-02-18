@@ -6,18 +6,18 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:34:32 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 16:55:27 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 18:20:16 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 
-void	printing_echo(t_list *ptr)
+int	printing_echo(t_list *ptr, int ret)
 {
 	t_list	*temp;
 
 	if (!ptr)
-		return ;
+		return (ret);
 	temp = ptr;
 	while (temp)
 	{
@@ -26,13 +26,26 @@ void	printing_echo(t_list *ptr)
 		if (temp)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
+	return (ret);
+}
+
+int	echo_option_check(char *option)
+{
+	int	i;
+
+	i = 1;
+	while (option[i] == 'n')
+		i++;
+	if (option[i] == '\0')
+		return (1);
+	else
+		return (0);
 }
 
 int	echo_option_print(t_process *process)
 {
 	t_list	*temp;
 	char	*option;
-	int		i;
 	int		ret;
 
 	ret = 1;
@@ -40,28 +53,14 @@ int	echo_option_print(t_process *process)
 	while (temp)
 	{
 		option = (char *)temp->content;
-		if (option[1] == 'n')
+		if (echo_option_check(option))
 		{
-			i = 1;
-			while (option[i] == 'n')
-				i++;
-			if (option[i] == '\0')
-			{
-				ret = 0;
-				temp = temp->next;
-				continue ;
-			}
-			else
-			{
-				printing_echo(temp);
-				return (ret);
-			}
+			ret = 0;
+			temp = temp->next;
+			continue ;
 		}
 		else
-		{
-			printing_echo(temp);
-			return (ret);
-		}
+			return (printing_echo(temp, ret));
 	}
 	return (ret);
 }
@@ -72,7 +71,7 @@ void	echo_arg_print(t_process *process, int flag)
 	{
 		if (process->option && flag)
 			ft_putchar_fd(' ', STDOUT_FILENO);
-		printing_echo(process->arguments);
+		printing_echo(process->arguments, 0);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/17 12:30:00 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:22:00 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	set_input_fd(t_process *process, int input_fd)
 	set_input_redirect(process);
 }
 
-void	set_output_fd(t_process *process, int pipe_fd[2],\
+void	set_output_fd(t_process *process, int pipe_fd[2], \
 										int process_count, int i)
 {
 	if (i < process_count - 1)
@@ -80,6 +80,7 @@ void	fork_main(t_info *info, t_process *processes)
 		sig_exit_handler(last_exit_status);
 	else
 		sig_exit_handler(first_exit_status);
-	while (wait(NULL) > 0);
+	while (wait(NULL) > 0)
+		;
 	info->last_exit_status = last_exit_status / 256;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
+#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/17 10:29:25 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/18 20:11:50 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS		= main.c\
 			  split_process_to_token.c\
 			  replace_env_value.c\
 			  save_token_in_struct.c\
-			  split_utils.c\
+			  parse_utils.c\
 			  \
 			  output_redir.c\
 			  input_redir.c\
@@ -62,7 +62,11 @@ SRCS		= main.c\
 			  mini_cd.c\
 			  terminal.c\
 			  heredoc.c\
-			  error.c
+			  error.c\
+			  init_minishell.c\
+			  clear.c\
+			  validate.c\
+			  
 
 OBJS		= $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

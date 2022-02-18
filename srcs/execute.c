@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/14 21:12:14 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 18:49:00 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,23 @@ int	execute_program(t_info *info, t_process *cur_process)
 	else
 		find_instruction(info, cur_process);
 	return (0);
+}
+
+int	execute_single_builtin(t_info *info, t_process *process)
+// mac 환경에서 파이프 누수 테스트 해볼 것
+{
+	int	ret;
+	int	save_stdin;
+	int	save_stdout;
+
+	save_stdin = dup(STDIN_FILENO);
+	save_stdout = dup(STDOUT_FILENO);
+	set_input_redirect(process);
+	set_output_redirect(process);
+	ret = execute_program(info, process);
+	dup2(save_stdin, STDIN_FILENO);
+	close(save_stdin);
+	dup2(save_stdout, STDOUT_FILENO);
+	close(save_stdout);
+	return (ret);
 }
