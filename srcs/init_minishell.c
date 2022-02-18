@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:45:27 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 18:49:10 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 20:31:24 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	run_minishell(t_info *info, t_process *processes)
 	if (validate_process(info, processes))
 		return ;
 	reset_output_mode(&(info->org_term));
-	/*print_parsing_data_test(processes, info->process_count); // test code */
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_single_builtin(info, &processes[0]);
 	else
 		fork_main(info, processes);
 	free_all(info, processes, output);
 }
+	/* print_parsing_data_test(processes, info->process_count);  test code */
 
 void	set_shlvl(t_info *info)
 {

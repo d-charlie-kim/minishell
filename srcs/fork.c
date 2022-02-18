@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/18 18:22:00 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 20:27:58 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ static void	create_processes(t_info *info, t_process *processes)
 		}
 		if (input_fd != 0)
 			close(input_fd);
-		close(pipe_fd[1]);
-		input_fd = pipe_fd[0];
+		if (i < info->process_count - 1)
+		{
+			close(pipe_fd[1]);
+			input_fd = pipe_fd[0];
+		}
 		i++;
 	}
 }

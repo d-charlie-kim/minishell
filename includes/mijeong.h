@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 20:11:36 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 20:17:43 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,16 @@ t_env		*is_already_exist(char *new_key, t_env *env);
 void		parsing_error_print(char *str);
 
 int			input_delete_space(char *str);
-void	free_all(t_info *info, t_process *processes, char *output);
+void		free_all(t_info *info, t_process *processes, char *output);
 
-void	print_error_and_exit(char *output, int error_num);
-int	err_option(char	*inst, t_info *info, t_process *process);
-int	execute_single_builtin(t_info *info, t_process *process);
-void	run_minishell(t_info *info, t_process *processes);
-void	set_shlvl(t_info *info);
+void		print_error_and_exit(char *output, int error_num);
+int			err_option(char	*inst, t_info *info, t_process *process);
+int			execute_single_builtin(t_info *info, t_process *process);
+void		run_minishell(t_info *info, t_process *processes);
+void		set_shlvl(t_info *info);
 
-int	validate_output(t_info *info, char *output);
-int	validate_process(t_info *info, t_process *processes);
+int			validate_output(t_info *info, char *output);
+int			validate_process(t_info *info, t_process *processes);
 
 
 #endif
