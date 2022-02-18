@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/18 22:32:15 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/18 22:54:43 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	save_str(char **save, char *output)
 {
 	char	*temp;
 
-	add_character_to_str(save, '\n');
+	if (ft_strlen(*save) > 0)
+		add_character_to_str(save, '\n');
 	temp = *save;
 	*save = ft_strjoin(*save, output);
 	free(temp);
