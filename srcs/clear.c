@@ -6,12 +6,31 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:46:58 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 18:47:08 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/18 21:14:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
+
+void	free_redirect(t_list *redirect)
+{
+	t_redirect_pair *ptr;
+	t_list			*temp;
+
+	temp = redirect;
+	while (temp)
+	{
+		ptr = (t_redirect_pair *)redirect->content;
+		if (ptr->file_name)
+		{
+			free (ptr->file_name);
+			ptr->file_name = NULL;
+		}
+		temp = temp->next;
+	}
+	ft_lstclear(&redirect, free);
+}
 
 void	free_all(t_info *info, t_process *processes, char *output)
 {
@@ -30,7 +49,7 @@ void	free_all(t_info *info, t_process *processes, char *output)
 		if (temp->arguments)
 			ft_lstclear(&temp->arguments, free);
 		if (temp->redirect)
-			ft_lstclear(&temp->redirect, free);    // redirect pair 안에 있는 filename도 free 해줘야 함
+			free_redirect(temp->redirect);
 		i++;
 	}
 	free (processes);
