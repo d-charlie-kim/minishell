@@ -76,7 +76,10 @@ static void	create_heredoc_process(t_info *info, t_process *process, const char 
 	int		pipe_fd[2];
 
 	if (process->heredoc_str)
+	{
 		free(process->heredoc_str);
+		process->heredoc_str = NULL;
+	}
 	reset_output_mode(&(info->org_term));
 	pipe(pipe_fd);
 	pid = fork();
