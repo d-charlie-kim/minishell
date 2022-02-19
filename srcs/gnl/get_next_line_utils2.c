@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:29:26 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 14:32:21 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 14:46:35 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	zero_or_error(char **line, char *temp, int ret)
 		return (zero_ret(line, temp));
 	else if (ret == -1)
 		return (-1);
+	return (0);
 }
 
 int	error_free(char *first, char *second)

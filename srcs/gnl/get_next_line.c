@@ -6,13 +6,13 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:18:40 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 14:34:17 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 14:46:06 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	zero_ret(char **line, char *temp)
+int	zero_ret(char **line, char *temp)
 {
 	if (!temp)
 	{

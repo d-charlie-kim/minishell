@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 17:19:37 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 14:32:52 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 14:46:02 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		zero_or_error(char **line, char *temp, int ret);
 int		error_free(char *first, char *second);
+int		zero_ret(char **line, char *temp);
 
 #endif
