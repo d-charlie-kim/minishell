@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/19 12:36:04 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/19 14:29:53 by dokkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS		= main.c\
 			  \
 			  get_next_line.c\
 			  get_next_line_utils.c\
+			  get_next_line_utils2.c\
 			  \
 			  fork.c\
 			  execute.c\
