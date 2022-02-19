@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 16:30:54 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:16:46 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
-
-static void	save_str(char **save, char *output)
-{
-	char	*temp;
-
-	if (ft_strlen(*save) > 0)
-		add_character_to_str(save, '\n');
-	temp = *save;
-	*save = ft_strjoin(*save, output);
-	free(temp);
-}
 
 static void	exec_heredoc(const char *exit_str, int output_fd)
 {
@@ -34,7 +23,7 @@ static void	exec_heredoc(const char *exit_str, int output_fd)
 	while (1)
 	{
 		output = readline("> ");
-		if (!ft_strncmp(output, exit_str, ft_strlen(output)))
+		if (!output || !ft_strncmp(output, exit_str, ft_strlen(output)))
 		{
 			free(output);
 			break ;
@@ -98,33 +87,42 @@ static int	create_heredoc_process(t_info *info, t_process *process, \
 	return (exit_status);
 }
 
-int	save_heredoc_str(t_info *info, t_process *processes)
+int	save_heredoc_str(t_info *info, t_process *process)
 {
-	int				i;
 	int				exit_status;
 	char			*exit_str;
 	t_list			*redirect;
 	t_redirect_pair	*pair;
 
+	redirect = process->redirect;
+	while (redirect)
+	{
+		pair = (t_redirect_pair *)(redirect->content);
+		if (pair->symbol == DOUBLE_IN)
+		{
+			exit_str = pair->file_name;
+			exit_status = create_heredoc_process \
+						(info, process, exit_str);
+			if (exit_status != 0)
+			{
+				sig_exit_handler(exit_status);
+				return (1);
+			}
+		}
+		redirect = redirect->next;
+	}
+	return (0);
+}
+
+int	heredoc_handler(t_info *info, t_process *processes)
+{
+	int	i;
+
 	i = 0;
 	while (i < info->process_count)
 	{
-		redirect = (&processes[i])->redirect;
-		while (redirect)
-		{
-			pair = (t_redirect_pair *)(redirect->content);
-			if (pair->symbol == DOUBLE_IN)
-			{
-				exit_str = pair->file_name;
-				exit_status = create_heredoc_process(info, &processes[i], exit_str);
-				if (exit_status != 0)
-				{
-					sig_exit_handler(exit_status);
-					return (1);
-				}
-			}
-			redirect = redirect->next;
-		}
+		if (save_heredoc_str(info, &processes[i]))
+			return (1);
 		i++;
 	}
 	return (0);

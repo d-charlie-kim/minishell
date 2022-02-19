@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:46:58 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 12:46:40 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 16:44:01 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
 
-void	free_redirect(t_list *redirect)
+void	free_redirect(t_list **redirect)
 {
 	t_redirect_pair	*ptr;
 	t_list			*temp;
 
-	temp = redirect;
+	temp = *redirect;
 	while (temp)
 	{
-		ptr = (t_redirect_pair *)redirect->content;
-		if (ptr->file_name)
-		{
-			free (ptr->file_name);
-			ptr->file_name = NULL;
-		}
+		ptr = (t_redirect_pair *)(temp->content);
+		free (ptr->file_name);
+		ptr->file_name = NULL;
 		temp = temp->next;
 	}
-	ft_lstclear(&redirect, free);
+	ft_lstclear(redirect, free);
 }
 
 void	free_envp(t_info *info)
@@ -60,7 +57,7 @@ void	free_process(t_process *process)
 	if (temp->arguments)
 		ft_lstclear(&temp->arguments, free);
 	if (temp->redirect)
-		free_redirect(temp->redirect);
+		free_redirect(&temp->redirect);
 	if (temp->heredoc_str)
 		free (temp->heredoc_str);
 }

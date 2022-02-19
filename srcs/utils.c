@@ -6,12 +6,23 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 00:39:52 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/18 18:20:57 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 17:17:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mijeong.h"
 #include "parsing.h"
+
+void	save_str(char **save, char *output)
+{
+	char	*temp;
+
+	if (ft_strlen(*save) > 0)
+		add_character_to_str(save, '\n');
+	temp = *save;
+	*save = ft_strjoin(*save, output);
+	free(temp);
+}
 
 char	*get_env_value(t_env *env, const char *key)
 {

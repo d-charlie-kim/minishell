@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_utils.c                                      :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:44:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 18:40:44 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 16:42:30 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	add_character_to_str(char **str, char character)
 	new_str = (char *)malloc(sizeof(char) * (str_size + 2));
 	if (!new_str)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	if (str_size != 0)
+	if (*str)
 	{
 		ft_strlcpy(new_str, *str, str_size + 1);
 		free(*str);

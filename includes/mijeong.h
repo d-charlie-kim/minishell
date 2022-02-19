@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 16:06:04 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:17:33 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		sigint_handler(void);
 void		set_output_mode(struct termios *new_term);
 void		reset_output_mode(struct termios *org_term);
 
-int			save_heredoc_str(t_info *info, t_process *processes);
+int			hreredoc_handler(t_info *info, t_process *processes);
 int			exit_process(t_info *info, t_process *processes, int exit_status);
 int			env_is_valid(char *target);
 
@@ -113,5 +113,8 @@ int			validate_output(t_info *info, char *output);
 int			validate_process(t_info *info, t_process *processes);
 void		free_envp(t_info *info);
 void		free_process(t_process *process);
+
+int			heredoc_handler(t_info *info, t_process *processes);
+void		save_str(char **save, char *output);
 
 #endif

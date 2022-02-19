@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:45:27 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 16:26:04 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:15:37 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ void	run_minishell(t_info *info, t_process *processes)
 		return ;
 	add_history(output);
 	processes = split_line_to_process(output, info);
-	if (validate_process(info, processes))
+	if (validate_process(info, processes) || heredoc_handler(info, processes))
+	{
+		free_all(info, processes, output);
 		return ;
-	if ((save_heredoc_str(info, processes)) == 1)
-		return ;
+	}
 	reset_output_mode(&(info->org_term));
 	if (info->process_count == 1 && is_builtin_function(&processes[0]))
 		info->last_exit_status = execute_single_builtin(info, &processes[0]);
