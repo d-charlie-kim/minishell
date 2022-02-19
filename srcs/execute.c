@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/18 18:49:00 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 17:55:58 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 bool	is_builtin_function(t_process *cur_process)
 {
-	if ((!ft_strncmp("cd", cur_process->instruction, 3)) || \
+	if ((!cur_process->instruction) || \
+		(!ft_strncmp("cd", cur_process->instruction, 3)) || \
 		(!ft_strncmp("exit", cur_process->instruction, 5)) || \
 		(!ft_strncmp("env", cur_process->instruction, 4)) || \
 		(!ft_strncmp("export", cur_process->instruction, 7)) || \

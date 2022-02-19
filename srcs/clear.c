@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:46:58 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 16:44:01 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 17:36:06 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void	free_process(t_process *process)
 
 void	free_all(t_info *info, t_process *processes, char *output)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	free (output);
-	while (i < info->process_count)
+	if (processes)
 	{
-		free_process(&processes[i]);
-		i++;
+		while (i < info->process_count)
+		{
+			free_process(&processes[i]);
+			i++;
+		}
+		free (processes);
 	}
-	free (processes);
 }
