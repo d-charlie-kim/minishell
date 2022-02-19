@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 12:33:45 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 16:06:04 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		sigint_handler(void);
 void		set_output_mode(struct termios *new_term);
 void		reset_output_mode(struct termios *org_term);
 
-void		save_heredoc_str(t_info *info, t_process *processes);
+int			save_heredoc_str(t_info *info, t_process *processes);
 int			exit_process(t_info *info, t_process *processes, int exit_status);
 int			env_is_valid(char *target);
 

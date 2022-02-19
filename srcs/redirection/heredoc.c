@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 12:45:34 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 16:30:54 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	read_heredoc_str(t_process *process, int input_fd)
 	}
 }
 
-static void	create_heredoc_process(t_info *info, t_process *process, \
+static int	create_heredoc_process(t_info *info, t_process *process, \
 												const char *exit_str)
 {
 	pid_t	pid;
@@ -81,7 +81,6 @@ static void	create_heredoc_process(t_info *info, t_process *process, \
 		free(process->heredoc_str);
 		process->heredoc_str = NULL;
 	}
-	reset_output_mode(&(info->org_term));
 	pipe(pipe_fd);
 	pid = fork();
 	if (pid == 0)
@@ -93,15 +92,16 @@ static void	create_heredoc_process(t_info *info, t_process *process, \
 	signal(SIGINT, SIG_IGN);
 	close(pipe_fd[1]);
 	waitpid(pid, &exit_status, 0);
-	sig_exit_handler(exit_status);
 	read_heredoc_str(process, pipe_fd[0]);
 	close(pipe_fd[0]);
 	init_mom_setting(info);
+	return (exit_status);
 }
 
-void	save_heredoc_str(t_info *info, t_process *processes)
+int	save_heredoc_str(t_info *info, t_process *processes)
 {
 	int				i;
+	int				exit_status;
 	char			*exit_str;
 	t_list			*redirect;
 	t_redirect_pair	*pair;
@@ -116,10 +116,16 @@ void	save_heredoc_str(t_info *info, t_process *processes)
 			if (pair->symbol == DOUBLE_IN)
 			{
 				exit_str = pair->file_name;
-				create_heredoc_process(info, &processes[i], exit_str);
+				exit_status = create_heredoc_process(info, &processes[i], exit_str);
+				if (exit_status != 0)
+				{
+					sig_exit_handler(exit_status);
+					return (1);
+				}
 			}
 			redirect = redirect->next;
 		}
 		i++;
 	}
+	return (0);
 }
