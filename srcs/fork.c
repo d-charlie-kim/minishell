@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 12:09:31 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 14:13:57 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:24:09 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	set_input_fd(t_process *process, int input_fd)
 	set_input_redirect(process);
 }
 
-void	set_output_fd(t_process *process, int pipe_fd[2], bool is_last_process)
+void	set_output_fd(t_process *process, int pipe_fd[2], bool is_last)
 {
-	if (!is_last_process)
+	if (!is_last)
 	{
 		close(pipe_fd[0]);
 		close(STDOUT_FILENO);
@@ -37,13 +37,12 @@ void	set_output_fd(t_process *process, int pipe_fd[2], bool is_last_process)
 	set_output_redirect(process);
 }
 
-static void	child_process(t_info *info, t_process *process, \
-							int input_fd, int pipe_fd[], bool is_last_process)
+void	setting_child(t_process *process, \
+							int input_fd, int pipe_fd[2], bool is_last)
 {
 	signal(SIGQUIT, SIG_DFL);
 	set_input_fd(process, input_fd);
-	set_output_fd(process, pipe_fd, is_last_process);
-	execute_program(info, process);
+	set_output_fd(process, pipe_fd, is_last);
 }
 
 static void	create_processes(t_info *info, t_process *processes)
@@ -51,33 +50,34 @@ static void	create_processes(t_info *info, t_process *processes)
 	int		i;
 	int		input_fd;
 	int		pipe_fd[2];
-	bool	is_last_process;
 
-	i = 0;
+	i = -1;
 	input_fd = 0;
-	is_last_process = i == info->process_count - 1;
-	while (i < info->process_count)
+	while (++i < info->process_count)
 	{
-		if (!is_last_process)
+		if (i < info->process_count - 1)
 			pipe(pipe_fd);
 		(&processes[i])->pid = fork();
 		if (processes[i].pid == 0)
-			child_process(info, &processes[i], input_fd, pipe_fd, is_last_process);
+		{
+			setting_child(&processes[i], \
+					input_fd, pipe_fd, i == info->process_count - 1);
+			execute_program(info, &processes[i]);
+		}
 		if (input_fd != 0)
 			close(input_fd);
-		if (!is_last_process)
+		if (i < info->process_count - 1)
 		{
 			close(pipe_fd[1]);
 			input_fd = pipe_fd[0];
 		}
-		i++;
 	}
 }
 
 void	fork_main(t_info *info, t_process *processes)
 {
-	int	last_exit_status;
-	int	first_exit_status;
+	int		last_exit_status;
+	int		first_exit_status;
 
 	reset_output_mode(&(info->org_term));
 	create_processes(info, processes);
