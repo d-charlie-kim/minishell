@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 16:50:56 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 18:25:02 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	validate_process(t_info *info, t_process *processes)
 			redirect_ptr = (t_redirect_pair *)ptr->content;
 			if (!redirect_ptr->file_name)
 			{
-				parsing_error_print("`newline'");
+				parsing_error_print("newline");
 				return (1);
 			}
 			ptr = ptr->next;

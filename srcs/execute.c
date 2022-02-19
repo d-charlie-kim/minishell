@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 17:55:58 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 20:03:29 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	execute_single_builtin(t_info *info, t_process *process)
 	int	save_stdin;
 	int	save_stdout;
 
+	ret = 0;
+	(void)info;
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
 	set_input_redirect(process);

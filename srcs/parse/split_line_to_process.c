@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 17:34:27 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 20:37:51 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	parsing_error_print(char *str)
 {
-	ft_putstr_fd("bash: syntax error near unexpected token ", STDERR_FILENO);
+	ft_putstr_fd("bash: syntax error near unexpected token `", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
 }
 
 static int	num_of_character_in_pipe(const char *ptr)
@@ -55,16 +55,25 @@ static int	get_pipe_count(const char *str)
 	}
 	if (is_in_quotes != NOT)
 	{
-		parsing_error_print("`newline'");
+		parsing_error_print("newline");
 		return (-2);
 	}
 	return (pipe_count);
+}
+
+t_process	*split_error(int ret, t_info *info, t_process *processes)
+{
+	if (ret != 258 && info->process_count != 1)
+		parsing_error_print("|");
+	free_all(info, processes, NULL);
+	return (NULL);
 }
 
 t_process	*split_line_to_process(const char *str, t_info *info)
 {
 	int			i;
 	int			len;
+	int			ret;
 	t_process	*processes;
 
 	info->process_count = get_pipe_count(str) + 1;
@@ -78,12 +87,9 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 	while (i < info->process_count)
 	{
 		len = num_of_character_in_pipe(str);
-		if (split_process_to_token(&processes[i], info, str, len))
-		{
-			if (info->process_count != 1)
-				parsing_error_print("`|'");
-			return (NULL);
-		}
+		ret = split_process_to_token(&processes[i], info, str, len);
+		if (ret)
+			return (split_error(ret, info, processes));
 		str += len + 1;
 		i++;
 	}

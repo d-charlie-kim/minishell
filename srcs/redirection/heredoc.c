@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 17:16:46 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 20:16:02 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ static void	read_heredoc_str(t_process *process, int input_fd)
 		else
 		{
 			temp = process->heredoc_str;
-			process->heredoc_str = ft_strjoin(process->heredoc_str, save);
+			process->heredoc_str = ft_strjoin(temp, save);
 			if (temp)
 				free(temp);
 		}
 		add_character_to_str(&(process->heredoc_str), '\n');
 		free(save);
 	}
+	free (save);
 }
 
 static int	create_heredoc_process(t_info *info, t_process *process, \
