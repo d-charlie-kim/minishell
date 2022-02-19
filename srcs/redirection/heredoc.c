@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 01:21:00 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/19 12:45:34 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static void	read_heredoc_str(t_process *process, int input_fd)
 	}
 }
 
-static void	create_heredoc_process(t_info *info, t_process *process, const char *exit_str)
+static void	create_heredoc_process(t_info *info, t_process *process, \
+												const char *exit_str)
 {
 	pid_t	pid;
 	int		exit_status;
@@ -100,7 +101,7 @@ static void	create_heredoc_process(t_info *info, t_process *process, const char 
 
 void	save_heredoc_str(t_info *info, t_process *processes)
 {
-	int 			i;
+	int				i;
 	char			*exit_str;
 	t_list			*redirect;
 	t_redirect_pair	*pair;

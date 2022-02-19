@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:46:58 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 21:14:37 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 12:46:40 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	free_redirect(t_list *redirect)
 {
-	t_redirect_pair *ptr;
+	t_redirect_pair	*ptr;
 	t_list			*temp;
 
 	temp = redirect;

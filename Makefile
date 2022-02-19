@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/19 00:50:50 by jaejeong         ###   ########.fr        #
+#    Updated: 2022/02/19 12:36:04 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCDIR		= srcs
 OBJDIR		= build
 SUBDIR		= parse\
 			  program\
+			  program/program_in_path\
 			  gnl\
 			  redirection
 
@@ -60,6 +61,9 @@ SRCS		= main.c\
 			  mini_echo.c\
 			  mini_exit.c\
 			  mini_cd.c\
+			  \
+			  setting_argv.c\
+			  setting_envp.c\
 			  program_in_path.c\
 			  \
 			  signal.c\

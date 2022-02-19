@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:41 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/18 18:11:36 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 12:43:47 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,14 @@ int	mini_exit(t_info *info, t_process *process)
 	char			*arg;
 
 	arg = get_arg(info, process);
-	if (str_is_num(arg) && num_is_valid(arg))
-		exit_status = ft_atoi(arg);
-	else
+	if (!(str_is_num(arg) && num_is_valid(arg)))
 	{
 		exit_error_print(info, 1, arg);
 		free_process(process);
 		free_envp(info);
 		exit(1);
 	}
+	exit_status = ft_atoi(arg);
 	if (process->arguments->next)
 	{
 		exit_error_print(info, 2, arg);
