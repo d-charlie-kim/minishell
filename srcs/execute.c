@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:30:22 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 20:03:29 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 23:29:06 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ int	execute_program(t_info *info, t_process *cur_process)
 	return (0);
 }
 
+static int	check_file_is_exist(t_list *redirect)
+{
+	int				fd;
+	t_redirect_pair	*pair;
+
+	while (redirect)
+	{
+		pair = (t_redirect_pair *)(redirect->content);
+		if (pair->symbol == SINGLE_IN)
+		{
+			fd = open(pair->file_name, 0);
+			if (fd < 0)
+			{
+				ft_putstr_fd("bash: ", STDERR_FILENO);
+				ft_putstr_fd(pair->file_name, STDERR_FILENO);
+				ft_putstr_fd(": ", STDERR_FILENO);
+				ft_putstr_fd(strerror(ENOENT), STDERR_FILENO);
+				ft_putchar_fd('\n', STDERR_FILENO);
+				return (-1);
+			}
+			close(fd);
+		}
+		redirect = redirect->next;
+	}
+	return (0);
+}
+
 int	execute_single_builtin(t_info *info, t_process *process)
 // mac 환경에서 파이프 누수 테스트 해볼 것
 {
@@ -59,6 +86,8 @@ int	execute_single_builtin(t_info *info, t_process *process)
 
 	ret = 0;
 	(void)info;
+	if (check_file_is_exist(process->redirect) == -1)
+		return (ENOENT);
 	save_stdin = dup(STDIN_FILENO);
 	save_stdout = dup(STDOUT_FILENO);
 	set_input_redirect(process);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 21:09:52 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/19 23:05:21 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,21 +92,18 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	return (ARG);
 }
 
-// int	temp_temp(t_process *process, char **new_str, char **cur_token)
-// {
-// 	int	tag;
-
-// 	tag = 0;
-// 	tag = classyfy_token(process, *cur_token, tag);
-// 	if (tag == 258)
-// 	{
-// 		free (cur_token);
-// 		free (*new_str);
-// 		return (258);
-// 	}
-// 	remove_outside_quotes_in_str(cur_token);
-// 	return (0);
-// }
+ int	temp_temp(t_process *process, char **new_str, char **cur_token, int *tag)
+ {
+ 	*tag = classyfy_token(process, *cur_token, *tag);
+ 	if (*tag == 258)
+ 	{
+ 		free (cur_token);
+ 		free (*new_str);
+ 		return (258);
+ 	}
+ 	remove_outside_quotes_in_str(cur_token);
+ 	return (0);
+ }
 
 // 재민이가 되게 해줄거야
 
@@ -124,23 +121,15 @@ int	split_process_to_token(t_process *process, t_info *info, \
 	i = input_delete_space(new_str);
 	if (i == -1)
 	{
-		free (new_str);
+		free(new_str);
 		return (1);
 	}
 	while (new_str[i])
 	{
 		cur_token = get_one_token(&new_str[i]);
 		i += ft_strlen(cur_token);
-		if (temp_temp(process, &new_str, &cur_token))
+		if (temp_temp(process, &new_str, &cur_token, &tag))
 			return (258);
-		// tag = classyfy_token(process, cur_token, tag);
-		// if (tag == 258)
-		// {
-		// 	free (cur_token);
-		// 	free (new_str);
-		// 	return (258);
-		// }
-		// remove_outside_quotes_in_str(&cur_token);
 		save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')
 			i++;
