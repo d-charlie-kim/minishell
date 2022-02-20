@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/19 20:16:02 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:13:36 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	exec_heredoc(const char *exit_str, int output_fd)
 	char	*output;
 
 	save = (char *)malloc(sizeof(char) * 1);
+	if (!save)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	save[0] = '\0';
 	while (1)
 	{

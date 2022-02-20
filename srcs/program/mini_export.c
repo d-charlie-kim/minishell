@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 13:19:39 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/14 16:39:01 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:11:38 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	get_new_env(char **new_key, char **new_value, char *arg_str)
 		len++;
 	*new_key = (char *)malloc(sizeof(char) * len + 1);
 	if (!*new_key)
-		print_error_and_exit("malloc error\n", 1);
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_strlcpy(*new_key, arg_str, len + 1);
 	if (arg_str[len] == '\0')
 		*new_value = NULL;
@@ -31,7 +31,7 @@ void	get_new_env(char **new_key, char **new_value, char *arg_str)
 	{
 		*new_value = (char *)malloc(sizeof(char) * (ft_strlen(arg_str) - len));
 		if (!*new_value)
-			print_error_and_exit("malloc error\n", 1);
+			print_error_and_exit("cannot allocate memory\n", ENOMEM);
 		ft_strlcpy(*new_value, arg_str + len + 1, ft_strlen(arg_str) - len);
 	}
 }
@@ -62,7 +62,7 @@ void	puttt(char *new_key, char *new_value, t_env *env)
 			temp = temp->next;
 		temp->next = (t_env *)malloc(sizeof(t_env));
 		if (!temp->next)
-			print_error_and_exit("malloc error\n", 1);
+			print_error_and_exit("cannot allocate memory\n", ENOMEM);
 		temp->next->key = new_key;
 		temp->next->value = new_value;
 		temp->next->next = NULL;

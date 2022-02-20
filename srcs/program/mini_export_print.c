@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 19:13:42 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/11 19:18:04 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:11:50 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_env	*init_new_node(t_env *temp)
 
 	new_node = (t_env *)malloc(sizeof(t_env));
 	if (!new_node)
-		print_error_and_exit("malloc error\n", 1);
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	new_node->key = temp->key;
 	new_node->value = temp->value;
 	new_node->next = NULL;
@@ -60,7 +60,7 @@ t_env	*make_sorted_env(t_env *env)
 	temp = env;
 	sorted_env = (t_env *)malloc(sizeof(t_env));
 	if (!sorted_env)
-		print_error_and_exit("malloc error\n", 1);
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	sorted_env->next = NULL;
 	while (temp != NULL)
 	{

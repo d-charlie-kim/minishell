@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaejeong <jaejeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 23:05:21 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/20 15:12:01 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
  	remove_outside_quotes_in_str(cur_token);
  	return (0);
  }
-
-// 재민이가 되게 해줄거야
 
 int	split_process_to_token(t_process *process, t_info *info, \
 		const char *str, int len)

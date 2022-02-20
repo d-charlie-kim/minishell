@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:46:22 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 15:55:37 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:12:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static char	*find_key_in_str(const char *str)
 	if (str[0] == '?')
 	{
 		ret = (char *)malloc(sizeof(char) * 2);
+		if (!ret)
+			print_error_and_exit("cannot allocate memory\n", ENOMEM);
 		ret[0] = '?';
 		ret[1] = '\0';
 		return (ret);
@@ -49,6 +51,8 @@ static char	*find_key_in_str(const char *str)
 	if (i == 0)
 		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (i + 1));
+	if (!ret)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_strlcpy(ret, str, i + 1);
 	return (ret);
 }

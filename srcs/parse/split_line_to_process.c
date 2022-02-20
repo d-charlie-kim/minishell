@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:06 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 20:37:51 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:17:49 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ static int	get_pipe_count(const char *str)
 	return (pipe_count);
 }
 
-t_process	*split_error(int ret, t_info *info, t_process *processes)
+t_process	*split_error(int ret, t_info *info)
 {
 	if (ret != 258 && info->process_count != 1)
 		parsing_error_print("|");
-	free_all(info, processes, NULL);
 	return (NULL);
 }
 
@@ -89,7 +88,7 @@ t_process	*split_line_to_process(const char *str, t_info *info)
 		len = num_of_character_in_pipe(str);
 		ret = split_process_to_token(&processes[i], info, str, len);
 		if (ret)
-			return (split_error(ret, info, processes));
+			return (split_error(ret, info));
 		str += len + 1;
 		i++;
 	}
