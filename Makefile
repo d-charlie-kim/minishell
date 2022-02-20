@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 15:34:43 by dokkim	           #+#    #+#              #
-#    Updated: 2022/02/20 15:08:09 by dokkim           ###   ########.fr        #
+#    Updated: 2022/02/20 15:59:13 by jaejeong         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS		= main.c\
 			  split_line_to_process.c\
 			  split_process_to_token.c\
 			  replace_env_value.c\
+			  classify_token.c\
 			  save_token_in_struct.c\
 			  parse_utils.c\
 			  \

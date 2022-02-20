@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/20 15:52:56 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/20 15:56:31 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,38 +63,9 @@ static char	*get_one_token(const char *str)
 		return (get_str_token(str));
 }
 
-static int	classyfy_token(t_process *process, const char *token, int tag)
-{
-	int	i;
-
-	if (token[0] == '<' || token[0] == '>')
-	{
-		if (tag == REDIRECTION)
-		{
-			parsing_error_print((char *)token);
-			return (258);
-		}
-		else
-			return (REDIRECTION);
-	}
-	if (tag == REDIRECTION)
-		return (FILENAME);
-	if (!process->instruction)
-		return (INST);
-	if (token[0] == '-' && !process->arguments)
-	{
-		i = 1;
-		while (token[i] == '"' || token[i] == '\'')
-			i++;
-		if (ft_isalpha(token[i]))
-			return (OPTION);
-	}
-	return (ARG);
-}
-
 int	check_token(t_process *process, char **new_str, char **cur_token, int *tag)
 {
-	*tag = classyfy_token(process, *cur_token, *tag);
+	*tag = classify_token(process, *cur_token, *tag);
 	if (*tag == 258)
 	{
 		free (*cur_token);

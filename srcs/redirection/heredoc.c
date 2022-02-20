@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 23:25:54 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/20 15:13:36 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 16:10:31 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void	exec_heredoc(const char *exit_str, int output_fd)
 	while (1)
 	{
 		output = readline("> ");
-		if (!output || !ft_strncmp(output, exit_str, ft_strlen(output)))
+		if (output && output[0] == '\0')
+			continue ;
+		if (!ft_strncmp(output, exit_str, ft_strlen(output)))
 		{
 			free(output);
 			break ;

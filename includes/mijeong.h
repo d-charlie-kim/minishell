@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mijeong.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:55:04 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/19 17:17:33 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:58:37 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_info
 t_process	*split_line_to_process(const char *str, t_info *info);
 int			split_process_to_token(t_process *process, t_info *info, \
 			const char *str, int len);
+int			classify_token(t_process *process, const char *token, int tag);
 void		save_token_in_struct(t_process *process, char *token, int tag);
 char		*replace_env_value(t_info *info, const char *str, int len);
 void		parse_envp(t_info *info, char **envp);
