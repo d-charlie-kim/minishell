@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_process_to_token.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/20 15:12:01 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 15:29:26 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
  	*tag = classyfy_token(process, *cur_token, *tag);
  	if (*tag == 258)
  	{
- 		free (cur_token);
+ 		free (*cur_token);
  		free (*new_str);
  		return (258);
  	}
