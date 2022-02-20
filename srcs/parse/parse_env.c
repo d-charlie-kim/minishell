@@ -6,7 +6,7 @@
 /*   By: dokkim <dokkim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:14:33 by jaejeong          #+#    #+#             */
-/*   Updated: 2022/02/20 15:13:20 by dokkim           ###   ########.fr       */
+/*   Updated: 2022/02/20 16:18:14 by dokkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,27 @@ static void	add_new_node(t_env **env, t_env *new_node)
 	last_node->next = new_node;
 }
 
-static void	save_key_and_value(t_env **env, const char *data)
+static char	*get_key(int *begin, const char *data)
 {
-	int		begin;
 	int		size;
 	char	*key;
-	char	*value;
-	t_env	*new_node;
 
-	new_node = (t_env *)malloc(sizeof(t_env));
-	if (!new_node)
-		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	begin = 0;
 	size = 0;
 	while (data[size] != '=')
 		size++;
 	key = (char *)malloc(sizeof(char) * (size + 1));
 	if (!key)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
-	ft_strlcpy(key, &data[begin], size + 1);
-	begin = size + 1;
+	ft_strlcpy(key, &data[*begin], size + 1);
+	*begin = size + 1;
+	return (key);
+}
+
+static char	*get_value(int begin, const char *data)
+{
+	int		size;
+	char	*value;
+
 	size = 0;
 	while (data[begin + size] != '\0')
 		size++;
@@ -55,8 +56,20 @@ static void	save_key_and_value(t_env **env, const char *data)
 	if (!value)
 		print_error_and_exit("cannot allocate memory\n", ENOMEM);
 	ft_strlcpy(value, &data[begin], size + 1);
-	new_node->key = key;
-	new_node->value = value;
+	return (value);
+}
+
+static void	save_key_and_value(t_env **env, const char *data)
+{
+	int		begin;
+	t_env	*new_node;
+
+	new_node = (t_env *)malloc(sizeof(t_env));
+	if (!new_node)
+		print_error_and_exit("cannot allocate memory\n", ENOMEM);
+	begin = 0;
+	new_node->key = get_key(&begin, data);
+	new_node->value = get_value(begin, data);
 	new_node->next = NULL;
 	add_new_node(env, new_node);
 }
