@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/20 15:44:21 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/20 15:52:56 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,18 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	return (ARG);
 }
 
- int	check_token(t_process *process, char **new_str, char **cur_token, int *tag)
- {
- 	*tag = classyfy_token(process, *cur_token, *tag);
- 	if (*tag == 258)
- 	{
- 		free (*cur_token);
- 		free (*new_str);
- 		return (258);
- 	}
- 	remove_outside_quotes_in_str(cur_token);
- 	return (0);
- }
+int	check_token(t_process *process, char **new_str, char **cur_token, int *tag)
+{
+	*tag = classyfy_token(process, *cur_token, *tag);
+	if (*tag == 258)
+	{
+		free (*cur_token);
+		free (*new_str);
+		return (258);
+	}
+	remove_outside_quotes_in_str(cur_token);
+	return (0);
+}
 
 int	split_process_to_token(t_process *process, t_info *info, \
 		const char *str, int len)
@@ -117,12 +117,7 @@ int	split_process_to_token(t_process *process, t_info *info, \
 	new_str = replace_env_value(info, str, len);
 	tag = 0;
 	i = input_delete_space(new_str);
-	if (i == -1)
-	{
-		free(new_str);
-		return (1);
-	}
-	while (new_str[i])
+	while (i >= 0 && new_str[i])
 	{
 		cur_token = get_one_token(&new_str[i]);
 		i += ft_strlen(cur_token);
@@ -133,5 +128,7 @@ int	split_process_to_token(t_process *process, t_info *info, \
 			i++;
 	}
 	free(new_str);
+	if (i == -1)
+		return (1);
 	return (0);
 }
