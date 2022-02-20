@@ -6,7 +6,7 @@
 /*   By: jaejeong <jaejeong@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 04:42:08 by dokkim            #+#    #+#             */
-/*   Updated: 2022/02/20 15:29:26 by jaejeong         ###   ########.fr       */
+/*   Updated: 2022/02/20 15:44:21 by jaejeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	classyfy_token(t_process *process, const char *token, int tag)
 	return (ARG);
 }
 
- int	temp_temp(t_process *process, char **new_str, char **cur_token, int *tag)
+ int	check_token(t_process *process, char **new_str, char **cur_token, int *tag)
  {
  	*tag = classyfy_token(process, *cur_token, *tag);
  	if (*tag == 258)
@@ -126,7 +126,7 @@ int	split_process_to_token(t_process *process, t_info *info, \
 	{
 		cur_token = get_one_token(&new_str[i]);
 		i += ft_strlen(cur_token);
-		if (temp_temp(process, &new_str, &cur_token, &tag))
+		if (check_token(process, &new_str, &cur_token, &tag))
 			return (258);
 		save_token_in_struct(process, cur_token, tag);
 		while (new_str[i] == ' ')
