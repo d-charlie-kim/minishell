@@ -23,9 +23,11 @@ void	sig_exit_handler(int sig)
 
 void	sigint_handler(void)
 {
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
+	write(STDERR_FILENO, "\b\b", 2);
+	write(STDERR_FILENO, "  \n", 3);
+	ft_putstr_fd("mijeong$ ", STDERR_FILENO);
+	// rl_on_new_line();
+	// rl_replace_line("", 0);
 	rl_redisplay();
 }
 
